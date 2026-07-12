@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SIT College Chatbot — Smart Campus Assistant</title>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+    .bg{position:fixed;inset:0;background:url('/static/images/campus.jpg') center/cover no-repeat;z-index:0}
+    .overlay{position:fixed;inset:0;background:rgba(10,15,40,.82);z-index:1}
+
+    /* ─── HEADER ─── */
+    header{position:relative;z-index:10;background:linear-gradient(135deg,rgba(124,58,237,.9),rgba(79,70,229,.9));backdrop-filter:blur(10px);display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.1);flex-shrink:0}
+    .back-btn{color:#fff;text-decoration:none;font-size:1.1rem;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;transition:background .2s;border:none;cursor:pointer}
+    .back-btn:hover{background:rgba(255,255,255,.22)}
+    .bot-avatar{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:1.3rem;border:2px solid rgba(255,255,255,.3);flex-shrink:0}
+    .header-info{flex:1;min-width:0}
+    .header-info h1{color:#fff;font-size:1rem;font-weight:700}
+    .header-info .status{color:rgba(200,230,200,.9);font-size:.72rem;display:flex;align-items:center;gap:5px;margin-top:2px}
+    .online-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite;flex-shrink:0}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+    .header-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+
+    /* Language selector */
+    .lang-select-wrap{position:relative;display:flex;align-items:center}
+    .lang-flag{position:absolute;left:7px;font-size:.85rem;pointer-events:none;z-index:1}
+    #langSel{
+      appearance:none;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);
+      color:#fff;border-radius:20px;padding:4px 26px 4px 26px;font-size:.72rem;font-weight:600;
+      cursor:pointer;outline:none;transition:background .2s;
+    }
+    #langSel:hover{background:rgba(255,255,255,.2)}
+    #langSel option{background:#2d1b6b;color:#fff}
+    .lang-caret{position:absolute;right:7px;font-size:.6rem;pointer-events:none;color:rgba(255,255,255,.6)}
+
+    /* Voice output toggle */
+    .voice-toggle{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:.7rem;font-weight:600;cursor:pointer;user-select:none;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);transition:all .2s;white-space:nowrap}
+    .voice-toggle.on{background:rgba(74,222,128,.2);border-color:rgba(74,222,128,.4);color:#4ade80}
+    .vt-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+    .icon-btn{background:rgba(255,255,255,.12);border:none;color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.95rem;transition:background .2s;text-decoration:none;flex-shrink:0}
+    .icon-btn:hover{background:rgba(255,255,255,.24)}
+
+    /* ─── CHAT WINDOW ─── */
+    .chat-window{flex:1;overflow-y:auto;position:relative;z-index:2;padding:18px 14px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth}
+    .chat-window::-webkit-scrollbar{width:5px}
+    .chat-window::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:10px}
+
+    .chips-wrap{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:4px 0 8px}
+    .chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.85);padding:5px 13px;border-radius:20px;font-size:.77rem;cursor:pointer;transition:background .2s,transform .15s;backdrop-filter:blur(6px)}
+    .chip:hover{background:rgba(255,255,255,.2);transform:translateY(-1px)}
+
+    /* ─── BUBBLES ─── */
+    .msg-row{display:flex;align-items:flex-end;gap:8px;max-width:640px}
+    .msg-row.user{margin-left:auto;flex-direction:row-reverse}
+    .msg-row.bot{margin-right:auto}
+    .msg-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+    .bot .msg-avatar{background:linear-gradient(135deg,#7c3aed,#4f46e5)}
+    .user .msg-avatar{background:linear-gradient(135deg,#0284c7,#0d47a1)}
+    .bubble{max-width:80%;padding:10px 14px;border-radius:18px;font-size:.87rem;line-height:1.55;word-break:break-word}
+    .bot .bubble{background:rgba(255,255,255,.1);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);color:#e8f0ff;border-bottom-left-radius:4px}
+    .user .bubble{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-bottom-right-radius:4px;box-shadow:0 3px 12px rgba(79,70,229,.4)}
+    .bubble a{color:#93c5fd;text-decoration:underline}
+
+    /* TTS button */
+    .tts-btn{display:inline-flex;align-items:center;gap:4px;margin-top:6px;padding:3px 10px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:12px;color:rgba(255,255,255,.65);font-size:.68rem;cursor:pointer;transition:all .2s;font-family:inherit}
+    .tts-btn:hover{background:rgba(255,255,255,.18);color:#fff}
+    .tts-btn.playing{background:rgba(74,222,128,.15);border-color:rgba(74,222,128,.3);color:#4ade80}
+
+    .ts{font-size:.63rem;color:rgba(255,255,255,.3);margin-top:3px;padding:0 4px}
+    .user .ts{text-align:right}
+
+    /* Typing animation */
+    .typing-row{display:flex;align-items:center;gap:8px}
+    .typing-dots{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);padding:9px 14px;border-radius:18px;border-bottom-left-radius:4px;display:flex;gap:5px;align-items:center}
+    .dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5)}
+    .dot:nth-child(1){animation:bounce .9s .0s infinite}
+    .dot:nth-child(2){animation:bounce .9s .15s infinite}
+    .dot:nth-child(3){animation:bounce .9s .30s infinite}
+    @keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+
+    /* ─── INPUT BAR ─── */
+    .input-bar{position:relative;z-index:10;background:rgba(10,15,40,.88);backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,.08);padding:10px 14px 12px;flex-shrink:0}
+
+    /* Language quick-bar inside input zone */
+    .lang-quick-bar{display:flex;gap:5px;margin-bottom:8px;flex-wrap:wrap}
+    .lang-chip{padding:3px 11px;border-radius:14px;font-size:.68rem;font-weight:600;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:rgba(255,255,255,.5);cursor:pointer;transition:all .18s;user-select:none}
+    .lang-chip.active{background:rgba(124,58,237,.4);border-color:rgba(167,139,250,.5);color:#c4b5fd}
+    .lang-chip:hover{background:rgba(255,255,255,.12);color:rgba(255,255,255,.8)}
+
+    .input-wrap{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:28px;padding:5px 5px 5px 16px;transition:border .2s}
+    .input-wrap:focus-within{border-color:rgba(124,58,237,.7)}
+    #msgInput{flex:1;background:transparent;border:none;outline:none;color:#e8f0ff;font-size:.9rem;font-family:inherit}
+    #msgInput::placeholder{color:rgba(255,255,255,.32)}
+
+    /* Mic button */
+    .mic-btn{width:38px;height:38px;border-radius:50%;border:none;background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+    .mic-btn:hover{background:rgba(255,255,255,.18);color:#fff}
+    .mic-btn.listening{background:rgba(239,68,68,.25);border:1.5px solid rgba(239,68,68,.5);color:#fca5a5;animation:mic-pulse 1.2s ease infinite}
+    @keyframes mic-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.35)}50%{box-shadow:0 0 0 9px rgba(239,68,68,0)}}
+    .mic-btn:disabled{opacity:.35;cursor:not-allowed}
+
+    .send-btn{width:38px;height:38px;border-radius:50%;border:none;background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform .15s,opacity .2s;flex-shrink:0}
+    .send-btn:hover{transform:scale(1.08)}
+    .send-btn:disabled{opacity:.4;cursor:not-allowed}
+
+    /* Status row */
+    .input-status{display:flex;justify-content:space-between;align-items:center;margin-top:5px;padding:0 2px}
+    .input-hint{color:rgba(255,255,255,.25);font-size:.67rem}
+    .rec-status{display:flex;align-items:center;gap:5px;color:#fca5a5;font-size:.7rem;font-weight:500;opacity:0;transition:opacity .3s}
+    .rec-status.active{opacity:1}
+    .rec-dot{width:7px;height:7px;border-radius:50%;background:#ef4444;animation:blink 1s ease infinite;flex-shrink:0}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+    /* No-speech notice */
+    .no-speech-notice{display:none;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.28);border-radius:8px;padding:7px 12px;font-size:.73rem;color:rgba(251,191,36,.9);margin:0 14px 6px;position:relative;z-index:10}
+
+    /* Voice waveform indicator */
+    .wave-wrap{display:none;align-items:center;gap:3px;padding:0 2px}
+    .wave-wrap.active{display:flex}
+    .wave-bar{width:3px;border-radius:2px;background:#ef4444;animation:wave 1s ease infinite}
+    .wave-bar:nth-child(1){height:8px;animation-delay:0s}
+    .wave-bar:nth-child(2){height:16px;animation-delay:.1s}
+    .wave-bar:nth-child(3){height:12px;animation-delay:.2s}
+    .wave-bar:nth-child(4){height:18px;animation-delay:.05s}
+    .wave-bar:nth-child(5){height:9px;animation-delay:.15s}
+    @keyframes wave{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+  </style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="overlay"></div>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <a href="/" class="back-btn" title="Back to Portal">←</a>
+  <div class="bot-avatar">🤖</div>
+  <div class="header-info">
+    <h1>SIT Campus Assistant</h1>
+    <div class="status"><div class="online-dot"></div> <span id="langStatusLabel">Online — English</span></div>
+  </div>
+  <div class="header-right">
+
+    <!-- Language selector (header) -->
+    <div class="lang-select-wrap" title="Select language for voice">
+      <span class="lang-flag" id="langFlag">🇬🇧</span>
+      <select id="langSel" onchange="onLangChange(this.value)">
+        <option value="en-IN">English</option>
+        <option value="kn-IN">ಕನ್ನಡ</option>
+        <option value="ml-IN">മലയാളം</option>
+        <option value="hi-IN">हिन्दी</option>
+      </select>
+      <span class="lang-caret">▾</span>
+    </div>
+
+    <!-- Voice output toggle -->
+    <div class="voice-toggle" id="voiceToggle" onclick="toggleVoiceOutput()" title="Toggle voice responses">
+      <div class="vt-dot"></div>
+      <span id="voiceToggleLabel">Voice Off</span>
+    </div>
+
+    <button class="icon-btn" onclick="clearChat()" title="Clear chat">🗑️</button>
+    <a href="/navigation" class="icon-btn" title="Campus Navigation">🧭</a>
+  </div>
+</header>
+
+<!-- No-speech notice (shown only if browser lacks SpeechRecognition) -->
+<div class="no-speech-notice" id="noSpeechNotice">
+  ⚠️ Voice input is not supported in this browser. Use Chrome or Edge for microphone support.
+</div>
+
+<!-- ══ CHAT WINDOW ══ -->
+<div class="chat-window" id="chatWindow">
+  <div class="msg-row bot">
+    <div class="msg-avatar">🤖</div>
+    <div>
+      <div class="bubble">
+        👋 <strong>Hello! Welcome to Srinivas Institute of Technology, Valachil!</strong><br><br>
+        I'm your Smart Campus Assistant. I can help you with:<br><br>
+        📋 Admissions &nbsp;·&nbsp; 🎓 Courses &nbsp;·&nbsp; 🏠 Hostel<br>
+        💰 Fees &nbsp;·&nbsp; 💼 Placements &nbsp;·&nbsp; 📚 Library<br>
+        🧭 Navigation &nbsp;·&nbsp; 📞 Contact &amp; more<br><br>
+        <strong>Type, press Enter, or tap 🎤 to speak your question!</strong><br>
+        <span style="font-size:.78rem;color:rgba(255,255,255,.5)">🌐 You can switch language using the dropdown above.</span>
+      </div>
+      <div class="ts">Just now</div>
+    </div>
+  </div>
+  <div class="chips-wrap" id="chips">
+    <div class="chip" onclick="quickAsk('Tell me about admissions')">📋 Admissions</div>
+    <div class="chip" onclick="quickAsk('What courses are offered?')">🎓 Courses</div>
+    <div class="chip" onclick="quickAsk('Tell me about hostel')">🏠 Hostel</div>
+    <div class="chip" onclick="quickAsk('What about placements?')">💼 Placements</div>
+    <div class="chip" onclick="quickAsk('Campus navigation')">🧭 Navigation</div>
+    <div class="chip" onclick="quickAsk('Contact details')">📞 Contact</div>
+  </div>
+</div>
+
+<!-- ══ INPUT BAR ══ -->
+<div class="input-bar">
+
+  <!-- Language quick-switch chips -->
+  <div class="lang-quick-bar" id="langQuickBar">
+    <span class="lang-chip active" data-lang="en-IN" onclick="switchLang('en-IN')">🇬🇧 English</span>
+    <span class="lang-chip" data-lang="kn-IN" onclick="switchLang('kn-IN')">🇮🇳 ಕನ್ನಡ</span>
+    <span class="lang-chip" data-lang="ml-IN" onclick="switchLang('ml-IN')">🇮🇳 മലയാളം</span>
+    <span class="lang-chip" data-lang="hi-IN" onclick="switchLang('hi-IN')">🇮🇳 हिन्दी</span>
+  </div>
+
+  <div class="input-wrap">
+    <!-- Waveform (shown while listening) -->
+    <div class="wave-wrap" id="waveWrap">
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+    </div>
+    <input type="text" id="msgInput" placeholder="Ask me anything about SIT… or tap 🎤"
+      onkeydown="if(event.key==='Enter')sendMessage()" autocomplete="off" maxlength="500"/>
+    <button class="mic-btn" id="micBtn" onclick="toggleVoiceInput()" title="Click to speak">🎤</button>
+    <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
+  </div>
+
+  <div class="input-status">
+    <div class="input-hint">Enter or ➤ to send &nbsp;·&nbsp; 🎤 voice &nbsp;·&nbsp; 🌐 language selector above</div>
+    <div class="rec-status" id="recStatus">
+      <div class="rec-dot"></div>
+      <span id="recLangLabel">Listening…</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+'use strict';
+
+/* ══════════════════════════════════════════════════════════════════════
+   LANGUAGE CONFIG
+   Defines display metadata and fallback language codes for each locale.
+   For TTS, we try the exact code first, then the base language, then
+   any Indian-English voice as a last resort so speech always plays.
+══════════════════════════════════════════════════════════════════════ */
+const LANG_META = {
+  'en-IN': {
+    name: 'English', flag: '🇬🇧',
+    placeholder: 'Ask me anything about SIT…',
+    ttsLangs: ['en-IN', 'en-GB', 'en-US', 'en'],
+    announce: 'Language switched to English.',
+  },
+  'kn-IN': {
+    name: 'ಕನ್ನಡ', flag: '🇮🇳',
+    placeholder: 'SIT ಬಗ್ಗೆ ಏನಾದರೂ ಕೇಳಿ…',
+    ttsLangs: ['kn-IN', 'kn', 'en-IN', 'en'],
+    announce: 'ಭಾಷೆ ಕನ್ನಡಕ್ಕೆ ಬದಲಾಯಿಸಲಾಗಿದೆ.',
+  },
+  'ml-IN': {
+    name: 'മലയാളം', flag: '🇮🇳',
+    placeholder: 'SIT നെ കുറിച്ച് ചോദിക്കൂ…',
+    ttsLangs: ['ml-IN', 'ml', 'en-IN', 'en'],
+    announce: 'ഭാഷ മലയാളത്തിലേക്ക് മാറ്റി.',
+  },
+  'hi-IN': {
+    name: 'हिन्दी', flag: '🇮🇳',
+    placeholder: 'SIT के बारे में कुछ भी पूछें…',
+    ttsLangs: ['hi-IN', 'hi', 'en-IN', 'en'],
+    announce: 'भाषा हिंदी में बदल दी गई।',
+  },
+};
+
+let currentLang = 'en-IN';
+
+/* ══════════════════════════════════════════════════════════════════════
+   VOICE CACHE
+   Browsers load voices asynchronously. We cache them once they are ready
+   and expose a voicesReady promise so TTS never fires before voices load.
+══════════════════════════════════════════════════════════════════════ */
+let cachedVoices = [];
+let voicesReady = false;
+
+function loadVoices() {
+  if (!window.speechSynthesis) return;
+  const v = window.speechSynthesis.getVoices();
+  if (v.length > 0) {
+    cachedVoices = v;
+    voicesReady = true;
+  }
+}
+
+if (window.speechSynthesis) {
+  /* onvoiceschanged fires in Chrome/Edge when voices are populated */
+  window.speechSynthesis.onvoiceschanged = () => {
+    loadVoices();
+  };
+  /* Also try immediately — Firefox/Safari may have them synchronously */
+  loadVoices();
+}
+
+/**
+ * Pick the best available voice for a language code.
+ * Iterates through the priority list in LANG_META.ttsLangs.
+ * Falls back to the first available voice if nothing matches,
+ * so speech always plays even when the OS has no regional voice.
+ */
+function getBestVoice(lang) {
+  if (!window.speechSynthesis) return null;
+  /* Refresh cache in case voices loaded after page init */
+  if (!voicesReady) loadVoices();
+  const voices = cachedVoices.length ? cachedVoices : window.speechSynthesis.getVoices();
+  if (!voices.length) return null;
+
+  const priorities = LANG_META[lang]?.ttsLangs || [lang, lang.split('-')[0], 'en-IN', 'en'];
+
+  for (const code of priorities) {
+    /* Exact match */
+    const exact = voices.find(v => v.lang === code);
+    if (exact) return exact;
+    /* Prefix match (e.g. 'kn' matches 'kn-IN') */
+    const prefix = voices.find(v => v.lang.startsWith(code + '-') || v.lang === code);
+    if (prefix) return prefix;
+  }
+
+  /* Absolute fallback — return any voice so audio is never silent */
+  return voices[0] || null;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   LANGUAGE SWITCHING
+══════════════════════════════════════════════════════════════════════ */
+function onLangChange(lang) { switchLang(lang); }
+
+function switchLang(lang) {
+  if (!LANG_META[lang]) return;
+  currentLang = lang;
+  const meta = LANG_META[lang];
+
+  /* Header dropdown */
+  document.getElementById('langSel').value = lang;
+  /* Flag emoji */
+  document.getElementById('langFlag').textContent = meta.flag;
+  /* Status subtitle */
+  document.getElementById('langStatusLabel').textContent = 'Online — ' + meta.name;
+  /* Input placeholder */
+  document.getElementById('msgInput').placeholder = meta.placeholder + ' or tap 🎤';
+  /* Quick-bar chips */
+  document.querySelectorAll('.lang-chip').forEach(c => {
+    c.classList.toggle('active', c.dataset.lang === lang);
+  });
+  /* Listening label */
+  document.getElementById('recLangLabel').textContent = 'Listening in ' + meta.name + '…';
+
+  /* If currently listening, restart recognition with new language */
+  if (listening) {
+    stopListening();
+    setTimeout(() => startListening(), 350);
+  }
+
+  /* Announce language change via TTS if voice output is on */
+  if (voiceOut) {
+    speakText(meta.announce, lang);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   HELPERS
+══════════════════════════════════════════════════════════════════════ */
+function now() {
+  return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+function scrollBottom() {
+  const w = document.getElementById('chatWindow');
+  w.scrollTop = w.scrollHeight;
+}
+function formatResponse(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_self">$1</a>');
+}
+function escHtml(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+/** Strip HTML tags and entities to get plain text suitable for TTS */
+function toPlainText(html) {
+  return html
+    .replace(/<br\s*\/?>/gi, '. ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   MESSAGE RENDERING
+   Bot response text is stored in msgStore (JS object) keyed by button ID.
+   It is NEVER embedded inside HTML onclick attributes — that breaks on
+   Malayalam/Kannada Unicode, newlines, quotes and markdown, silently
+   killing the Read Aloud button.
+══════════════════════════════════════════════════════════════════════ */
+let ttsIdx = 0;
+const msgStore = {};
+
+function addUserMsg(text) {
+  document.getElementById('chatWindow').insertAdjacentHTML('beforeend',
+    `<div class="msg-row user">
+       <div class="msg-avatar">👤</div>
+       <div>
+         <div class="bubble">${escHtml(text)}</div>
+         <div class="ts">${now()}</div>
+       </div>
+     </div>`
+  );
+  scrollBottom();
+}
+
+function addBotMsg(text) {
+  const id = 'tts' + (++ttsIdx);
+  /* Store text safely in JS object — never inline into HTML attribute */
+  msgStore[id] = text;
+  const hasTTS = !!window.speechSynthesis;
+  const ttsBtn = hasTTS
+    ? `<button class="tts-btn" id="${id}" onclick="speakMsg('${id}')">🔊 Read Aloud</button>`
+    : '';
+  document.getElementById('chatWindow').insertAdjacentHTML('beforeend',
+    `<div class="msg-row bot">
+       <div class="msg-avatar">🤖</div>
+       <div>
+         <div class="bubble">${formatResponse(text)}</div>
+         ${ttsBtn}
+         <div class="ts">${now()}</div>
+       </div>
+     </div>`
+  );
+  scrollBottom();
+  if (voiceOut && window.speechSynthesis) {
+    speakMsg(id);
+  }
+}
+
+function showTyping() {
+  document.getElementById('chatWindow').insertAdjacentHTML('beforeend',
+    `<div class="msg-row bot typing-row" id="typingInd">
+       <div class="msg-avatar">🤖</div>
+       <div class="typing-dots">
+         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+       </div>
+     </div>`
+  );
+  scrollBottom();
+}
+function hideTyping() {
+  const t = document.getElementById('typingInd');
+  if (t) t.remove();
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   TRANSLITERATION NORMALIZER
+   When the Web Speech API recognises speech in Indian languages it
+   sometimes returns the result in Roman transliteration instead of
+   the native script (e.g. "pravesham" instead of "പ്രവേശനം").
+   This map catches the most common transliterations so the backend
+   can still match them against its keyword list.
+   We append the native-script equivalent so BOTH forms are sent.
+══════════════════════════════════════════════════════════════════════ */
+const TRANSLIT_MAP = {
+  // Malayalam
+  'praveshanam': 'പ്രവേശനം', 'pravesham': 'പ്രവേശനം', 'admission': 'admission',
+  'hostel': 'hostel', 'fees': 'fees', 'fee': 'fee',
+  'joli': 'ജോലി', 'placement': 'placement', 'padikkan': 'പഠിക്കാൻ',
+  'pusthakam': 'പുസ്തകം', 'library': 'library',
+  'bakshanam': 'ഭക്ഷണം', 'canteen': 'canteen',
+  'pareeksha': 'പരീക്ഷ', 'exam': 'exam',
+  'thamasam': 'താമസം', 'yathra': 'യാത്ര',
+  'namaskaram': 'നമസ്കാരം', 'nandi': 'നന്ദി',
+  'samayam': 'സമയം',
+  // Kannada transliteration
+  'pravesa': 'ಪ್ರವೇಶ', 'hastela': 'ಹಾಸ್ಟೆಲ್',
+  'shulka': 'ಶುಲ್ಕ', 'kelasa': 'ಕೆಲಸ',
+  'namskaara': 'ನಮಸ್ಕಾರ',
+  // Hindi transliteration
+  'pravesh': 'प्रवेश', 'naukri': 'नौकरी',
+  'dhanyavaad': 'धन्यवाद',
+};
+
+/**
+ * Enrich the user message with native-script equivalents for any
+ * transliterated words found, so the backend keyword matcher can hit.
+ */
+function enrichWithNativeScript(msg) {
+  const lower = msg.toLowerCase();
+  const extras = [];
+  for (const [roman, native] of Object.entries(TRANSLIT_MAP)) {
+    if (lower.includes(roman) && native !== roman) {
+      extras.push(native);
+    }
+  }
+  return extras.length ? msg + ' ' + extras.join(' ') : msg;
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   SEND MESSAGE
+══════════════════════════════════════════════════════════════════════ */
+async function sendMessage() {
+  const inp = document.getElementById('msgInput');
+  const btn = document.getElementById('sendBtn');
+  const msg = inp.value.trim();
+  if (!msg) return;
+
+  const chips = document.getElementById('chips');
+  if (chips) chips.style.display = 'none';
+
+  inp.value = '';
+  btn.disabled = true;
+
+  addUserMsg(msg);
+  showTyping();
+
+  await new Promise(r => setTimeout(r, 400 + Math.random() * 350));
+
+  /* Enrich message with native-script equivalents of any transliterations */
+  const enriched = enrichWithNativeScript(msg);
+
+  try {
+    const res = await fetch('/api/chatbot', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      /* Send both the display message and the enriched version for matching,
+         plus the active language code so the backend knows the context. */
+      body: JSON.stringify({ message: enriched, lang: currentLang }),
+    });
+    const data = await res.json();
+    hideTyping();
+    addBotMsg(data.error ? ('⚠️ ' + data.error) : data.response);
+  } catch (e) {
+    hideTyping();
+    addBotMsg('⚠️ Sorry, a connection error occurred. Please try again.');
+  }
+
+  btn.disabled = false;
+  inp.focus();
+}
+
+function quickAsk(t) {
+  document.getElementById('msgInput').value = t;
+  sendMessage();
+}
+function clearChat() {
+  if (!confirm('Clear the chat history?')) return;
+  location.reload();
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   VOICE INPUT — Speech Recognition (STT)
+
+   Key fixes vs previous version:
+   • A fresh SpeechRecognition instance is created for every session.
+     Reusing one instance across starts can cause silent failures in
+     Chrome after the first use.
+   • lang is set from currentLang at the moment startListening() is called,
+     not from a stale closure.
+   • abortListening() (instead of stop()) is used when the user manually
+     cancels, preventing onend from triggering an auto-send.
+   • Guards prevent double-start race conditions.
+══════════════════════════════════════════════════════════════════════ */
+const SpeechAPI = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+let recognition  = null;
+let listening    = false;
+let autoSend     = true;   /* set to false when user manually stops */
+
+/* Show unsupported notice if browser lacks SpeechRecognition */
+if (!SpeechAPI) {
+  document.getElementById('noSpeechNotice').style.display = 'block';
+  const micEl = document.getElementById('micBtn');
+  micEl.disabled = true;
+  micEl.title    = 'Voice input not supported in this browser';
+}
+
+function createRecognition() {
+  if (!SpeechAPI) return null;
+
+  const r        = new SpeechAPI();
+  r.continuous   = false;
+  r.interimResults = true;
+  /* Always use currentLang at the moment the session starts */
+  r.lang         = currentLang;
+  r.maxAlternatives = 1;
+
+  r.onstart = () => {
+    listening = true;
+    const mic = document.getElementById('micBtn');
+    mic.classList.add('listening');
+    mic.textContent = '⏹';
+    document.getElementById('recStatus').classList.add('active');
+    document.getElementById('waveWrap').classList.add('active');
+    document.getElementById('msgInput').placeholder =
+      'Listening in ' + (LANG_META[currentLang]?.name || currentLang) + '… speak now';
+  };
+
+  r.onresult = e => {
+    /* Build transcript from all result segments */
+    let interim = '';
+    let finalTranscript = '';
+    for (let i = 0; i < e.results.length; i++) {
+      const seg = e.results[i][0].transcript;
+      if (e.results[i].isFinal) finalTranscript += seg;
+      else interim += seg;
+    }
+    /* Show interim in the input box live */
+    document.getElementById('msgInput').value = finalTranscript || interim;
+
+    /* When speech is confirmed final, stop and send */
+    if (finalTranscript) {
+      autoSend = true;
+      stopListening();
+    }
+  };
+
+  r.onerror = e => {
+    autoSend = false;
+    stopListening();
+    const msgs = {
+      'not-allowed':          '🎤 Microphone access denied. Please allow it in your browser settings.',
+      'no-speech':            '🎤 No speech detected. Please try again and speak clearly.',
+      'language-not-supported': '🎤 "' + (LANG_META[currentLang]?.name || currentLang) + '" is not supported for voice input on this device. Try English.',
+      'network':              '🎤 Network error during speech recognition. Check your connection.',
+      'audio-capture':        '🎤 No microphone found. Please connect a microphone and try again.',
+      'service-not-allowed':  '🎤 Speech service blocked. Make sure you are on HTTPS or localhost.',
+    };
+    const msg = msgs[e.error] || ('🎤 Voice input error: ' + e.error);
+    addBotMsg(msg);
+  };
+
+  r.onend = () => {
+    const transcript = document.getElementById('msgInput').value.trim();
+    const shouldSend = autoSend && transcript.length > 0;
+    /* Reset autoSend before stopping UI so re-triggers are safe */
+    autoSend = true;
+    stopListening();
+    if (shouldSend) {
+      /* Small delay so the UI settles before send */
+      setTimeout(() => sendMessage(), 250);
+    }
+  };
+
+  return r;
+}
+
+function toggleVoiceInput() {
+  if (listening) {
+    autoSend = false;   /* manual cancel — don't auto-send */
+    stopListening();
+  } else {
+    startListening();
+  }
+}
+
+function startListening() {
+  if (!SpeechAPI) return;
+  if (listening) return;        /* prevent double-start */
+
+  autoSend = true;
+  recognition = createRecognition();
+  if (!recognition) return;
+
+  try {
+    recognition.start();
+  } catch (err) {
+    /* InvalidStateError means it was already started — ignore */
+    console.warn('[STT] start() error:', err.name, err.message);
+  }
+}
+
+function stopListening() {
+  listening = false;
+
+  if (recognition) {
+    try { recognition.stop(); } catch (_) {}
+    recognition = null;  /* discard — always create a fresh instance next time */
+  }
+
+  const mic = document.getElementById('micBtn');
+  mic.classList.remove('listening');
+  mic.textContent = '🎤';
+  document.getElementById('recStatus').classList.remove('active');
+  document.getElementById('waveWrap').classList.remove('active');
+
+  const meta = LANG_META[currentLang];
+  document.getElementById('msgInput').placeholder =
+    (meta ? meta.placeholder : 'Ask me anything about SIT…') + ' or tap 🎤';
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   VOICE OUTPUT — Speech Synthesis (TTS)
+
+   Key fixes vs previous version:
+   • speakText() waits for voices to be available before speaking,
+     using a retry loop. This fixes the silent-first-speak bug on Chrome.
+   • getBestVoice() now iterates a priority list so regional voices are
+     matched correctly (e.g. kn-IN → kn → en-IN → en).
+   • speechSynthesis.cancel() is called before every new utterance to
+     clear any pending queue and prevent overlapping audio.
+   • A workaround for Chrome's TTS cutoff bug (utterances longer than
+     ~15 s silently stop) is applied by chunking long text at sentences.
+══════════════════════════════════════════════════════════════════════ */
+let voiceOut = false;
+
+function toggleVoiceOutput() {
+  voiceOut = !voiceOut;
+  const el = document.getElementById('voiceToggle');
+  const lb = document.getElementById('voiceToggleLabel');
+  if (voiceOut) {
+    el.classList.add('on');
+    lb.textContent = 'Voice On';
+    /* Small delay so voices are ready on first toggle */
+    setTimeout(() => speakText('Voice output enabled.', 'en-IN'), 100);
+  } else {
+    el.classList.remove('on');
+    lb.textContent = 'Voice Off';
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+  }
+}
+
+/**
+ * Core TTS function. Handles voice loading delay via retry.
+ * @param {string} text  - plain text to speak
+ * @param {string} lang  - BCP-47 language code (e.g. 'kn-IN')
+ * @param {Function} [onDone] - optional callback when speech ends
+ * @param {string} [btnId]    - optional TTS button id to reset on end
+ */
+function speakText(text, lang, onDone, btnId) {
+  if (!window.speechSynthesis || !text.trim()) return;
+
+  /* Stop anything currently playing */
+  window.speechSynthesis.cancel();
+
+  /* Retry up to 20 times (2 s total) waiting for voices to load */
+  let attempts = 0;
+  const MAX    = 20;
+
+  function trySpeak() {
+    attempts++;
+    /* Refresh voice cache on every attempt */
+    loadVoices();
+
+    const voices = cachedVoices.length
+      ? cachedVoices
+      : window.speechSynthesis.getVoices();
+
+    /* On first attempts, voices array may still be empty */
+    if (voices.length === 0 && attempts < MAX) {
+      setTimeout(trySpeak, 100);
+      return;
+    }
+
+    const voice = getBestVoice(lang);
+
+    /* Split text into sentence chunks to avoid Chrome's TTS cutoff bug */
+    const chunks = chunkText(text);
+
+    let chunkIdx = 0;
+
+    function speakChunk() {
+      if (chunkIdx >= chunks.length) {
+        /* All chunks done */
+        if (onDone) onDone();
+        return;
+      }
+
+      const u    = new SpeechSynthesisUtterance(chunks[chunkIdx]);
+      u.lang     = lang;
+      u.rate     = 0.95;
+      u.pitch    = 1;
+      u.volume   = 1;
+      if (voice) u.voice = voice;
+
+      u.onend = () => {
+        chunkIdx++;
+        speakChunk();
+      };
+      u.onerror = (e) => {
+        /* 'interrupted' is normal when cancel() is called externally */
+        if (e.error !== 'interrupted') {
+          console.warn('[TTS] utterance error:', e.error);
+        }
+        if (onDone) onDone();
+        /* Reset button if provided */
+        const btn = btnId ? document.getElementById(btnId) : null;
+        if (btn) { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read Aloud'; }
+      };
+
+      window.speechSynthesis.speak(u);
+    }
+
+    speakChunk();
+  }
+
+  trySpeak();
+}
+
+/** Split text into ≤200-char chunks at sentence boundaries */
+function chunkText(text) {
+  if (text.length <= 200) return [text];
+  const sentences = text.match(/[^.!?\n]+[.!?\n]*/g) || [text];
+  const chunks = [];
+  let buf = '';
+  for (const s of sentences) {
+    if ((buf + s).length > 200 && buf.length > 0) {
+      chunks.push(buf.trim());
+      buf = s;
+    } else {
+      buf += s;
+    }
+  }
+  if (buf.trim()) chunks.push(buf.trim());
+  return chunks.length ? chunks : [text];
+}
+
+/**
+ * Called by the "🔊 Read Aloud" button on each bot message.
+ * Text is retrieved from msgStore[btnId] — never passed via HTML attribute.
+ */
+function speakMsg(btnId) {
+  if (!window.speechSynthesis) return;
+
+  const btn     = document.getElementById(btnId);
+  const rawText = msgStore[btnId] || '';
+
+  /* If this button is already playing, cancel and reset */
+  if (btn && btn.classList.contains('playing')) {
+    window.speechSynthesis.cancel();
+    btn.classList.remove('playing');
+    btn.innerHTML = '🔊 Read Aloud';
+    return;
+  }
+
+  /* Cancel any ongoing speech and reset all other buttons */
+  window.speechSynthesis.cancel();
+  document.querySelectorAll('.tts-btn.playing').forEach(b => {
+    b.classList.remove('playing');
+    b.innerHTML = '🔊 Read Aloud';
+  });
+
+  if (!rawText) return;   /* nothing to speak */
+
+  if (btn) { btn.classList.add('playing'); btn.innerHTML = '⏹ Stop'; }
+
+  const plain = toPlainText(rawText);
+
+  speakText(plain, currentLang,
+    /* onDone */ () => {
+      if (btn) { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read Aloud'; }
+    },
+    btnId
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════════════════════════════ */
+document.getElementById('msgInput').focus();
+
+/* Pre-warm the voice cache as early as possible */
+if (window.speechSynthesis) {
+  loadVoices();
+  /* Some browsers need a short delay before voices are populated */
+  setTimeout(loadVoices, 500);
+  setTimeout(loadVoices, 1500);
+}
+</script>
+</body>
+</html>

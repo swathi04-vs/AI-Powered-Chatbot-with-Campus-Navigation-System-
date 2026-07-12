@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Srinivas Institute of Technology — Smart Portal</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;height:100vh;overflow:hidden}
+
+    .bg{
+      position:fixed;inset:0;
+      background:url('/static/images/campus.jpg') center/cover no-repeat;
+      z-index:0;
+    }
+    .overlay{
+      position:fixed;inset:0;
+      background:linear-gradient(160deg,rgba(0,20,60,.75) 0%,rgba(0,0,0,.65) 100%);
+      z-index:1;
+    }
+    .content{
+      position:relative;z-index:2;
+      height:100vh;
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      text-align:center;padding:24px;
+    }
+
+    /* College logo badge */
+    .logo-badge{
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.2);
+      backdrop-filter:blur(8px);
+      border-radius:50%;
+      width:80px;height:80px;
+      display:flex;align-items:center;justify-content:center;
+      font-size:2.4rem;
+      margin-bottom:22px;
+      box-shadow:0 4px 20px rgba(0,0,0,.3);
+    }
+
+    .tagline{
+      color:rgba(180,210,255,.85);
+      font-size:.85rem;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      margin-bottom:10px;
+      font-weight:500;
+    }
+    h1{
+      color:#fff;
+      font-size:clamp(1.5rem,3.5vw,2.6rem);
+      font-weight:700;
+      letter-spacing:.5px;
+      text-shadow:0 2px 14px rgba(0,0,0,.6);
+      margin-bottom:8px;
+      line-height:1.2;
+    }
+    .subtitle{
+      color:rgba(200,225,255,.8);
+      font-size:clamp(.95rem,2vw,1.15rem);
+      margin-bottom:50px;
+      font-weight:300;
+    }
+
+    /* Button grid */
+    .btn-grid{
+      display:flex;gap:22px;flex-wrap:wrap;justify-content:center;
+    }
+
+    .card-btn{
+      display:flex;flex-direction:column;align-items:center;gap:10px;
+      padding:26px 36px;
+      border:none;border-radius:18px;
+      text-decoration:none;color:#fff;
+      cursor:pointer;
+      min-width:210px;
+      transition:transform .2s,box-shadow .2s;
+      position:relative;overflow:hidden;
+    }
+    .card-btn::before{
+      content:'';
+      position:absolute;inset:0;
+      background:rgba(255,255,255,.08);
+      opacity:0;transition:opacity .2s;
+    }
+    .card-btn:hover::before{opacity:1}
+    .card-btn:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+
+    .card-btn .btn-icon{font-size:2.2rem}
+    .card-btn .btn-label{font-size:1.05rem;font-weight:700;letter-spacing:.3px}
+    .card-btn .btn-sub{font-size:.78rem;opacity:.8;font-weight:400}
+
+    .btn-chatbot{
+      background:linear-gradient(135deg,#7c3aed,#4f46e5);
+      box-shadow:0 6px 24px rgba(124,58,237,.45);
+    }
+    .btn-nav{
+      background:linear-gradient(135deg,#0284c7,#0d47a1);
+      box-shadow:0 6px 24px rgba(2,132,199,.45);
+    }
+
+    /* Pill badges */
+    .badge{
+      position:absolute;top:-8px;right:-8px;
+      background:#f59e0b;color:#fff;
+      font-size:.6rem;font-weight:700;
+      padding:3px 8px;border-radius:20px;
+      text-transform:uppercase;letter-spacing:.5px;
+    }
+
+    /* Bottom bar */
+    .bottom-bar{
+      position:absolute;bottom:0;left:0;right:0;
+      background:rgba(0,0,0,.3);
+      backdrop-filter:blur(6px);
+      display:flex;justify-content:center;gap:32px;
+      padding:12px 20px;
+      border-top:1px solid rgba(255,255,255,.1);
+    }
+    .stat{text-align:center}
+    .stat-num{color:#fff;font-size:1.1rem;font-weight:700}
+    .stat-lbl{color:rgba(255,255,255,.55);font-size:.7rem;text-transform:uppercase;letter-spacing:.5px}
+  </style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="overlay"></div>
+
+<div class="content">
+  <div class="logo-badge">🏛️</div>
+  <div class="tagline">Est. 1999 &nbsp;·&nbsp; VTU Affiliated &nbsp;·&nbsp; AICTE Approved</div>
+  <h1>Srinivas Institute of Technology, Valachil</h1>
+  <p class="subtitle">Smart Digital Campus Portal</p>
+
+  <div class="btn-grid">
+
+    <div style="position:relative">
+      <a href="/chatbot" class="card-btn btn-chatbot">
+        <span class="btn-icon">🤖</span>
+        <span class="btn-label">College Chatbot</span>
+        <span class="btn-sub">Ask anything about SIT</span>
+      </a>
+      <span class="badge">AI</span>
+    </div>
+
+    <div style="position:relative">
+      <a href="/navigation" class="card-btn btn-nav">
+        <span class="btn-icon">🧭</span>
+        <span class="btn-label">Campus Navigation</span>
+        <span class="btn-sub">3D Indoor & Outdoor Maps</span>
+      </a>
+      <span class="badge" style="background:#10b981">GPS</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer stats bar -->
+<div class="bottom-bar">
+  <div class="stat"><div class="stat-num">5000+</div><div class="stat-lbl">Students</div></div>
+  <div class="stat"><div class="stat-num">200+</div><div class="stat-lbl">Faculty</div></div>
+  <div class="stat"><div class="stat-num">10+</div><div class="stat-lbl">Programs</div></div>
+  <div class="stat"><div class="stat-num">90%+</div><div class="stat-lbl">Placements</div></div>
+</div>
+
+</body>
+</html>

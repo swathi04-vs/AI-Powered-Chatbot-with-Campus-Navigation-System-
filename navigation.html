@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Campus Navigation — SIT</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'Segoe UI',sans-serif;height:100vh;overflow:hidden}
+
+    .bg{position:fixed;inset:0;background:url('/static/images/campus.jpg') center/cover no-repeat;z-index:0}
+    .overlay{position:fixed;inset:0;background:linear-gradient(160deg,rgba(2,50,120,.78),rgba(0,0,0,.65));z-index:1}
+
+    header{
+      position:relative;z-index:10;
+      background:rgba(0,30,80,.7);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(255,255,255,.1);
+      padding:14px 22px;
+      display:flex;align-items:center;gap:14px;
+    }
+    header a{color:#fff;text-decoration:none;font-size:1.3rem}
+    header h1{color:#fff;font-size:1.1rem;font-weight:600}
+
+    .content{
+      position:relative;z-index:2;
+      height:calc(100vh - 56px);
+      display:flex;flex-direction:column;
+      align-items:center;justify-content:center;
+      padding:24px;text-align:center;
+    }
+
+    .icon{font-size:3.5rem;margin-bottom:18px}
+    h2{color:#fff;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;margin-bottom:8px}
+    .sub{color:rgba(200,220,255,.75);font-size:.95rem;margin-bottom:44px}
+
+    .card-row{display:flex;gap:22px;flex-wrap:wrap;justify-content:center}
+
+    .nav-card{
+      background:rgba(255,255,255,.1);
+      backdrop-filter:blur(14px);
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:20px;
+      padding:30px 36px;
+      text-decoration:none;color:#fff;
+      min-width:220px;
+      display:flex;flex-direction:column;align-items:center;gap:12px;
+      transition:transform .2s,background .2s,box-shadow .2s;
+    }
+    .nav-card:hover{
+      transform:translateY(-6px);
+      background:rgba(255,255,255,.16);
+      box-shadow:0 16px 40px rgba(0,0,0,.35);
+    }
+    .nav-card .card-icon{font-size:2.4rem}
+    .nav-card .card-title{font-size:1.1rem;font-weight:700}
+    .nav-card .card-desc{font-size:.8rem;opacity:.75;line-height:1.4;text-align:center}
+
+    .badge-pill{
+      background:rgba(255,255,255,.18);
+      border-radius:20px;padding:4px 12px;
+      font-size:.72rem;font-weight:600;
+      letter-spacing:.5px;
+    }
+
+    .back-link{
+      margin-top:40px;
+      color:rgba(200,220,255,.6);
+      font-size:.82rem;
+      text-decoration:none;
+    }
+    .back-link:hover{color:#fff}
+  </style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="overlay"></div>
+
+<header>
+  <a href="/">←</a>
+  <h1>🧭 Campus Navigation</h1>
+</header>
+
+<div class="content">
+  <div class="icon">🗺️</div>
+  <h2>Smart Campus Navigation</h2>
+  <p class="sub">Choose your navigation mode to get started</p>
+
+  <div class="card-row">
+
+    <a href="/indoor" class="nav-card" style="border-color:rgba(0,229,255,.3)">
+      <span class="card-icon">🏛️</span>
+      <span class="card-title">Indoor Navigation</span>
+      <span class="card-desc">3D building model with 5 floors, room labels, and live Dijkstra routing. Find any room instantly.</span>
+      <span class="badge-pill">3D · Dijkstra</span>
+    </a>
+
+    <a href="/outdoor" class="nav-card">
+      <span class="card-icon">🌍</span>
+      <span class="card-title">Outdoor Navigation</span>
+      <span class="card-desc">Navigate between campus buildings using GPS and interactive maps</span>
+      <span class="badge-pill">GPS · Leaflet Maps</span>
+    </a>
+
+  </div>
+
+  <a href="/" class="back-link">← Back to Portal</a>
+</div>
+
+</body>
+</html>

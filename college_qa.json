@@ -1,0 +1,2360 @@
+{
+  "greeting": {
+    "keywords": [
+      "hi",
+      "hello",
+      "hey",
+      "good morning",
+      "good afternoon",
+      "good evening",
+      "howdy",
+      "നമസ്കാരം",
+      "ഹലോ",
+      "ഹായ്",
+      "സുപ്രഭാതം",
+      "ನಮಸ್ಕಾರ",
+      "ಹಲೋ",
+      "ಹಾಯ್",
+      "नमस्ते",
+      "हेलो",
+      "हाय",
+      "सुप्रभात",
+      "namaskaram",
+      "vanakkam",
+      "namasthe"
+    ],
+    "response": "Hello! 👋 Welcome to Srinivas Institute of Technology, Valachil. I'm your Smart Campus Assistant. How can I help you today? You can ask me about admissions, courses, hostel, fees, placements, faculty, campus navigation, and more!",
+    "response_ml": "നമസ്കാരം! 👋 ശ്രീനിവാസ് ഇൻസ്റ്റിറ്റ്യൂട്ട് ഓഫ് ടെക്നോളജി, വലഞ്ചിലിലേക്ക് സ്വാഗതം. ഞാൻ നിങ്ങളുടെ സ്മാർട്ട് കാമ്പസ് അസിസ്റ്റന്റ് ആണ്. പ്രവേശനം, കോഴ്സുകൾ, ഹോസ്റ്റൽ, ഫീസ്, പ്ലേസ്മെന്റ്, ഫാക്കൽറ്റി, നാവിഗേഷൻ എന്നിവയെ കുറിച്ച് ചോദിക്കാം!",
+    "response_kn": "ನಮಸ್ಕಾರ! 👋 ಶ್ರೀನಿವಾಸ್ ಇನ್ಸ್ಟಿಟ್ಯೂಟ್ ಆಫ್ ಟೆಕ್ನಾಲಜಿ, ವಲಚಿಲ್‌ಗೆ ಸ್ವಾಗತ. ನಾನು ನಿಮ್ಮ ಸ್ಮಾರ್ಟ್ ಕ್ಯಾಂಪಸ್ ಸಹಾಯಕ. ಪ್ರವೇಶ, ಕೋರ್ಸ್, ಹಾಸ್ಟೆಲ್, ಶುಲ್ಕ, ಪ್ಲೇಸ್ಮೆಂಟ್ ಬಗ್ಗೆ ಕೇಳಬಹುದು!",
+    "response_hi": "नमस्ते! 👋 श्रीनिवास इंस्टीट्यूट ऑफ टेक्नोलॉजी, वलाचिल में आपका स्वागत है। मैं आपका स्मार्ट कैंपस असिस्टेंट हूँ। प्रवेश, कोर्स, हॉस्टल, फीस, प्लेसमेंट, नेविगेशन के बारे में पूछ सकते हैं!"
+  },
+  "about": {
+    "keywords": [
+      "about",
+      "srinivas",
+      "institute",
+      "college",
+      "university",
+      "valachil",
+      "mangalore",
+      "കോളേജ്",
+      "സ്ഥാപനം",
+      "വിവരം",
+      "എന്താണ്",
+      "കോളജ്",
+      "ಕಾಲೇಜು",
+      "ಸಂಸ್ಥೆ",
+      "ವಿಶ್ವವಿದ್ಯಾಲಯ",
+      "कॉलेज",
+      "संस्था",
+      "विश्वविद्यालय",
+      "जानकारी",
+      "sit",
+      "srinivasinstitute"
+    ],
+    "response": "Srinivas Institute of Technology (SIT) is a leading engineering college located at Valachil, Mangalore, Karnataka. Established in 1999, it is affiliated to Visvesvaraya Technological University (VTU) and approved by AICTE. The college is known for its excellent academic programs, state-of-the-art infrastructure, and strong industry connections.",
+    "response_ml": "ശ്രീനിവാസ് ഇൻസ്റ്റിറ്റ്യൂട്ട് ഓഫ് ടെക്നോളജി (SIT) കർണാടകയിലെ മംഗലൂരിലെ വലഞ്ചിലിൽ സ്ഥിതി ചെയ്യുന്ന ഒരു പ്രമുഖ എഞ്ചിനീയറിംഗ് കോളേജാണ്. 1999-ൽ സ്ഥാപിതമായ ഇത് വിശ്വേശ്വരയ്യ ടെക്നോളജിക്കൽ യൂണിവേഴ്സിറ്റി (VTU) അഫിലിയേറ്റ് ചെയ്തതും AICTE അംഗീകൃതവുമാണ്.",
+    "response_kn": "ಶ್ರೀನಿವಾಸ್ ಇನ್ಸ್ಟಿಟ್ಯೂಟ್ ಆಫ್ ಟೆಕ್ನಾಲಜಿ (SIT) ಕರ್ನಾಟಕದ ಮಂಗಳೂರಿನ ವಲಚಿಲ್‌ನಲ್ಲಿ ನೆಲೆಗೊಂಡಿರುವ ಪ್ರಮುಖ ಎಂಜಿನಿಯರಿಂಗ್ ಕಾಲೇಜು. 1999ರಲ್ಲಿ ಸ್ಥಾಪಿತವಾಗಿದ್ದು VTU ಸಂಯೋಜಿತ ಮತ್ತು AICTE ಅನುಮೋದಿತ.",
+    "response_hi": "श्रीनिवास इंस्टीट्यूट ऑफ टेक्नोलॉजी (SIT) कर्नाटक के मंगलूरु के वलाचिल में स्थित एक प्रमुख इंजीनियरिंग कॉलेज है। 1999 में स्थापित, यह VTU से संबद्ध और AICTE अनुमोदित है।"
+  },
+  "admission": {
+    "keywords": [
+      "admission",
+      "apply",
+      "application",
+      "enrollment",
+      "join",
+      "get admission",
+      "how to join",
+      "eligibility",
+      "cutoff",
+      "പ്രവേശനം",
+      "ചേരാൻ",
+      "അപേക്ഷ",
+      "യോഗ്യത",
+      "എങ്ങനെ ചേരാം",
+      "അഡ്മിഷൻ",
+      "ಪ್ರವೇಶ",
+      "ಸೇರಲು",
+      "ಅರ್ಜಿ",
+      "ಅರ್ಹತೆ",
+      "ಅಡ್ಮಿಷನ್",
+      "प्रवेश",
+      "दाखिला",
+      "आवेदन",
+      "योग्यता",
+      "एडमिशन",
+      "pravesham",
+      "cheraan",
+      "arji"
+    ],
+    "response": "📋 **Admissions at SIT:**\n\n• Undergraduate (B.E.) admissions are through KCET / COMEDK / Management quota.\n• Eligibility: 10+2 with Physics, Chemistry & Mathematics with minimum 45% marks.\n• Apply online at the official SIT website or through KEA.\n• For management quota, contact the admissions office directly.\n\n📞 Admissions Office: +91-824-2274334",
+    "response_ml": "📋 **SIT-ൽ പ്രവേശനം:**\n\n• B.E. പ്രവേശനം KCET / COMEDK / മാനേജ്മെന്റ് ക്വോട്ട വഴി.\n• യോഗ്യത: 10+2 ഭൗതികശാസ്ത്രം, രസതന്ത്രം, ഗണിതം — കുറഞ്ഞത് 45% മാർക്ക്.\n• ഔദ്യോഗിക വെബ്സൈറ്റ് വഴി അല്ലെങ്കിൽ KEA വഴി ഓൺലൈൻ അപേക്ഷ.\n• മാനേജ്മെന്റ് ക്വോട്ടയ്ക്ക് അഡ്മിഷൻ ഓഫീസ് നേരിട്ട് ബന്ധപ്പെടുക.\n\n📞 അഡ്മിഷൻ ഓഫീസ്: +91-824-2274334",
+    "response_kn": "📋 **SIT ನಲ್ಲಿ ಪ್ರವೇಶ:**\n\n• B.E. ಪ್ರವೇಶ KCET / COMEDK / ಮ್ಯಾನೇಜ್ಮೆಂಟ್ ಕೋಟಾ ಮೂಲಕ.\n• ಅರ್ಹತೆ: 10+2 ಭೌತಶಾಸ್ತ್ರ, ರಸಾಯನ, ಗಣಿತ — ಕನಿಷ್ಠ 45% ಅಂಕ.\n• ಅಧಿಕೃತ ವೆಬ್‌ಸೈಟ್ ಅಥವಾ KEA ಮೂಲಕ ಆನ್‌ಲೈನ್ ಅರ್ಜಿ.\n\n📞 ಪ್ರವೇಶ ಕಚೇರಿ: +91-824-2274334",
+    "response_hi": "📋 **SIT में प्रवेश:**\n\n• B.E. प्रवेश KCET / COMEDK / मैनेजमेंट कोटा के माध्यम से।\n• योग्यता: 10+2 में भौतिकी, रसायन, गणित — न्यूनतम 45% अंक।\n• आधिकारिक वेबसाइट या KEA के माध्यम से ऑनलाइन आवेदन।\n\n📞 प्रवेश कार्यालय: +91-824-2274334"
+  },
+  "courses": {
+    "keywords": [
+      "courses",
+      "branches",
+      "departments",
+      "programs",
+      "engineering",
+      "b.e",
+      "b.tech",
+      "m.tech",
+      "mba",
+      "കോഴ്സ്",
+      "വകുപ്പ്",
+      "ബ്രാഞ്ച്",
+      "പഠിക്കാൻ",
+      "എഞ്ചിനീയറിംഗ്",
+      "ഡിപ്പാർട്ട്മെന്റ്",
+      "ಕೋರ್ಸ್",
+      "ವಿಭಾಗ",
+      "ಶಾಖೆ",
+      "ಇಂಜಿನಿಯರಿಂಗ್",
+      "कोर्स",
+      "विभाग",
+      "शाखा",
+      "इंजीनियरिंग",
+      "पढ़ाई",
+      "course",
+      "padikkan",
+      "padhai"
+    ],
+    "response": "🎓 **Courses Offered at SIT:**\n\n**Undergraduate (B.E.):**\n• Computer Science & Engineering (CSE)\n• AI & Machine Learning (AIML)\n• Electronics & Communication (ECE)\n• Mechanical Engineering (ME)\n• Information Science (ISE)\n• Electrical & Electronics (EEE)\n\n**Postgraduate:**\n• M.Tech in CSE, MCA\n• MBA\n\nAll programs are VTU affiliated and AICTE approved.",
+    "response_ml": "🎓 **SIT-ൽ ലഭ്യമായ കോഴ്സുകൾ:**\n\n**അണ്ടർഗ്രാജ്വേറ്റ് (B.E.):**\n• കമ്പ്യൂട്ടർ സയൻസ് & എഞ്ചിനീയറിംഗ് (CSE)\n• AI & മെഷീൻ ലേണിംഗ് (AIML)\n• ഇലക്ട്രോണിക്സ് & കമ്മ്യൂണിക്കേഷൻ (ECE)\n• മെക്കാനിക്കൽ എഞ്ചിനീയറിംഗ് (ME)\n• സിവിൽ എഞ്ചിനീയറിംഗ് (CE)\n• ഇൻഫർമേഷൻ സയൻസ് (ISE)\n• ഇലക്ട്രിക്കൽ & ഇലക്ട്രോണിക്സ് (EEE)\n\n**പോസ്റ്റ്ഗ്രാജ്വേറ്റ്:** M.Tech, MBA\n\nഎല്ലാ പ്രോഗ്രാമുകളും VTU അഫിലിയേറ്റ്, AICTE അംഗീകൃതം.",
+    "response_kn": "🎓 **SIT ನಲ್ಲಿ ಲಭ್ಯವಿರುವ ಕೋರ್ಸ್‌ಗಳು:**\n\n**ಪದವಿ (B.E.):**\n• ಕಂಪ್ಯೂಟರ್ ವಿಜ್ಞಾನ & ಇಂಜಿನಿಯರಿಂಗ್ (CSE)\n• AI & ಮೆಶಿನ್ ಲರ್ನಿಂಗ್ (AIML)\n• ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್ & ಕಮ್ಯುನಿಕೇಷನ್ (ECE)\n• ಮೆಕ್ಯಾನಿಕಲ್ ಇಂಜಿನಿಯರಿಂಗ್ (ME)\n• ಸಿವಿಲ್ ಇಂಜಿನಿಯರಿಂಗ್ (CE)\n\n**ಸ್ನಾತಕೋತ್ತರ:** M.Tech, MBA\n\nಎಲ್ಲಾ ಕಾರ್ಯಕ್ರಮಗಳು VTU ಸಂಯೋಜಿತ, AICTE ಅನುಮೋದಿತ.",
+    "response_hi": "🎓 **SIT में उपलब्ध कोर्स:**\n\n**स्नातक (B.E.):**\n• कंप्यूटर साइंस & इंजीनियरिंग (CSE)\n• AI & मशीन लर्निंग (AIML)\n• इलेक्ट्रॉनिक्स & कम्युनिकेशन (ECE)\n• मैकेनिकल इंजीनियरिंग (ME)\n• सिविल इंजीनियरिंग (CE)\n\n**स्नातकोत्तर:** M.Tech, MBA\n\nसभी कार्यक्रम VTU संबद्ध और AICTE अनुमोदित।"
+  },
+  "hostel": {
+    "keywords": [
+      "hostel",
+      "accommodation",
+      "stay",
+      "rooms",
+      "boarding",
+      "dormitory",
+      "pg",
+      "ഹോസ്റ്റൽ",
+      "താമസം",
+      "മുറി",
+      "ബോർഡിംഗ്",
+      "ಹಾಸ್ಟೆಲ್",
+      "ವಸತಿ",
+      "ತಂಗಲು",
+      "ರೂಮ್",
+      "छात्रावास",
+      "हॉस्टल",
+      "रहना",
+      "कमरा",
+      "thamasam",
+      "muri"
+    ],
+    "response": "🏠 **Hostel Facilities at SIT:**\n\n• Separate hostel blocks for boys and girls.\n• Secure campus with 24/7 security.\n• Mess facility with nutritious meals.\n• Wi-Fi enabled campus.\n• Common room, indoor games, and reading room.\n• Medical facility available.\n\nFor hostel enquiries, contact the Hostel Warden or Admin Office.",
+    "response_ml": "🏠 **SIT ഹോസ്റ്റൽ സൗകര്യങ്ങൾ:**\n\n• ആൺകുട്ടികൾക്കും പെൺകുട്ടികൾക്കും പ്രത്യേക ഹോസ്റ്റൽ ബ്ലോക്കുകൾ.\n• 24/7 സുരക്ഷയുള്ള കാമ്പസ്.\n• പോഷകാഹാരം നൽകുന്ന മെസ്സ് സൗകര്യം.\n• Wi-Fi സൗകര്യം.\n• കോമൺ റൂം, ഇൻഡോർ ഗെയിംസ്, റീഡിംഗ് റൂം.\n• മെഡിക്കൽ സൗകര്യം.\n\nഹോസ്റ്റൽ വിവരങ്ങൾക്ക് വാർഡൻ അല്ലെങ്കിൽ അഡ്മിൻ ഓഫീസ് ബന്ധപ്പെടുക.",
+    "response_kn": "🏠 **SIT ಹಾಸ್ಟೆಲ್ ಸೌಲಭ್ಯಗಳು:**\n\n• ಹುಡುಗರು ಮತ್ತು ಹುಡುಗಿಯರಿಗೆ ಪ್ರತ್ಯೇಕ ಹಾಸ್ಟೆಲ್ ಬ್ಲಾಕ್.\n• 24/7 ಭದ್ರತೆ.\n• ಮೆಸ್ ಸೌಲಭ್ಯ.\n• Wi-Fi ಸಂಪರ್ಕ.\n• ಕಾಮನ್ ರೂಮ್, ಒಳಾಂಗಣ ಆಟಗಳು.\n\nಹಾಸ್ಟೆಲ್ ವಿಚಾರಣೆಗೆ ವಾರ್ಡನ್ ಅಥವಾ ಆಡಳಿತ ಕಚೇರಿ ಸಂಪರ್ಕಿಸಿ.",
+    "response_hi": "🏠 **SIT हॉस्टल सुविधाएं:**\n\n• लड़कों और लड़कियों के लिए अलग हॉस्टल ब्लॉक।\n• 24/7 सुरक्षा।\n• पौष्टिक भोजन के साथ मेस सुविधा।\n• Wi-Fi सुविधा।\n• कॉमन रूम, इनडोर गेम्स।\n\nहॉस्टल जानकारी के लिए वार्डन या एडमिन ऑफिस से संपर्क करें।"
+  },
+  "fees": {
+    "keywords": [
+      "fees",
+      "fee",
+      "cost",
+      "tuition",
+      "scholarship",
+      "payment",
+      "charges",
+      "ഫീസ്",
+      "ചെലവ്",
+      "ട്യൂഷൻ",
+      "സ്കോളർഷിപ്പ്",
+      "പണം",
+      "ಶುಲ್ಕ",
+      "ಫೀಸ್",
+      "ವೆಚ್ಚ",
+      "ವಿದ್ಯಾರ್ಥಿ ವೇತನ",
+      "शुल्क",
+      "फीस",
+      "छात्रवृत्ति",
+      "पैसा",
+      "feez",
+      "chelavu",
+      "shulka"
+    ],
+    "response": "💰 **Fee Structure at SIT:**\n\n• B.E. tuition fees vary by category (Government / Management quota).\n• Government quota fees are fixed by Karnataka Government.\n• Scholarships available for SC/ST, OBC, and merit-based students.\n• Fee payment accepted online and at the accounts office.\n\n📞 Contact Accounts Office: +91-824-2274334 for exact fee details.",
+    "response_ml": "💰 **SIT ഫീസ് ഘടന:**\n\n• B.E. ട്യൂഷൻ ഫീസ് ഗവൺമെന്റ് / മാനേജ്മെന്റ് ക്വോട്ട അനുസരിച്ച് വ്യത്യാസപ്പെടും.\n• ഗവൺമെന്റ് ക്വോട്ട ഫീസ് കർണാടക സർക്കാർ നിശ്ചയിക്കുന്നു.\n• SC/ST, OBC, മെറിറ്റ് വിദ്യാർഥികൾക്ക് സ്കോളർഷിപ്പ് ലഭ്യം.\n• ഓൺലൈൻ അല്ലെങ്കിൽ അക്കൗണ്ട്സ് ഓഫീസ് വഴി ഫീസ് അടക്കാം.\n\n📞 അക്കൗണ്ട്സ് ഓഫീസ്: +91-824-2274334",
+    "response_kn": "💰 **SIT ಶುಲ್ಕ ರಚನೆ:**\n\n• B.E. ಟ್ಯೂಷನ್ ಶುಲ್ಕ ಸರ್ಕಾರ / ಮ್ಯಾನೇಜ್ಮೆಂಟ್ ಕೋಟಾ ಪ್ರಕಾರ ಬದಲಾಗುತ್ತದೆ.\n• ಸರ್ಕಾರ ಕೋಟಾ ಶುಲ್ಕ ಕರ್ನಾಟಕ ಸರ್ಕಾರ ನಿರ್ಧರಿಸುತ್ತದೆ.\n• SC/ST, OBC ಮತ್ತು ಮೆರಿಟ್ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ವಿದ್ಯಾರ್ಥಿ ವೇತನ.\n\n📞 ಖಾತೆ ಕಚೇರಿ: +91-824-2274334",
+    "response_hi": "💰 **SIT शुल्क संरचना:**\n\n• B.E. ट्यूशन फीस सरकारी / मैनेजमेंट कोटा के अनुसार अलग।\n• सरकारी कोटा फीस कर्नाटक सरकार द्वारा निर्धारित।\n• SC/ST, OBC और मेरिट छात्रों के लिए छात्रवृत्ति।\n• ऑनलाइन या अकाउंट्स ऑफिस में फीस जमा करें।\n\n📞 अकाउंट्स ऑफिस: +91-824-2274334"
+  },
+  "placements": {
+    "keywords": [
+      "placement",
+      "job",
+      "career",
+      "recruit",
+      "company",
+      "campus placement",
+      "package",
+      "salary",
+      "internship",
+      "പ്ലേസ്മെന്റ്",
+      "ജോലി",
+      "കരിയർ",
+      "കമ്പനി",
+      "ഇന്റേൺഷിപ്പ്",
+      "ಪ್ಲೇಸ್ಮೆಂಟ್",
+      "ಕೆಲಸ",
+      "ಉದ್ಯೋಗ",
+      "ಕಂಪನಿ",
+      "ಇಂಟರ್ನ್ಶಿಪ್",
+      "प्लेसमेंट",
+      "नौकरी",
+      "काम",
+      "कंपनी",
+      "इंटर्नशिप",
+      "joli",
+      "kelasa",
+      "naukri"
+    ],
+    "response": "💼 **Placements at SIT:**\n\n• Dedicated Training & Placement Cell.\n• 90%+ placement record in recent years.\n• Top recruiters: Infosys, TCS, Wipro, Accenture, Cognizant, HCL, and more.\n• Average package: 4–6 LPA | Highest: 18+ LPA.\n• Regular internship opportunities.\n• Soft skills & aptitude training provided.",
+    "response_ml": "💼 **SIT പ്ലേസ്മെന്റ്:**\n\n• സമർപ്പിത ട്രെയിനിംഗ് & പ്ലേസ്മെന്റ് സെൽ.\n• സമീപ വർഷങ്ങളിൽ 90%+ പ്ലേസ്മെന്റ് റെക്കോർഡ്.\n• പ്രധാന കമ്പനികൾ: Infosys, TCS, Wipro, Accenture, Cognizant, HCL.\n• ശരാശരി പാക്കേജ്: 4–6 LPA | ഏറ്റവും ഉയർന്നത്: 18+ LPA.\n• ഇന്റേൺഷിപ്പ് അവസരങ്ങൾ.\n• സോഫ്റ്റ് സ്കിൽസ് & ആപ്റ്റിറ്റ്യൂഡ് ട്രെയിനിംഗ്.",
+    "response_kn": "💼 **SIT ಪ್ಲೇಸ್ಮೆಂಟ್:**\n\n• ಸಮರ್ಪಿತ ತರಬೇತಿ & ಪ್ಲೇಸ್ಮೆಂಟ್ ಸೆಲ್.\n• ಇತ್ತೀಚಿನ ವರ್ಷಗಳಲ್ಲಿ 90%+ ಪ್ಲೇಸ್ಮೆಂಟ್ ದಾಖಲೆ.\n• ಪ್ರಮುಖ ಕಂಪನಿಗಳು: Infosys, TCS, Wipro, Accenture, HCL.\n• ಸರಾಸರಿ ಪ್ಯಾಕೇಜ್: 4–6 LPA | ಗರಿಷ್ಠ: 18+ LPA.\n• ಇಂಟರ್ನ್‌ಶಿಪ್ ಅವಕಾಶಗಳು.",
+    "response_hi": "💼 **SIT प्लेसमेंट:**\n\n• समर्पित ट्रेनिंग & प्लेसमेंट सेल।\n• हाल के वर्षों में 90%+ प्लेसमेंट रिकॉर्ड।\n• प्रमुख कंपनियां: Infosys, TCS, Wipro, Accenture, HCL।\n• औसत पैकेज: 4–6 LPA | सर्वोच्च: 18+ LPA।\n• इंटर्नशिप के अवसर।"
+  },
+  "faculty": {
+    "keywords": [
+      "faculty",
+      "professor",
+      "teacher",
+      "staff",
+      "lecturer",
+      "hod",
+      "principal",
+      "അദ്ധ്യാപകൻ",
+      "ഫാക്കൽറ്റി",
+      "ടീച്ചർ",
+      "പ്രൊഫസർ",
+      "ಅಧ್ಯಾಪಕ",
+      "ಫ್ಯಾಕಲ್ಟಿ",
+      "ಶಿಕ್ಷಕ",
+      "ಪ್ರಾಧ್ಯಾಪಕ",
+      "शिक्षक",
+      "अध्यापक",
+      "प्रोफेसर",
+      "फैकल्टी",
+      "adhyapakan",
+      "teacher"
+    ],
+    "response": "👨‍🏫 **Faculty at SIT:**\nSIT has 200+ qualified faculty members with PhD, M.Tech, and industry experience. The faculty-student ratio ensures personalized attention. Staff regularly publish research papers and attend national/international conferences.",
+    "response_ml": "👨‍🏫 **SIT ഫാക്കൽറ്റി:**\nSIT-ൽ PhD, M.Tech, വ്യവസായ പരിചയമുള്ള 200-ലധികം അർഹതയുള്ള ഫാക്കൽറ്റി അംഗങ്ങൾ ഉണ്ട്. ഫാക്കൽറ്റി-വിദ്യാർഥി അനുപാതം വ്യക്തിഗത ശ്രദ്ധ ഉറപ്പ് നൽകുന്നു. ഫാക്കൽറ്റി ഗവേഷണ പ്രബന്ധങ്ങൾ പ്രസിദ്ധീകരിക്കുകയും ദേശീയ/അന്തർദേശീയ സമ്മേളനങ്ങളിൽ പങ്കെടുക്കുകയും ചെയ്യുന്നു.",
+    "response_kn": "👨‍🏫 **SIT ಫ್ಯಾಕಲ್ಟಿ:**\nSIT ನಲ್ಲಿ PhD, M.Tech ಮತ್ತು ಉದ್ಯಮ ಅನುಭವ ಹೊಂದಿರುವ 200+ ಅರ್ಹ ಫ್ಯಾಕಲ್ಟಿ ಸದಸ್ಯರಿದ್ದಾರೆ. ಸಂಶೋಧನಾ ಪ್ರಬಂಧ ಪ್ರಕಟಣೆ ಮತ್ತು ರಾಷ್ಟ್ರೀಯ/ಅಂತರರಾಷ್ಟ್ರೀಯ ಸಮ್ಮೇಳನಗಳಲ್ಲಿ ಭಾಗವಹಿಸುವಿಕೆ.",
+    "response_hi": "👨‍🏫 **SIT फैकल्टी:**\nSIT में PhD, M.Tech और उद्योग अनुभव वाले 200+ योग्य फैकल्टी सदस्य हैं। शोध पत्र प्रकाशन और राष्ट्रीय/अंतर्राष्ट्रीय सम्मेलनों में भागीदारी।"
+  },
+  "library": {
+    "keywords": [
+      "library",
+      "books",
+      "journals",
+      "reading",
+      "resources",
+      "e-library",
+      "ലൈബ്രറി",
+      "പുസ്തകം",
+      "വായന",
+      "ഗ്രന്ഥശാല",
+      "ಗ್ರಂಥಾಲಯ",
+      "ಲೈಬ್ರರಿ",
+      "ಪುಸ್ತಕ",
+      "ಓದು",
+      "पुस्तकालय",
+      "लाइब्रेरी",
+      "किताब",
+      "पढ़ना",
+      "pusthakam",
+      "granthashala"
+    ],
+    "response": "📚 **Library at SIT:**\n\n• 50,000+ books collection.\n• Online journals: IEEE, Springer, NPTEL.\n• Digital library with e-books and e-journals.\n• Open 8 AM – 6 PM during college hours.\n• Separate reading rooms for quiet study.",
+    "response_ml": "📚 **SIT ലൈബ്രറി:**\n\n• 50,000-ലധികം പുസ്തകങ്ങൾ.\n• IEEE, Springer, NPTEL ഓൺലൈൻ ജേണലുകൾ.\n• ഇ-ബുക്കുകളും ഇ-ജേണലുകളും ഉള്ള ഡിജിറ്റൽ ലൈബ്രറി.\n• കോളേജ് സമയത്ത് രാവിലെ 8 – വൈകുന്നേരം 6 വരെ തുറന്നിരിക്കും.\n• ശാന്തമായ പഠനത്തിനായി പ്രത്യേക റീഡിംഗ് റൂമുകൾ.",
+    "response_kn": "📚 **SIT ಗ್ರಂಥಾಲಯ:**\n\n• 50,000+ ಪುಸ್ತಕ ಸಂಗ್ರಹ.\n• IEEE, Springer, NPTEL ಆನ್‌ಲೈನ್ ಜರ್ನಲ್‌ಗಳು.\n• ಡಿಜಿಟಲ್ ಗ್ರಂಥಾಲಯ.\n• ಬೆಳಿಗ್ಗೆ 8 – ಸಂಜೆ 6 ತನಕ ತೆರೆದಿರುತ್ತದೆ.",
+    "response_hi": "📚 **SIT पुस्तकालय:**\n\n• 50,000+ पुस्तकों का संग्रह।\n• IEEE, Springer, NPTEL ऑनलाइन जर्नल।\n• डिजिटल लाइब्रेरी।\n• सुबह 8 बजे से शाम 6 बजे तक खुला।"
+  },
+  "sports": {
+    "keywords": [
+      "sports",
+      "games",
+      "cricket",
+      "football",
+      "basketball",
+      "gym",
+      "fitness",
+      "athletics",
+      "സ്പോർട്സ്",
+      "കളി",
+      "ക്രിക്കറ്റ്",
+      "ഫുട്ബോൾ",
+      "ജിം",
+      "ಕ್ರೀಡೆ",
+      "ಆಟ",
+      "ಕ್ರಿಕೆಟ್",
+      "ಫುಟ್ಬಾಲ್",
+      "ಜಿಮ್",
+      "खेल",
+      "क्रिकेट",
+      "फुटबॉल",
+      "जिम",
+      "kali",
+      "aata"
+    ],
+    "response": "🏏 **Sports & Recreation at SIT:**\n\n• Large outdoor ground for cricket, football, and athletics.\n• Indoor badminton, table tennis, and chess.\n• Well-equipped gymnasium.\n• Annual sports meet every year.\n• Students participate in VTU-level sports events.",
+    "response_ml": "🏏 **SIT സ്പോർട്സ് & വിനോദം:**\n\n• ക്രിക്കറ്റ്, ഫുട്ബോൾ, അത്‌ലറ്റിക്സ് ഗ്രൗണ്ട്.\n• ഇൻഡോർ ബാഡ്മിന്റൺ, ടേബിൾ ടെന്നീസ്, ചെസ്.\n• ജിംനേഷ്യം.\n• വർഷംതോറും സ്പോർട്സ് മീറ്റ്.\n• VTU തല സ്പോർട്സ് മത്സരങ്ങളിൽ പങ്കാളിത്തം.",
+    "response_kn": "🏏 **SIT ಕ್ರೀಡೆ & ಮನರಂಜನೆ:**\n\n• ಕ್ರಿಕೆಟ್, ಫುಟ್ಬಾಲ್, ಅಥ್ಲೆಟಿಕ್ಸ್ ಮೈದಾನ.\n• ಒಳಾಂಗಣ ಬ್ಯಾಡ್ಮಿಂಟನ್, ಟೇಬಲ್ ಟೆನಿಸ್, ಚೆಸ್.\n• ಜಿಮ್ನೇಷಿಯಂ.\n• ವಾರ್ಷಿಕ ಕ್ರೀಡಾ ಸಮ್ಮೇಳನ.",
+    "response_hi": "🏏 **SIT खेल और मनोरंजन:**\n\n• क्रिकेट, फुटबॉल, एथलेटिक्स मैदान।\n• इनडोर बैडमिंटन, टेबल टेनिस, शतरंज।\n• जिमनेजियम।\n• वार्षिक खेल मेला।"
+  },
+  "canteen": {
+    "keywords": [
+      "canteen",
+      "food",
+      "eat",
+      "lunch",
+      "snacks",
+      "cafeteria",
+      "mess",
+      "ഭക്ഷണം",
+      "ക്യാന്റീൻ",
+      "തിന്നുക",
+      "ഊണ്",
+      "മെസ്സ്",
+      "ಊಟ",
+      "ಕ್ಯಾಂಟೀನ್",
+      "ತಿನ್ನು",
+      "ಮೆಸ್",
+      "खाना",
+      "कैंटीन",
+      "भोजन",
+      "bakshanam",
+      "oottu",
+      "khana"
+    ],
+    "response": "🍽️ **Canteen & Food at SIT:**\nSIT has a spacious canteen serving breakfast, lunch, snacks, and beverages at affordable rates. The hostel mess provides nutritious home-style meals. Special dietary options available.",
+    "response_ml": "🍽️ **SIT ക്യാന്റീൻ & ഭക്ഷണം:**\nSIT-ൽ പ്രഭാതഭക്ഷണം, ഉച്ചഭക്ഷണം, ലഘുഭക്ഷണം, പാനീയങ്ങൾ ന്യായമായ വിലയ്ക്ക് ലഭിക്കുന്ന വലിയ ക്യാന്റീൻ ഉണ്ട്. ഹോസ്റ്റൽ മെസ്സ് പോഷകഭക്ഷണം നൽകുന്നു.",
+    "response_kn": "🍽️ **SIT ಕ್ಯಾಂಟೀನ್ & ಆಹಾರ:**\nSIT ನಲ್ಲಿ ಉಪಹಾರ, ಊಟ, ತಿಂಡಿ, ಪಾನೀಯ ನ್ಯಾಯಯುತ ದರದಲ್ಲಿ ಲಭ್ಯ. ಹಾಸ್ಟೆಲ್ ಮೆಸ್ ಪೌಷ್ಟಿಕ ಆಹಾರ ಒದಗಿಸುತ್ತದೆ.",
+    "response_hi": "🍽️ **SIT कैंटीन & खाना:**\nSIT में नाश्ता, दोपहर का खाना, स्नैक्स और पेय सस्ती दरों पर मिलते हैं। हॉस्टल मेस पौष्टिक भोजन प्रदान करता है।"
+  },
+  "transportation": {
+    "keywords": [
+      "bus",
+      "transport",
+      "vehicle",
+      "travel",
+      "commute",
+      "route",
+      "ബസ്",
+      "ഗതാഗതം",
+      "വണ്ടി",
+      "യാത്ര",
+      "ಬಸ್",
+      "ಸಾರಿಗೆ",
+      "ವಾಹನ",
+      "ಪ್ರಯಾಣ",
+      "बस",
+      "परिवहन",
+      "यात्रा",
+      "वाहन",
+      "yathra"
+    ],
+    "response": "🚌 **Transportation at SIT:**\nCollege bus services available from Mangalore city, Surathkal, Deralakatte, and nearby towns. Contact the transport office for route details and fees.",
+    "response_ml": "🚌 **SIT ഗതാഗതം:**\nമംഗലൂരു നഗരം, സൂരത്കൽ, ദേരളക്കട്ടെ, സമീപ പ്രദേശങ്ങളിൽ നിന്ന് ബസ് സർവീസ് ലഭ്യം. റൂട്ട് വിവരങ്ങൾക്ക് ട്രാൻസ്പോർട്ട് ഓഫീസ് ബന്ധപ്പെടുക.",
+    "response_kn": "🚌 **SIT ಸಾರಿಗೆ:**\nಮಂಗಳೂರು ನಗರ, ಸೂರತ್ಕಲ್, ಡೆರಳಕಟ್ಟೆ ಸೇರಿದಂತೆ ವಿವಿಧ ಪ್ರದೇಶಗಳಿಂದ ಬಸ್ ಸೇವೆ. ರೂಟ್ ವಿವರಗಳಿಗೆ ಸಾರಿಗೆ ಕಚೇರಿ ಸಂಪರ್ಕಿಸಿ.",
+    "response_hi": "🚌 **SIT परिवहन:**\nमंगलूरु शहर, सूरतकल, डेरलाकट्टे और आसपास के कस्बों से बस सेवा उपलब्ध। रूट विवरण के लिए ट्रांसपोर्ट ऑफिस से संपर्क करें।"
+  },
+  "contact": {
+    "keywords": [
+      "contact",
+      "phone",
+      "email",
+      "address",
+      "location",
+      "reach",
+      "website",
+      "call",
+      "ബന്ധപ്പെടുക",
+      "ഫോൺ",
+      "വിലാസം",
+      "ഇമെയിൽ",
+      "വെബ്സൈറ്റ്",
+      "ಸಂಪರ್ಕ",
+      "ಫೋನ್",
+      "ವಿಳಾಸ",
+      "ಇಮೇಲ್",
+      "संपर्क",
+      "फोन",
+      "पता",
+      "ईमेल",
+      "bandhappe",
+      "phone number"
+    ],
+    "response": "📞 **Contact Srinivas Institute of Technology:**\n\n📍 Valachil, Farangipete Post, Mangalore – 574143, Karnataka\n📞 Phone: +91-824-2274334\n📧 Email: info@srinivas.ac.in\n🌐 Website: www.srinivasgroup.com\n⏰ Mon–Sat, 9 AM – 5 PM",
+    "response_ml": "📞 **ശ്രീനിവാസ് ഇൻസ്റ്റിറ്റ്യൂട്ട് ഓഫ് ടെക്നോളജി ബന്ധപ്പെടാൻ:**\n\n📍 വലഞ്ചിൽ, ഫരാൻഗിപ്പേട്ടെ പോസ്റ്റ്, മംഗലൂരു – 574143, കർണാടക\n📞 ഫോൺ: +91-824-2274334\n📧 ഇമെയിൽ: info@srinivas.ac.in\n🌐 വെബ്സൈറ്റ്: www.srinivasgroup.com\n⏰ തിങ്കൾ–ശനി, രാവിലെ 9 – വൈകുന്നേരം 5",
+    "response_kn": "📞 **ಶ್ರೀನಿವಾಸ್ ಇನ್ಸ್ಟಿಟ್ಯೂಟ್ ಸಂಪರ್ಕ:**\n\n📍 ವಲಚಿಲ್, ಫರಂಗಿಪೇಟೆ ಅಂಚೆ, ಮಂಗಳೂರು – 574143, ಕರ್ನಾಟಕ\n📞 ಫೋನ್: +91-824-2274334\n📧 ಇಮೇಲ್: info@srinivas.ac.in\n🌐 ವೆಬ್‌ಸೈಟ್: www.srinivasgroup.com\n⏰ ಸೋಮ–ಶನಿ, ಬೆಳಿಗ್ಗೆ 9 – ಸಂಜೆ 5",
+    "response_hi": "📞 **श्रीनिवास इंस्टीट्यूट ऑफ टेक्नोलॉजी संपर्क:**\n\n📍 वलाचिल, फरंगीपेटे पोस्ट, मंगलूरु – 574143, कर्नाटक\n📞 फोन: +91-824-2274334\n📧 ईमेल: info@srinivas.ac.in\n🌐 वेबसाइट: www.srinivasgroup.com\n⏰ सोम–शनि, सुबह 9 – शाम 5"
+  },
+  "campus navigation": {
+    "keywords": [
+      "navigation",
+      "map",
+      "directions",
+      "navigate",
+      "find",
+      "locate",
+      "building",
+      "floor",
+      "indoor",
+      "outdoor",
+      "where",
+      "നാവിഗേഷൻ",
+      "മാപ്പ്",
+      "ദിശ",
+      "കെട്ടിടം",
+      "എവിടെ",
+      "കണ്ടെത്തുക",
+      "ನ್ಯಾವಿಗೇಷನ್",
+      "ನಕ್ಷೆ",
+      "ದಿಕ್ಕು",
+      "ಕಟ್ಟಡ",
+      "ಎಲ್ಲಿ",
+      "नेविगेशन",
+      "नक्शा",
+      "दिशा",
+      "इमारत",
+      "कहां",
+      "evide",
+      "elli",
+      "kahan"
+    ],
+    "response": "🧭 **Campus Navigation:**\n\n• 🏛️ **Indoor Navigation** – Find rooms, labs, offices inside buildings.\n• 🗺️ **Outdoor Navigation** – Navigate between campus buildings using GPS.\n\n👉 [Click here to open Campus Navigation](/navigation)",
+    "response_ml": "🧭 **കാമ്പസ് നാവിഗേഷൻ:**\n\n• 🏛️ **ഇൻഡോർ നാവിഗേഷൻ** – കെട്ടിടത്തിനകത്ത് മുറികൾ, ലാബുകൾ, ഓഫീസുകൾ കണ്ടെത്തുക.\n• 🗺️ **ഔട്ട്ഡോർ നാവിഗേഷൻ** – GPS ഉപയോഗിച്ച് കാമ്പസ് കെട്ടിടങ്ങൾ തമ്മിൽ നാവിഗേറ്റ് ചെയ്യുക.\n\n👉 [നാവിഗേഷൻ തുറക്കുക](/navigation)",
+    "response_kn": "🧭 **ಕ್ಯಾಂಪಸ್ ನ್ಯಾವಿಗೇಷನ್:**\n\n• 🏛️ **ಒಳಾಂಗಣ ನ್ಯಾವಿಗೇಷನ್** – ಕಟ್ಟಡದೊಳಗೆ ಕೊಠಡಿ, ಲ್ಯಾಬ್, ಕಚೇರಿ ಹುಡುಕಿ.\n• 🗺️ **ಹೊರಾಂಗಣ ನ್ಯಾವಿಗೇಷನ್** – GPS ಬಳಸಿ ಕ್ಯಾಂಪಸ್ ಕಟ್ಟಡಗಳ ನಡುವೆ ಸಂಚರಿಸಿ.\n\n👉 [ನ್ಯಾವಿಗೇಷನ್ ತೆರೆಯಿರಿ](/navigation)",
+    "response_hi": "🧭 **कैंपस नेविगेशन:**\n\n• 🏛️ **इनडोर नेविगेशन** – इमारत के अंदर कमरे, लैब, ऑफिस खोजें।\n• 🗺️ **आउटडोर नेविगेशन** – GPS का उपयोग करके कैंपस भवनों के बीच नेविगेट करें।\n\n👉 [नेविगेशन खोलें](/navigation)"
+  },
+  "exam": {
+    "keywords": [
+      "exam",
+      "examination",
+      "test",
+      "cia",
+      "internal",
+      "semester",
+      "result",
+      "marks",
+      "grades",
+      "പരീക്ഷ",
+      "ടെസ്റ്റ്",
+      "ഫലം",
+      "മാർക്ക്",
+      "ಪರೀಕ್ಷೆ",
+      "ಫಲಿತಾಂಶ",
+      "ಅಂಕ",
+      "परीक्षा",
+      "टेस्ट",
+      "परिणाम",
+      "अंक",
+      "parixa",
+      "pareeksha"
+    ],
+    "response": "📝 **Examinations at SIT:**\n\n• CIA (Continuous Internal Assessment): tests, assignments, lab records.\n• VTU Semester Exams conducted at end of each semester.\n• Results published on VTU website.\n• Re-evaluation and reappear options available through VTU.",
+    "response_ml": "📝 **SIT പരീക്ഷകൾ:**\n\n• CIA (തുടർ ആഭ്യന്തര വിലയിരുത്തൽ): ടെസ്റ്റ്, അസൈൻമെന്റ്, ലാബ് റെക്കോർഡ്.\n• VTU സെമസ്റ്റർ പരീക്ഷകൾ ഓരോ സെമസ്റ്ററിന്റെ അവസാനം.\n• ഫലം VTU വെബ്സൈറ്റിൽ.\n• VTU വഴി പുനർ-മൂല്യനിർണ്ണയം ലഭ്യം.",
+    "response_kn": "📝 **SIT ಪರೀಕ್ಷೆಗಳು:**\n\n• CIA: ಪರೀಕ್ಷೆ, ನಿಯೋಜನೆ, ಲ್ಯಾಬ್ ದಾಖಲೆ.\n• VTU ಸೆಮಿಸ್ಟರ್ ಪರೀಕ್ಷೆ ಪ್ರತಿ ಸೆಮಿಸ್ಟರ್ ಕೊನೆಯಲ್ಲಿ.\n• ಫಲಿತಾಂಶ VTU ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ.",
+    "response_hi": "📝 **SIT परीक्षाएं:**\n\n• CIA: टेस्ट, असाइनमेंट, लैब रिकॉर्ड।\n• VTU सेमेस्टर परीक्षा हर सेमेस्टर के अंत में।\n• परिणाम VTU वेबसाइट पर।"
+  },
+  "timing": {
+    "keywords": [
+      "timing",
+      "time",
+      "schedule",
+      "college time",
+      "working hours",
+      "opening",
+      "closing",
+      "സമയം",
+      "ടൈമിംഗ്",
+      "ഷെഡ്യൂൾ",
+      "ಸಮಯ",
+      "ವೇಳಾಪಟ್ಟಿ",
+      "समय",
+      "टाइमिंग",
+      "samayam",
+      "samaya"
+    ],
+    "response": "⏰ **College Timings:**\n\n• College: 8:30 AM – 4:30 PM (Mon–Sat)\n• Office: 9:00 AM – 5:00 PM\n• Library: 8:00 AM – 6:00 PM\n• Canteen: 8:00 AM – 5:00 PM",
+    "response_ml": "⏰ **കോളേജ് സമയം:**\n\n• കോളേജ്: രാവിലെ 8:30 – വൈകുന്നേരം 4:30 (തിങ്കൾ–ശനി)\n• ഓഫീസ്: രാവിലെ 9:00 – വൈകുന്നേരം 5:00\n• ലൈബ്രറി: രാവിലെ 8:00 – വൈകുന്നേരം 6:00\n• ക്യാന്റീൻ: രാവിലെ 8:00 – വൈകുന്നേരം 5:00",
+    "response_kn": "⏰ **ಕಾಲೇಜು ಸಮಯ:**\n\n• ಕಾಲೇಜು: ಬೆಳಿಗ್ಗೆ 8:30 – ಸಂಜೆ 4:30 (ಸೋಮ–ಶನಿ)\n• ಕಚೇರಿ: ಬೆಳಿಗ್ಗೆ 9:00 – ಸಂಜೆ 5:00\n• ಗ್ರಂಥಾಲಯ: ಬೆಳಿಗ್ಗೆ 8:00 – ಸಂಜೆ 6:00",
+    "response_hi": "⏰ **कॉलेज समय:**\n\n• कॉलेज: सुबह 8:30 – शाम 4:30 (सोम–शनि)\n• ऑफिस: सुबह 9:00 – शाम 5:00\n• पुस्तकालय: सुबह 8:00 – शाम 6:00"
+  },
+  "wifi": {
+    "keywords": [
+      "wifi",
+      "internet",
+      "network",
+      "connectivity",
+      "വൈഫൈ",
+      "ഇന്റർനെറ്റ്",
+      "ವೈಫೈ",
+      "ಇಂಟರ್ನೆಟ್",
+      "वाईफाई",
+      "इंटरनेट"
+    ],
+    "response": "📶 **Campus WiFi:**\nSIT campus is fully Wi-Fi enabled. Students and faculty can access high-speed internet across all academic blocks, library, and hostel areas.",
+    "response_ml": "📶 **കാമ്പസ് WiFi:**\nSIT കാമ്പസ് പൂർണ്ണമായും Wi-Fi സജ്ജമാണ്. എല്ലാ അക്കാദമിക് ബ്ലോക്കുകൾ, ലൈബ്രറി, ഹോസ്റ്റൽ മേഖലകളിൽ ഹൈ-സ്പീഡ് ഇന്റർനെറ്റ് ലഭ്യമാണ്.",
+    "response_kn": "📶 **ಕ್ಯಾಂಪಸ್ WiFi:**\nSIT ಕ್ಯಾಂಪಸ್ ಸಂಪೂರ್ಣ Wi-Fi ಸಕ್ರಿಯ. ಎಲ್ಲಾ ಶೈಕ್ಷಣಿಕ ಬ್ಲಾಕ್, ಗ್ರಂಥಾಲಯ, ಹಾಸ್ಟೆಲ್ ಪ್ರದೇಶದಲ್ಲಿ ವೇಗದ ಇಂಟರ್ನೆಟ್.",
+    "response_hi": "📶 **कैंपस WiFi:**\nSIT कैंपस पूरी तरह Wi-Fi सक्षम है। सभी अकादमिक ब्लॉक, लाइब्रेरी, हॉस्टल में हाई-स्पीड इंटरनेट उपलब्ध।"
+  },
+  "farewell": {
+    "keywords": [
+      "bye",
+      "goodbye",
+      "thank you",
+      "thanks",
+      "see you",
+      "later",
+      "exit",
+      "നന്ദി",
+      "ബൈ",
+      "വിട",
+      "ശരി",
+      "ಧನ್ಯವಾದ",
+      "ಬೈ",
+      "ವಿದಾಯ",
+      "धन्यवाद",
+      "बाय",
+      "अलविदा",
+      "nandi",
+      "dhanyavaad"
+    ],
+    "response": "😊 Thank you for using the SIT Smart Campus Assistant! Have a great day. Go Srinivas! 🎓",
+    "response_ml": "😊 SIT സ്മാർട്ട് കാമ്പസ് അസിസ്റ്റന്റ് ഉപയോഗിച്ചതിന് നന്ദി! ഒരു നല്ല ദിവസം ആശംസിക്കുന്നു. ശ്രീനിവാസ് വിജയിക്കട്ടെ! 🎓",
+    "response_kn": "😊 SIT ಸ್ಮಾರ್ಟ್ ಕ್ಯಾಂಪಸ್ ಸಹಾಯಕ ಬಳಸಿದ್ದಕ್ಕೆ ಧನ್ಯವಾದ! ಒಳ್ಳೆಯ ದಿನ ಆಗಲಿ. ಶ್ರೀನಿವಾಸ್ ಗೆಲ್ಲಲಿ! 🎓",
+    "response_hi": "😊 SIT स्मार्ट कैंपस असिस्टेंट का उपयोग करने के लिए धन्यवाद! आपका दिन शुभ हो। जय श्रीनिवास! 🎓"
+  },
+  "accreditation": {
+    "keywords": [
+      "accreditation",
+      "naac",
+      "aicte",
+      "vtu",
+      "nba",
+      "approved",
+      "recognized",
+      "affiliated",
+      "ranking",
+      "അക്രഡിറ്റേഷൻ",
+      "അംഗീകാരം",
+      "അഫിലിയേഷൻ",
+      "ಮಾನ್ಯತೆ",
+      "ಅಂಗೀಕಾರ",
+      "मान्यता",
+      "अनुमोदन"
+    ],
+    "response": "🏆 **Accreditation & Recognition:**\n\n• Affiliated to **Visvesvaraya Technological University (VTU)**, Belagavi.\n• Approved by **AICTE** (All India Council for Technical Education).\n• **NAAC** accredited institution.\n• NBA (National Board of Accreditation) accredited programs.\n• Part of the prestigious **Srinivas Group of Colleges**.",
+    "response_ml": "🏆 **അക്രഡിറ്റേഷൻ & അംഗീകാരം:**\n\n• **VTU** (വിശ്വേശ്വരയ്യ ടെക്നോളജിക്കൽ യൂണിവേഴ്സിറ്റി) അഫിലിയേറ്റ്.\n• **AICTE** അംഗീകൃതം.\n• **NAAC** അക്രഡിറ്റഡ്.\n• **NBA** അക്രഡിറ്റഡ് പ്രോഗ്രാമുകൾ.\n• ശ്രീനിവാസ് ഗ്രൂപ്പ് ഓഫ് കോളേജസിന്റെ ഭാഗം.",
+    "response_kn": "🏆 **ಮಾನ್ಯತೆ & ಅಂಗೀಕಾರ:**\n\n• **VTU** (ವಿಶ್ವೇಶ್ವರಯ್ಯ ತಾಂತ್ರಿಕ ವಿಶ್ವವಿದ್ಯಾಲಯ) ಸಂಯೋಜಿತ.\n• **AICTE** ಅನುಮೋದಿತ.\n• **NAAC** ಮಾನ್ಯತೆ ಪಡೆದ ಸಂಸ್ಥೆ.\n• **NBA** ಮಾನ್ಯತೆ ಪಡೆದ ಕಾರ್ಯಕ್ರಮಗಳು.",
+    "response_hi": "🏆 **मान्यता और अनुमोदन:**\n\n• **VTU** (विश्वेश्वरय्या तकनीकी विश्वविद्यालय) से संबद्ध।\n• **AICTE** अनुमोदित।\n• **NAAC** मान्यता प्राप्त।\n• **NBA** मान्यता प्राप्त कार्यक्रम।"
+  },
+  "history": {
+    "keywords": [
+      "history",
+      "established",
+      "founded",
+      "year",
+      "started",
+      "when",
+      "origin",
+      "old",
+      "ചരിത്രം",
+      "സ്ഥാപിതം",
+      "വർഷം",
+      "തുടക്കം",
+      "ಇತಿಹಾಸ",
+      "ಸ್ಥಾಪನೆ",
+      "ವರ್ಷ",
+      "इतिहास",
+      "स्थापना",
+      "साल",
+      "कब"
+    ],
+    "response": "📅 **History of SIT:**\n\nSrinivas Institute of Technology (SIT) was established in **1999** by the **Srinivas Educational Trust** under the visionary leadership of Dr. P. Srinivas Kini. Starting with a few engineering branches, SIT has grown into a comprehensive technical institution offering 7 B.E. programmes and multiple postgraduate courses, nurturing thousands of engineers over 25+ years.",
+    "response_ml": "📅 **SIT-ന്റെ ചരിത്രം:**\n\nശ്രീനിവാസ് ഇൻസ്റ്റിറ്റ്യൂട്ട് ഓഫ് ടെക്നോളജി **1999**-ൽ ശ്രീനിവാസ് എഡ്യൂക്കേഷണൽ ട്രസ്റ്റ് സ്ഥാപിച്ചു. ഏതാനും എഞ്ചിനീയറിംഗ് ബ്രാഞ്ചുകളിൽ തുടങ്ങി, 25+ വർഷങ്ങളിൽ ആയിരക്കണക്കിന് എഞ്ചിനീയർമാരെ വളർത്തിയ ഒരു സ്ഥാപനമായി SIT മാറി.",
+    "response_kn": "📅 **SIT ಇತಿಹಾಸ:**\n\nಶ್ರೀನಿವಾಸ್ ಇನ್ಸ್ಟಿಟ್ಯೂಟ್ ಆಫ್ ಟೆಕ್ನಾಲಜಿ **1999**ರಲ್ಲಿ ಶ್ರೀನಿವಾಸ್ ಶಿಕ್ಷಣ ಟ್ರಸ್ಟ್‌ನಿಂದ ಸ್ಥಾಪಿತವಾಯಿತು. 25+ ವರ್ಷಗಳಲ್ಲಿ ಸಾವಿರಾರು ಎಂಜಿನಿಯರ್‌ಗಳನ್ನು ರೂಪಿಸಿದ ಸಂಸ್ಥೆ.",
+    "response_hi": "📅 **SIT का इतिहास:**\n\nश्रीनिवास इंस्टीट्यूट ऑफ टेक्नोलॉजी की स्थापना **1999** में श्रीनिवास एजुकेशनल ट्रस्ट द्वारा की गई। 25+ वर्षों में हजारों इंजीनियरों को तैयार किया है।"
+  },
+  "cse": {
+    "keywords": [
+      "cse",
+      "computer science",
+      "computer engineering",
+      "cs",
+      "software",
+      "programming",
+      "കമ്പ്യൂട്ടർ സയൻസ്",
+      "കമ്പ്യൂട്ടർ",
+      "ಕಂಪ್ಯೂಟರ್ ವಿಜ್ಞಾನ",
+      "ಕಂಪ್ಯೂಟರ್",
+      "कंप्यूटर साइंस",
+      "कंप्यूटर"
+    ],
+    "response": "💻 **CSE Department at SIT:**\n\n• **B.E. Computer Science & Engineering** – 4-year programme.\n• Strong focus on programming, data structures, algorithms, OS, DBMS, networking.\n• **M.Tech in CSE** also available.\n• Labs: Programming, Networks, DBMS, AI/ML.\n• Active coding clubs, hackathons, and tech fests.\n• Excellent placement record with top IT companies.",
+    "response_ml": "💻 **SIT CSE വകുപ്പ്:**\n\n• **B.E. കമ്പ്യൂട്ടർ സയൻസ് & എഞ്ചിനീയറിംഗ്** – 4 വർഷ പ്രോഗ്രാം.\n• പ്രോഗ്രാമിംഗ്, ഡേറ്റ സ്ട്രക്ചർ, OS, DBMS, നെറ്റ്വർക്കിംഗ്.\n• **M.Tech in CSE** ലഭ്യം.\n• AI/ML ലാബ്, DBMS ലാബ്.\n• ഹാക്കതോൺ, ടെക് ഫെസ്റ്റ്.",
+    "response_kn": "💻 **SIT CSE ವಿಭಾಗ:**\n\n• **B.E. ಕಂಪ್ಯೂಟರ್ ವಿಜ್ಞಾನ & ಇಂಜಿನಿಯರಿಂಗ್** – 4 ವರ್ಷದ ಕಾರ್ಯಕ್ರಮ.\n• ಪ್ರೋಗ್ರಾಮಿಂಗ್, OS, DBMS, ನೆಟ್‌ವರ್ಕಿಂಗ್.\n• **M.Tech in CSE** ಲಭ್ಯ.\n• ಹ್ಯಾಕಥಾನ್, ಕೋಡಿಂಗ್ ಕ್ಲಬ್.",
+    "response_hi": "💻 **SIT CSE विभाग:**\n\n• **B.E. कंप्यूटर साइंस & इंजीनियरिंग** – 4 साल का कार्यक्रम।\n• प्रोग्रामिंग, OS, DBMS, नेटवर्किंग।\n• **M.Tech in CSE** उपलब्ध।\n• हैकथॉन, कोडिंग क्लब।"
+  },
+  "aiml": {
+    "keywords": [
+      "aiml",
+      "ai",
+      "machine learning",
+      "artificial intelligence",
+      "data science",
+      "deep learning",
+      "ആർട്ടിഫിഷ്യൽ ഇന്റലിജൻസ്",
+      "മെഷീൻ ലേണിംഗ്",
+      "ಕೃತಕ ಬುದ್ಧಿಮತ್ತೆ",
+      "ಮೆಶಿನ್ ಲರ್ನಿಂಗ್",
+      "कृत्रिम बुद्धिमत्ता",
+      "मशीन लर्निंग"
+    ],
+    "response": "🤖 **AI & Machine Learning (AIML) at SIT:**\n\n• **B.E. in Artificial Intelligence & Machine Learning** – one of the most sought-after programmes.\n• Curriculum covers Python, ML algorithms, Deep Learning, Computer Vision, NLP, Big Data.\n• Dedicated AI/ML Lab with GPU-enabled systems.\n• Projects on real-world AI applications.\n• High demand from top tech companies in placements.",
+    "response_ml": "🤖 **SIT AIML:**\n\n• **B.E. AI & ML** – ഏറ്റവും ആവശ്യക്കാരുള്ള പ്രോഗ്രാം.\n• Python, ML, Deep Learning, Computer Vision, NLP.\n• GPU-enabled AI/ML ലാബ്.\n• ടോപ് ടെക് കമ്പനികളിൽ ഉയർന്ന പ്ലേസ്മെന്റ്.",
+    "response_kn": "🤖 **SIT AIML:**\n\n• **B.E. AI & ML** – ಅತ್ಯಂತ ಬೇಡಿಕೆಯ ಕಾರ್ಯಕ್ರಮ.\n• Python, ML, Deep Learning, NLP.\n• GPU-enabled AI/ML ಲ್ಯಾಬ್.",
+    "response_hi": "🤖 **SIT AIML:**\n\n• **B.E. AI & ML** – सबसे अधिक मांग वाला कार्यक्रम।\n• Python, ML, Deep Learning, NLP।\n• GPU-enabled AI/ML लैब।"
+  },
+  "ece": {
+    "keywords": [
+      "ece",
+      "electronics",
+      "communication",
+      "vlsi",
+      "embedded",
+      "signal processing",
+      "ഇലക്ട്രോണിക്സ്",
+      "കമ്മ്യൂണിക്കേഷൻ",
+      "ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್",
+      "ಕಮ್ಯುನಿಕೇಷನ್",
+      "इलेक्ट्रॉनिक्स",
+      "संचार"
+    ],
+    "response": "📡 **ECE Department at SIT:**\n\n• **B.E. Electronics & Communication Engineering.**\n• **M.Tech in VLSI Design** available.\n• Labs: VLSI, Embedded Systems, Signal Processing, Communication.\n• Focus on IoT, 5G, Antenna Design, Microprocessors.\n• Strong industry tie-ups with electronics firms.",
+    "response_ml": "📡 **SIT ECE വകുപ്പ്:**\n\n• **B.E. ഇലക്ട്രോണിക്സ് & കമ്മ്യൂണിക്കേഷൻ**.\n• **M.Tech in VLSI Design** ലഭ്യം.\n• VLSI, Embedded, Signal Processing ലാബുകൾ.\n• IoT, 5G, Microprocessors.",
+    "response_kn": "📡 **SIT ECE ವಿಭಾಗ:**\n\n• **B.E. ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್ & ಕಮ್ಯುನಿಕೇಷನ್**.\n• **M.Tech in VLSI** ಲಭ್ಯ.\n• VLSI, Embedded, Signal Processing ಲ್ಯಾಬ್‌ಗಳು.",
+    "response_hi": "📡 **SIT ECE विभाग:**\n\n• **B.E. इलेक्ट्रॉनिक्स & कम्युनिकेशन**।\n• **M.Tech in VLSI** उपलब्ध।\n• VLSI, Embedded, Signal Processing लैब।"
+  },
+  "mechanical": {
+    "keywords": [
+      "mechanical",
+      "me",
+      "machine",
+      "manufacturing",
+      "automobile",
+      "thermal",
+      "cad",
+      "cam",
+      "മെക്കാനിക്കൽ",
+      "യന്ത്രം",
+      "ಮೆಕ್ಯಾನಿಕಲ್",
+      "ಯಂತ್ರ",
+      "मैकेनिकल",
+      "यंत्र"
+    ],
+    "response": "⚙️ **Mechanical Engineering at SIT:**\n\n• **B.E. Mechanical Engineering** – broad and versatile programme.\n• **M.Tech in Machine Design** available.\n• Labs: CAD/CAM, Fluid Mechanics, Heat Transfer, Manufacturing, Metrology.\n• Focus on robotics, automation, and sustainable energy.\n• Placements in manufacturing, auto, and core engineering sectors.",
+    "response_ml": "⚙️ **SIT Mechanical Engineering:**\n\n• **B.E. Mechanical Engineering**.\n• **M.Tech in Machine Design** ലഭ്യം.\n• CAD/CAM, Fluid Mechanics, Manufacturing ലാബുകൾ.\n• Robotics, Automation.",
+    "response_kn": "⚙️ **SIT ಮೆಕ್ಯಾನಿಕಲ್ ಇಂಜಿನಿಯರಿಂಗ್:**\n\n• **B.E. ಮೆಕ್ಯಾನಿಕಲ್ ಇಂಜಿನಿಯರಿಂಗ್**.\n• **M.Tech ಮೆಷಿನ್ ಡಿಸೈನ್** ಲಭ್ಯ.\n• CAD/CAM, Fluid Mechanics ಲ್ಯಾಬ್‌ಗಳು.",
+    "response_hi": "⚙️ **SIT मैकेनिकल इंजीनियरिंग:**\n\n• **B.E. मैकेनिकल इंजीनियरिंग**।\n• **M.Tech मशीन डिज़ाइन** उपलब्ध।\n• CAD/CAM, Fluid Mechanics लैब।"
+  },
+  "civil": {
+    "keywords": [
+      "civil",
+      "ce",
+      "construction",
+      "structural",
+      "surveying",
+      "concrete",
+      "സിവിൽ",
+      "നിർമ്മാണം",
+      "ಸಿವಿಲ್",
+      "ನಿರ್ಮಾಣ",
+      "सिविल",
+      "निर्माण"
+    ],
+    "response": "🏗️ **Civil Engineering at SIT:**\n\n• **B.E. Civil Engineering** – covers design, construction, and infrastructure.\n• Labs: Concrete Technology, Geotechnical, Surveying, Environmental Engg, Structural Analysis.\n• Focus on sustainable construction and smart cities.\n• Students work on live projects and design competitions.",
+    "response_ml": "🏗️ **SIT Civil Engineering:**\n\n• **B.E. Civil Engineering**.\n• Concrete Technology, Surveying, Structural Analysis ലാബുകൾ.\n• Sustainable Construction, Smart Cities.",
+    "response_kn": "🏗️ **SIT ಸಿವಿಲ್ ಇಂಜಿನಿಯರಿಂಗ್:**\n\n• **B.E. ಸಿವಿಲ್ ಇಂಜಿನಿಯರಿಂಗ್**.\n• ಕಾಂಕ್ರೀಟ್ ತಂತ್ರಜ್ಞಾನ, ಸರ್ವೇಯಿಂಗ್ ಲ್ಯಾಬ್‌ಗಳು.",
+    "response_hi": "🏗️ **SIT सिविल इंजीनियरिंग:**\n\n• **B.E. सिविल इंजीनियरिंग**।\n• कंक्रीट टेक्नोलॉजी, सर्वेयिंग लैब।"
+  },
+  "ise": {
+    "keywords": [
+      "ise",
+      "information science",
+      "information technology",
+      "it",
+      "ഇൻഫർമേഷൻ സയൻസ്",
+      "ಮಾಹಿತಿ ವಿಜ್ಞಾನ",
+      "सूचना विज्ञान"
+    ],
+    "response": "🖥️ **Information Science & Engineering (ISE) at SIT:**\n\n• **B.E. Information Science & Engineering** – focuses on software systems, databases, and networks.\n• Covers web development, cloud computing, cybersecurity, and data analytics.\n• Labs: Software Engineering, Web Tech, Cybersecurity.\n• Strong industry placement in IT services and product companies.",
+    "response_ml": "🖥️ **SIT ISE:**\n\n• **B.E. ഇൻഫർമേഷൻ സയൻസ് & എഞ്ചിനീയറിംഗ്**.\n• Web Development, Cloud Computing, Cybersecurity, Data Analytics.",
+    "response_kn": "🖥️ **SIT ISE:**\n\n• **B.E. ಮಾಹಿತಿ ವಿಜ್ಞಾನ & ಇಂಜಿನಿಯರಿಂಗ್**.\n• Web Dev, Cloud, Cybersecurity, Data Analytics.",
+    "response_hi": "🖥️ **SIT ISE:**\n\n• **B.E. इन्फॉर्मेशन साइंस & इंजीनियरिंग**।\n• Web Dev, Cloud, Cybersecurity, Data Analytics।"
+  },
+  "eee": {
+    "keywords": [
+      "eee",
+      "electrical",
+      "electronics engineering",
+      "power systems",
+      "power electronics",
+      "ഇലക്ട്രിക്കൽ",
+      "ವಿದ್ಯುತ್ ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್",
+      "इलेक्ट्रिकल"
+    ],
+    "response": "⚡ **Electrical & Electronics Engineering (EEE) at SIT:**\n\n• **B.E. Electrical & Electronics Engineering.**\n• Covers power systems, machines, power electronics, control systems, renewable energy.\n• Labs: Electrical Machines, Power Electronics, Control Systems, PLC.\n• Opportunities in power sector, KSEB, BESCOM, and industrial automation.",
+    "response_ml": "⚡ **SIT EEE:**\n\n• **B.E. Electrical & Electronics Engineering**.\n• Power Systems, Renewable Energy, Control Systems.\n• KSEB, BESCOM, Industrial Automation.",
+    "response_kn": "⚡ **SIT EEE:**\n\n• **B.E. ವಿದ್ಯುತ್ & ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್ ಇಂಜಿನಿಯರಿಂಗ್**.\n• ವಿದ್ಯುತ್ ವ್ಯವಸ್ಥೆ, ನವೀಕರಣ ಶಕ್ತಿ.",
+    "response_hi": "⚡ **SIT EEE:**\n\n• **B.E. इलेक्ट्रिकल & इलेक्ट्रॉनिक्स इंजीनियरिंग**।\n• पावर सिस्टम, नवीकरणीय ऊर्जा।"
+  },
+  "mba": {
+    "keywords": [
+      "mba",
+      "management",
+      "business administration",
+      "business",
+      "മാനേജ്മെന്റ്",
+      "MBA",
+      "ನಿರ್ವಹಣೆ",
+      "MBA",
+      "प्रबंधन",
+      "MBA"
+    ],
+    "response": "📊 **MBA at SIT:**\n\n• **Master of Business Administration (MBA)** – 2-year postgraduate programme.\n• Specialisations: Marketing, Finance, HR, Operations, Systems.\n• Strong industry interface with guest lectures, case studies, and live projects.\n• Campus placement support for MBA graduates.\n• Affiliated to VTU and AICTE approved.",
+    "response_ml": "📊 **SIT MBA:**\n\n• **MBA** – 2 വർഷ PG പ്രോഗ്രാം.\n• Marketing, Finance, HR, Operations, Systems Specialisations.\n• Industry Interface, Guest Lectures, Live Projects.\n• Campus Placement.",
+    "response_kn": "📊 **SIT MBA:**\n\n• **MBA** – 2 ವರ್ಷದ PG ಕಾರ್ಯಕ್ರಮ.\n• Marketing, Finance, HR, Operations ವಿಶೇಷತೆಗಳು.",
+    "response_hi": "📊 **SIT MBA:**\n\n• **MBA** – 2 साल का PG कार्यक्रम।\n• Marketing, Finance, HR, Operations विशेषज्ञता।"
+  },
+  "labs": {
+    "keywords": [
+      "lab",
+      "laboratory",
+      "workshop",
+      "practical",
+      "experiment",
+      "ലാബ്",
+      "ലബോറട്ടറി",
+      "പ്രായോഗിക",
+      "ಲ್ಯಾಬ್",
+      "ಪ್ರಯೋಗಾಲಯ",
+      "लैब",
+      "प्रयोगशाला"
+    ],
+    "response": "🔬 **Laboratories at SIT:**\n\n• **CSE/ISE:** Programming, Networks, DBMS, AI/ML, Cyber Security labs.\n• **ECE:** VLSI, Embedded Systems, Signal Processing, Communication labs.\n• **ME:** CAD/CAM, Fluid Mechanics, Manufacturing, Metrology labs.\n• **Civil:** Concrete, Geotechnical, Surveying, Environment labs.\n• **EEE:** Electrical Machines, Power Electronics, Control Systems labs.\n• All labs are equipped with modern instruments and software.",
+    "response_ml": "🔬 **SIT ലാബോറട്ടറികൾ:**\n\n• CSE: Programming, DBMS, AI/ML, Cybersecurity.\n• ECE: VLSI, Embedded, Signal Processing.\n• ME: CAD/CAM, Manufacturing.\n• Civil: Concrete, Surveying.\n• EEE: Electrical Machines, Power Electronics.",
+    "response_kn": "🔬 **SIT ಪ್ರಯೋಗಾಲಯಗಳು:**\n\n• CSE: Programming, DBMS, AI/ML.\n• ECE: VLSI, Embedded Systems.\n• ME: CAD/CAM, Manufacturing.\n• Civil: Concrete, Surveying.\n• EEE: Electrical Machines.",
+    "response_hi": "🔬 **SIT प्रयोगशालाएं:**\n\n• CSE: Programming, DBMS, AI/ML.\n• ECE: VLSI, Embedded Systems.\n• ME: CAD/CAM, Manufacturing.\n• Civil: Concrete, Surveying.\n• EEE: Electrical Machines।"
+  },
+  "research": {
+    "keywords": [
+      "research",
+      "publication",
+      "project",
+      "paper",
+      "phd",
+      "innovation",
+      "ഗവേഷണം",
+      "ഗവേഷണ പ്രബന്ധം",
+      "ಸಂಶೋಧನೆ",
+      "ಪ്ರಕಟಣೆ",
+      "अनुसंधान",
+      "प्रकाशन"
+    ],
+    "response": "🔭 **Research at SIT:**\n\n• Active research in AI/ML, VLSI, IoT, Structural Engineering, Renewable Energy.\n• Faculty publish regularly in Scopus-indexed and UGC-approved journals.\n• Research grants from DST, VGST, and industry bodies.\n• Student research projects showcased at national competitions.\n• Research collaborations with industries in Mangalore & Bengaluru.",
+    "response_ml": "🔭 **SIT ഗവേഷണം:**\n\n• AI/ML, VLSI, IoT, Renewable Energy ഗവേഷണം.\n• Scopus, UGC ജേണലുകളിൽ ഫാക്കൽറ്റി പ്രസിദ്ധീകരണം.\n• DST, VGST ഗ്രാന്റുകൾ.",
+    "response_kn": "🔭 **SIT ಸಂಶೋಧನೆ:**\n\n• AI/ML, VLSI, IoT ಸಂಶೋಧನೆ.\n• Scopus ಜರ್ನಲ್‌ಗಳಲ್ಲಿ ಪ್ರಕಟಣೆ.\n• DST, VGST ಅನುದಾನ.",
+    "response_hi": "🔭 **SIT अनुसंधान:**\n\n• AI/ML, VLSI, IoT अनुसंधान।\n• Scopus पत्रिकाओं में प्रकाशन।\n• DST, VGST अनुदान।"
+  },
+  "clubs": {
+    "keywords": [
+      "clubs",
+      "activities",
+      "extracurricular",
+      "nss",
+      "cultural",
+      "technical",
+      "fest",
+      "events",
+      "club",
+      "ക്ലബ്",
+      "പ്രവർത്തനങ്ങൾ",
+      "NSS",
+      "ಕ್ಲಬ್",
+      "ಚಟುವಟಿಕೆ",
+      "NSS",
+      "क्लब",
+      "गतिविधि",
+      "NSS"
+    ],
+    "response": "🎭 **Clubs & Activities at SIT:**\n\n• **Technical Clubs:** Coding Club, Robotics Club, IEEE Student Chapter, ISTE.\n• **Cultural Clubs:** Dance, Music, Drama, Fine Arts.\n• **Social Service:** NSS (National Service Scheme), NCC.\n• **Annual Events:** Spandan (Cultural Fest), Technozion (Tech Fest).\n• Students can join multiple clubs for holistic development.",
+    "response_ml": "🎭 **SIT ക്ലബ്ബുകൾ & പ്രവർത്തനങ്ങൾ:**\n\n• Coding Club, Robotics Club, IEEE, ISTE.\n• ഡാൻസ്, സംഗീതം, ഡ്രാമ.\n• NSS, NCC.\n• Spandan (Cultural), Technozion (Tech Fest).",
+    "response_kn": "🎭 **SIT ಕ್ಲಬ್‌ಗಳು:**\n\n• Coding, Robotics, IEEE, ISTE.\n• ನೃತ್ಯ, ಸಂಗೀತ, ನಾಟಕ.\n• NSS, NCC.\n• Spandan, Technozion.",
+    "response_hi": "🎭 **SIT क्लब और गतिविधियाँ:**\n\n• Coding Club, Robotics Club, IEEE, ISTE।\n• नृत्य, संगीत, नाटक।\n• NSS, NCC।\n• Spandan, Technozion।"
+  },
+  "principal": {
+    "keywords": [
+      "principal",
+      "director",
+      "head",
+      "management",
+      "chairman",
+      "dr",
+      "പ്രിൻസിപ്പൽ",
+      "ഡയറക്ടർ",
+      "ചെയർമാൻ",
+      "ಪ್ರಾಂಶುಪಾಲ",
+      "ಡೈರೆಕ್ಟರ್",
+      "प्रिंसिपल",
+      "निदेशक"
+    ],
+    "response": "👨‍💼 **Leadership at SIT:**\n\n• SIT is managed by the **Srinivas Educational Trust**.\n• The institution operates under the **Srinivas Group of Colleges**, Mangalore.\n• Experienced administrative and academic leadership ensures quality education.\n• For current principal/director details, visit: www.srinivasgroup.com",
+    "response_ml": "👨‍💼 **SIT നേതൃത്വം:**\n\n• SIT ശ്രീനിവാസ് എഡ്യൂക്കേഷണൽ ട്രസ്റ്റ് നിയന്ത്രിക്കുന്നു.\n• ശ്രീനിവാസ് ഗ്രൂപ്പ് ഓഫ് കോളേജസ് കീഴിൽ.\n• www.srinivasgroup.com",
+    "response_kn": "👨‍💼 **SIT ನಾಯಕತ್ವ:**\n\n• SIT ಅನ್ನು ಶ್ರೀನಿವಾಸ್ ಶಿಕ್ಷಣ ಟ್ರಸ್ಟ್ ನಿರ್ವಹಿಸುತ್ತದೆ.\n• www.srinivasgroup.com",
+    "response_hi": "👨‍💼 **SIT नेतृत्व:**\n\n• SIT श्रीनिवास एजुकेशनल ट्रस्ट द्वारा प्रबंधित।\n• www.srinivasgroup.com"
+  },
+  "scholarship": {
+    "keywords": [
+      "scholarship",
+      "financial aid",
+      "stipend",
+      "free seat",
+      "sc st scholarship",
+      "merit scholarship",
+      "സ്കോളർഷിപ്പ്",
+      "സ്കോളർഷിപ്",
+      "ವಿದ್ಯಾರ್ಥಿ ವೇತನ",
+      "ಶಿಷ್ಯವೇತನ",
+      "छात्रवृत्ति"
+    ],
+    "response": "🎓 **Scholarships at SIT:**\n\n• **Government Scholarships:** SC/ST Post-Matric, OBC, EBC scholarships (Karnataka Govt).\n• **Merit Scholarship:** For top-ranked students in KCET.\n• **Minority Scholarships:** Available for eligible students.\n• **Management Scholarships:** Institution-level merit-based waivers.\n• Apply through respective government portals or the SIT admin office.\n\n📞 Contact: +91-824-2274334",
+    "response_ml": "🎓 **SIT സ്കോളർഷിപ്പുകൾ:**\n\n• SC/ST, OBC, EBC Govt Scholarships.\n• KCET ടോപ്പ് വിദ്യാർഥികൾക്ക് Merit Scholarship.\n• Minority, Management Scholarships.\n• 📞 +91-824-2274334",
+    "response_kn": "🎓 **SIT ವಿದ್ಯಾರ್ಥಿ ವೇತನಗಳು:**\n\n• SC/ST, OBC, EBC ಸರ್ಕಾರಿ ಶಿಷ್ಯವೇತನ.\n• KCET ಟಾಪ್ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಮೆರಿಟ್.\n• 📞 +91-824-2274334",
+    "response_hi": "🎓 **SIT छात्रवृत्ति:**\n\n• SC/ST, OBC, EBC सरकारी छात्रवृत्ति।\n• KCET टॉपर्स के लिए मेरिट स्कॉलरशिप।\n• 📞 +91-824-2274334"
+  },
+  "internship_detail": {
+    "keywords": [
+      "internship details",
+      "summer internship",
+      "industry training",
+      "apprenticeship",
+      "ഇന്റേൺഷിപ്പ്",
+      "ഇൻഡസ്ട്രി ട്രെയിനിംഗ്",
+      "ಇಂಟರ್ನ್‌ಶಿಪ್ ವಿವರ",
+      "इंटर्नशिप विवरण"
+    ],
+    "response": "🏢 **Internship Opportunities at SIT:**\n\n• Mandatory internship during 6th/7th semester for B.E. students.\n• Training & Placement Cell connects students with companies.\n• Past internship partners: Infosys, BPCL, L&T, KPTCL, local industries.\n• Duration: 4–8 weeks typically.\n• Students receive certificates and internship reports contribute to grades.",
+    "response_ml": "🏢 **SIT Internship:**\n\n• 6th/7th Semester Mandatory Internship.\n• Infosys, BPCL, L&T, KPTCL, Local Industries.\n• 4–8 ആഴ്ച ദൈർഘ്യം.",
+    "response_kn": "🏢 **SIT ಇಂಟರ್ನ್‌ಶಿಪ್:**\n\n• 6th/7th ಸೆಮಿಸ್ಟರ್ ಕಡ್ಡಾಯ ಇಂಟರ್ನ್‌ಶಿಪ್.\n• Infosys, BPCL, L&T, KPTCL.",
+    "response_hi": "🏢 **SIT इंटर्नशिप:**\n\n• 6th/7th सेमेस्टर में अनिवार्य इंटर्नशिप।\n• Infosys, BPCL, L&T, KPTCL।"
+  },
+  "kcet": {
+    "keywords": [
+      "kcet",
+      "kea",
+      "karnataka entrance",
+      "state quota",
+      "KCET",
+      "KEA",
+      "ಕೆಸಿಇಟಿ",
+      "केसीईटी"
+    ],
+    "response": "📋 **KCET Admissions at SIT:**\n\n• KCET (Karnataka Common Entrance Test) is the primary route for government quota seats.\n• Conducted by KEA (Karnataka Examinations Authority).\n• Apply at kea.kar.nic.in after results.\n• SIT accepts KCET ranks for all B.E. branches.\n• Cutoff ranks vary by branch and category each year.\n\n📞 +91-824-2274334",
+    "response_ml": "📋 **KCET Admissions:**\n\n• KCET – Karnataka Government Quota Admission.\n• kea.kar.nic.in-ൽ അപേക്ഷ.\n• SIT-ൽ എല്ലാ ബ്രാഞ്ചുകൾക്കും KCET Rank.\n• 📞 +91-824-2274334",
+    "response_kn": "📋 **KCET ಪ್ರವೇಶ:**\n\n• kea.kar.nic.in ನಲ್ಲಿ ಅರ್ಜಿ.\n• ಎಲ್ಲಾ B.E. ಶಾಖೆಗಳಿಗೆ KCET ರ‍್ಯಾಂಕ್.",
+    "response_hi": "📋 **KCET प्रवेश:**\n\n• kea.kar.nic.in पर आवेदन।\n• सभी B.E. शाखाओं के लिए KCET रैंक।"
+  },
+  "comedk": {
+    "keywords": [
+      "comedk",
+      "comedk uget",
+      "private quota",
+      "COMEDK",
+      "ಕೊಮೆಡ್ಕೆ",
+      "कॉमेडके"
+    ],
+    "response": "📋 **COMEDK Admissions at SIT:**\n\n• COMEDK UGET is the entrance exam for private engineering colleges in Karnataka.\n• Apply at comedk.org after registering.\n• SIT accepts COMEDK ranks for all B.E. branches.\n• Fee structure under COMEDK is different from KCET quota.\n\n📞 +91-824-2274334",
+    "response_ml": "📋 **COMEDK Admissions:**\n\n• COMEDK UGET – Private Quota Admission.\n• comedk.org-ൽ അപേക്ഷ.\n• 📞 +91-824-2274334",
+    "response_kn": "📋 **COMEDK ಪ್ರವೇಶ:**\n\n• comedk.org ನಲ್ಲಿ ಅರ್ಜಿ.\n• 📞 +91-824-2274334",
+    "response_hi": "📋 **COMEDK प्रवेश:**\n\n• comedk.org पर आवेदन।\n• 📞 +91-824-2274334"
+  },
+  "lateral_entry": {
+    "keywords": [
+      "lateral entry",
+      "diploma",
+      "3rd semester",
+      "direct second year",
+      "dce",
+      "ലാറ്ററൽ എൻട്രി",
+      "ഡിപ്ലോമ",
+      "ಲ್ಯಾಟರಲ್ ಎಂಟ್ರಿ",
+      "ಡಿಪ್ಲೊಮಾ",
+      "लेटरल एंट्री",
+      "डिप्लोमा"
+    ],
+    "response": "📋 **Lateral Entry Admission at SIT:**\n\n• Diploma holders can join **B.E. 2nd year (3rd semester)** directly.\n• Admissions through DCE (Diploma CET) conducted by KEA.\n• Eligibility: Diploma in relevant engineering branch with 45% marks.\n• Limited seats available under lateral entry quota.",
+    "response_ml": "📋 **Lateral Entry:**\n\n• Diploma ഉള്ളവർക്ക് **B.E. 2nd Year** നേരിട്ട് ചേരാം.\n• DCE (Diploma CET) വഴി.\n• 45% Marks.",
+    "response_kn": "📋 **ಲ್ಯಾಟರಲ್ ಎಂಟ್ರಿ:**\n\n• ಡಿಪ್ಲೊಮಾ ಹೊಂದಿರುವವರು **B.E. 2nd ವರ್ಷ** ನೇರ ಸೇರಬಹುದು.\n• DCE ಮೂಲಕ. 45% ಅಂಕ.",
+    "response_hi": "📋 **लेटरल एंट्री:**\n\n• डिप्लोमा धारक **B.E. 2nd Year** में सीधे प्रवेश।\n• DCE के माध्यम से। 45% अंक।"
+  },
+  "anti_ragging": {
+    "keywords": [
+      "ragging",
+      "anti ragging",
+      "harassment",
+      "bullying",
+      "safe campus",
+      "റാഗിംഗ്",
+      "ഹരാസ്മെന്റ്",
+      "ರ‍್ಯಾಗಿಂಗ್",
+      "ಕಿರುಕುಳ",
+      "रैगिंग",
+      "उत्पीड़न"
+    ],
+    "response": "🛡️ **Anti-Ragging Policy at SIT:**\n\n• SIT follows a **strict zero-tolerance anti-ragging policy**.\n• Anti-Ragging Committee is active on campus.\n• Complaints can be reported to the committee or via the UGC helpline: **1800-180-5522**.\n• Disciplinary action including expulsion for violators.\n• Regular awareness programmes conducted.",
+    "response_ml": "🛡️ **Anti-Ragging:**\n\n• **Zero Tolerance Policy**.\n• Anti-Ragging Committee.\n• UGC Helpline: 1800-180-5522.\n• ലംഘനത്തിന് ഡിസ്മിസൽ.",
+    "response_kn": "🛡️ **ಆಂಟಿ-ರ‍್ಯಾಗಿಂಗ್:**\n\n• **Zero Tolerance Policy**.\n• UGC Helpline: 1800-180-5522.",
+    "response_hi": "🛡️ **एंटी-रैगिंग:**\n\n• **Zero Tolerance Policy**।\n• UGC Helpline: 1800-180-5522।"
+  },
+  "grievance": {
+    "keywords": [
+      "grievance",
+      "complaint",
+      "redressal",
+      "problem",
+      "issue",
+      "feedback",
+      "പരാതി",
+      "ഫീഡ്ബാക്ക്",
+      "ದೂರು",
+      "ಫೀಡ್‌ಬ್ಯಾಕ್",
+      "शिकायत",
+      "फीडबैक"
+    ],
+    "response": "📣 **Grievance Redressal at SIT:**\n\n• **Grievance Redressal Committee** handles student/faculty complaints.\n• Submit complaints to the committee or the Principal's office.\n• Online grievance: via official SIT website.\n• Anonymous feedback forms available.\n• Response within 7 working days.",
+    "response_ml": "📣 **Grievance Redressal:**\n\n• Grievance Redressal Committee.\n• Principal Office.\n• Official Website.\n• 7 Working Days Response.",
+    "response_kn": "📣 **ದೂರು ನಿವಾರಣೆ:**\n\n• Grievance Committee ಅಥವಾ Principal ಕಚೇರಿ.",
+    "response_hi": "📣 **शिकायत निवारण:**\n\n• Grievance Committee या प्रिंसिपल कार्यालय।"
+  },
+  "medical": {
+    "keywords": [
+      "medical",
+      "health",
+      "clinic",
+      "doctor",
+      "first aid",
+      "ambulance",
+      "medicine",
+      "മെഡിക്കൽ",
+      "ആരോഗ്യം",
+      "ഡോക്ടർ",
+      "ವೈದ್ಯಕೀಯ",
+      "ಆರೋಗ್ಯ",
+      "ಡಾಕ್ಟರ್",
+      "चिकित्सा",
+      "स्वास्थ्य",
+      "डॉक्टर"
+    ],
+    "response": "🏥 **Medical Facilities at SIT:**\n\n• Campus medical room staffed by qualified nurse/doctor.\n• First-aid available on-site.\n• Tie-up with nearby hospitals in Valachil/Deralakatte for emergencies.\n• Ambulance facility for emergencies.\n• Health insurance for hostel students.",
+    "response_ml": "🏥 **SIT Medical:**\n\n• Qualified Nurse/Doctor – Campus Medical Room.\n• First Aid.\n• Emergency: Nearby Hospitals.\n• Ambulance Facility.",
+    "response_kn": "🏥 **SIT ವೈದ್ಯಕೀಯ:**\n\n• ಕ್ಯಾಂಪಸ್ ವೈದ್ಯಕೀಯ ಕೊಠಡಿ.\n• ತುರ್ತು: ಹತ್ತಿರದ ಆಸ್ಪತ್ರೆ.\n• ಅಂಬುಲೆನ್ಸ್.",
+    "response_hi": "🏥 **SIT चिकित्सा:**\n\n• कैंपस मेडिकल रूम।\n• आपातकाल: पास के अस्पताल।\n• एम्बुलेंस सुविधा।"
+  },
+  "auditorium": {
+    "keywords": [
+      "auditorium",
+      "seminar hall",
+      "conference",
+      "hall",
+      "audi",
+      "ഓഡിറ്റോറിയം",
+      "സെമിനാർ ഹാൾ",
+      "ಸಭಾಂಗಣ",
+      "ಸೆಮಿನಾರ್ ಹಾಲ್",
+      "सभागार",
+      "सेमिनार हॉल"
+    ],
+    "response": "🎤 **Auditorium & Seminar Halls at SIT:**\n\n• Main auditorium with capacity for 500+ students.\n• Multiple seminar halls equipped with projectors and audio systems.\n• Used for tech fests, cultural events, guest lectures, and convocations.\n• Seminar halls available in each department block.",
+    "response_ml": "🎤 **SIT Auditorium:**\n\n• 500+ Capacity Main Auditorium.\n• Projector & Audio System.\n• Tech Fests, Cultural Events, Guest Lectures.",
+    "response_kn": "🎤 **SIT ಸಭಾಂಗಣ:**\n\n• 500+ ಸಾಮರ್ಥ್ಯದ ಮುಖ್ಯ ಸಭಾಂಗಣ.\n• ಪ್ರೊಜೆಕ್ಟರ್ & ಆಡಿಯೋ ಸಿಸ್ಟಮ್.",
+    "response_hi": "🎤 **SIT सभागार:**\n\n• 500+ क्षमता का मुख्य ऑडिटोरियम।\n• प्रोजेक्टर और ऑडियो सिस्टम।"
+  },
+  "convocation": {
+    "keywords": [
+      "convocation",
+      "graduation",
+      "degree",
+      "certificate",
+      "കൺവൊക്കേഷൻ",
+      "ഡിഗ്രി",
+      "സർട്ടിഫിക്കറ്റ്",
+      "ಪದವಿ ಪ್ರದಾನ",
+      "ಡಿಗ್ರಿ",
+      "दीक्षांत",
+      "डिग्री",
+      "प्रमाण पत्र"
+    ],
+    "response": "🎓 **Convocation at SIT:**\n\n• VTU Convocation is held annually for graduating students.\n• Degrees are awarded by Visvesvaraya Technological University.\n• Students receive B.E./M.Tech/MBA degree certificates.\n• Provisional certificates issued by SIT after results.\n• Check VTU website for convocation schedule.",
+    "response_ml": "🎓 **Convocation:**\n\n• VTU Convocation Annual.\n• B.E./M.Tech/MBA Degree.\n• Provisional Certificate SIT ൽ നിന്ന്.",
+    "response_kn": "🎓 **ಪದವಿ ಪ್ರದಾನ:**\n\n• ವಾರ್ಷಿಕ VTU Convocation.\n• B.E./M.Tech/MBA ಡಿಗ್ರಿ.",
+    "response_hi": "🎓 **दीक्षांत समारोह:**\n\n• VTU का वार्षिक Convocation।\n• B.E./M.Tech/MBA डिग्री।"
+  },
+  "dresscode": {
+    "keywords": [
+      "dress code",
+      "uniform",
+      "dress",
+      "attire",
+      "clothing",
+      "ഡ്രസ്സ് കോഡ്",
+      "യൂണിഫോം",
+      "ಡ್ರೆಸ್ ಕೋಡ್",
+      "ಸಮವಸ್ತ್ರ",
+      "ड्रेस कोड",
+      "वर्दी"
+    ],
+    "response": "👔 **Dress Code at SIT:**\n\n• Formal dress code is followed in the college.\n• Boys: Formal shirt, trousers.\n• Girls: Salwar kameez/saree/formal clothes.\n• Lab coats required in laboratories.\n• ID cards must be worn at all times on campus.",
+    "response_ml": "👔 **SIT Dress Code:**\n\n• Boys: Formal Shirt, Trouser.\n• Girls: Salwar Kameez/Saree.\n• Lab Coat – Labs ൽ.\n• ID Card – Campus ൽ.",
+    "response_kn": "👔 **SIT ಡ್ರೆಸ್ ಕೋಡ್:**\n\n• Boys: Formal Shirt, Trouser.\n• Girls: Salwar/Saree.\n• ಲ್ಯಾಬ್ ಕೋಟ್.",
+    "response_hi": "👔 **SIT ड्रेस कोड:**\n\n• Boys: Formal Shirt, Trouser।\n• Girls: Salwar/Saree।\n• Lab Coat।"
+  },
+  "idcard": {
+    "keywords": [
+      "id card",
+      "identity card",
+      "student id",
+      "lost id",
+      "ID കാർഡ്",
+      "ഐഡി",
+      "ID ಕಾರ್ಡ್",
+      "ID कार्ड"
+    ],
+    "response": "🪪 **Student ID Card at SIT:**\n\n• Every student is issued a photo ID card at the time of admission.\n• ID card is mandatory on campus at all times.\n• Lost ID: Apply at the admin office with a fee for duplicate.\n• ID card used for library, lab access, and exams.",
+    "response_ml": "🪪 **Student ID Card:**\n\n• Admission സമയത്ത് ID Card.\n• Campus ൽ Mandatory.\n• Duplicate: Admin Office.",
+    "response_kn": "🪪 **ಸ್ಟೂಡೆಂಟ್ ID ಕಾರ್ಡ್:**\n\n• ಪ್ರವೇಶ ಸಮಯದಲ್ಲಿ ID Card.\n• ಕ್ಯಾಂಪಸ್‌ನಲ್ಲಿ ಕಡ್ಡಾಯ.",
+    "response_hi": "🪪 **स्टूडेंट ID कार्ड:**\n\n• प्रवेश के समय ID Card।\n• कैंपस में अनिवार्य।"
+  },
+  "attendance": {
+    "keywords": [
+      "attendance",
+      "present",
+      "absent",
+      "shortage",
+      "minimum attendance",
+      "അറ്റൻഡൻസ്",
+      "ഹാജർ",
+      "ಹಾಜರಾತಿ",
+      "उपस्थिति"
+    ],
+    "response": "📊 **Attendance at SIT:**\n\n• Minimum **75% attendance** is mandatory as per VTU norms.\n• Students with less than 75% are not eligible to write semester exams.\n• Medical condonation available with valid medical certificate (up to 10% relaxation).\n• Attendance is monitored and displayed on the student portal.",
+    "response_ml": "📊 **Attendance:**\n\n• **75% Minimum** – VTU Norm.\n• 75% ൽ താഴ്ന്നവർക്ക് Exam Eligibility ഇല്ല.\n• Medical: 10% Condonation.",
+    "response_kn": "📊 **ಹಾಜರಾತಿ:**\n\n• **75% ಕನಿಷ್ಠ** – VTU ನಿಯಮ.\n• ಕಡಿಮೆ ಇದ್ದರೆ ಪರೀಕ್ಷೆ ಅನರ್ಹ.",
+    "response_hi": "📊 **उपस्थिति:**\n\n• **75% न्यूनतम** – VTU नियम।\n• कम होने पर परीक्षा के लिए अयोग्य।"
+  },
+  "online_learning": {
+    "keywords": [
+      "online class",
+      "e-learning",
+      "nptel",
+      "coursera",
+      "mooc",
+      "online course",
+      "ഓൺലൈൻ ക്ലാസ്",
+      "NPTEL",
+      "ಆನ್‌ಲೈನ್ ತರಗತಿ",
+      "NPTEL",
+      "ऑनलाइन क्लास",
+      "NPTEL"
+    ],
+    "response": "💻 **Online Learning at SIT:**\n\n• Students encouraged to enroll in **NPTEL** (SWAYAM) courses.\n• NPTEL credits recognized by VTU.\n• Access to **Coursera** and other platforms encouraged.\n• E-learning resources available through college LMS.\n• Online lab resources and video lectures available.",
+    "response_ml": "💻 **Online Learning:**\n\n• **NPTEL (SWAYAM)** Courses – VTU Credits.\n• Coursera, E-Learning LMS.\n• Video Lectures.",
+    "response_kn": "💻 **ಆನ್‌ಲೈನ್ ಕಲಿಕೆ:**\n\n• **NPTEL (SWAYAM)** – VTU Credits.\n• Coursera, E-Learning LMS.",
+    "response_hi": "💻 **ऑनलाइन लर्निंग:**\n\n• **NPTEL (SWAYAM)** – VTU क्रेडिट।\n• Coursera, E-Learning LMS।"
+  },
+  "how_to_reach": {
+    "keywords": [
+      "how to reach",
+      "directions to college",
+      "reach sit",
+      "distance from mangalore",
+      "എങ്ങനെ എത്തും",
+      "വഴി",
+      "ಹೇಗೆ ತಲುಪಬಹುದು",
+      "ದಾರಿ",
+      "कैसे पहुंचें",
+      "रास्ता"
+    ],
+    "response": "📍 **How to Reach SIT Valachil:**\n\n• **By Road:** SIT is on NH 66, about 12 km from Mangalore city.\n• **By Bus:** State and private buses from Mangalore Central Bus Stand to Valachil/Farangipete.\n• **By Train:** Nearest station – Mangalore Junction (~15 km) or Surathkal (~8 km).\n• **By Air:** Mangalore International Airport (~20 km).\n• College buses available from Mangalore, Surathkal, Deralakatte.",
+    "response_ml": "📍 **SIT Valachil എത്താൻ:**\n\n• Road: NH 66, Mangalore നഗരത്തിൽ നിന്ന് 12 km.\n• Bus: Mangalore Central ൽ നിന്ന് Valachil/Farangipete.\n• Train: Mangalore Junction (~15 km), Surathkal (~8 km).\n• Air: Mangalore Airport (~20 km).",
+    "response_kn": "📍 **SIT Valachil ತಲುಪಲು:**\n\n• Road: NH 66, ಮಂಗಳೂರಿನಿಂದ 12 km.\n• Bus: Mangalore Central ನಿಂದ Valachil.\n• Train: Mangalore Junction, Surathkal.\n• Air: Mangalore Airport.",
+    "response_hi": "📍 **SIT Valachil कैसे पहुंचें:**\n\n• Road: NH 66, मंगलूरु से 12 km।\n• Bus: Mangalore Central से Valachil।\n• Train: Mangalore Junction, Surathkal।\n• Air: Mangalore Airport।"
+  },
+  "nss_ncc": {
+    "keywords": [
+      "nss",
+      "ncc",
+      "national service scheme",
+      "national cadet corps",
+      "social service",
+      "NSS",
+      "NCC",
+      "സോഷ്യൽ സർവീസ്",
+      "NSS",
+      "NCC",
+      "ಸಮಾಜ ಸೇವೆ",
+      "NSS",
+      "NCC",
+      "सामाजिक सेवा"
+    ],
+    "response": "🌿 **NSS & NCC at SIT:**\n\n• **NSS (National Service Scheme):** Community service, blood donation, cleanliness drives, tree plantation.\n• **NCC (National Cadet Corps):** Defence training, discipline, leadership.\n• Regular camps, rallies, and social activities organized.\n• NSS/NCC participation adds to the overall student profile.",
+    "response_ml": "🌿 **NSS & NCC:**\n\n• NSS: Community Service, Blood Donation, Cleanliness.\n• NCC: Defence Training, Leadership.\n• Camps, Rallies.",
+    "response_kn": "🌿 **NSS & NCC:**\n\n• NSS: ಸಮುದಾಯ ಸೇವೆ, ರಕ್ತದಾನ.\n• NCC: ರಕ್ಷಣಾ ತರಬೇತಿ.",
+    "response_hi": "🌿 **NSS & NCC:**\n\n• NSS: सामुदायिक सेवा, रक्तदान।\n• NCC: रक्षा प्रशिक्षण।"
+  },
+  "techfest": {
+    "keywords": [
+      "technozion",
+      "tech fest",
+      "technical festival",
+      "tech event",
+      "ടെക്നോ ഫെസ്റ്റ്",
+      "ടെക് ഫെസ്റ്റ്",
+      "ಟೆಕ್ ಫೆಸ್ಟ್",
+      "टेक फेस्ट"
+    ],
+    "response": "🚀 **Technozion – Tech Fest at SIT:**\n\n• Annual technical festival organised by SIT students.\n• Events: Hackathon, coding contest, robotics, paper presentation, project expo.\n• Participation from colleges across Karnataka.\n• Cash prizes and certificates for winners.\n• Organised by the technical clubs in association with faculty.",
+    "response_ml": "🚀 **Technozion Tech Fest:**\n\n• Annual Tech Festival.\n• Hackathon, Coding, Robotics, Paper Presentation.\n• Karnataka Colleges Participation.\n• Cash Prizes.",
+    "response_kn": "🚀 **Technozion Tech Fest:**\n\n• ವಾರ್ಷಿಕ ತಾಂತ್ರಿಕ ಹಬ್ಬ.\n• Hackathon, Coding, Robotics.\n• ನಗದು ಬಹುಮಾನ.",
+    "response_hi": "🚀 **Technozion Tech Fest:**\n\n• वार्षिक तकनीकी उत्सव।\n• Hackathon, Coding, Robotics।\n• नकद पुरस्कार।"
+  },
+  "culturalfest": {
+    "keywords": [
+      "spandan",
+      "cultural fest",
+      "cultural event",
+      "cultural",
+      "കൾച്ചറൽ ഫെസ്റ്റ്",
+      "ಸಾಂಸ್ಕೃತಿಕ ಹಬ್ಬ",
+      "सांस्कृतिक उत्सव"
+    ],
+    "response": "🎭 **Spandan – Cultural Fest at SIT:**\n\n• Annual cultural festival of SIT.\n• Events: Dance, music, drama, fashion show, solo singing, group performances.\n• Participation from colleges across Dakshina Kannada district.\n• Celebrates the diverse cultural talents of students.",
+    "response_ml": "🎭 **Spandan Cultural Fest:**\n\n• Annual Cultural Festival.\n• Dance, Music, Drama, Fashion Show.\n• Dakshina Kannada Colleges.",
+    "response_kn": "🎭 **Spandan Cultural Fest:**\n\n• ವಾರ್ಷಿಕ ಸಾಂಸ್ಕೃತಿಕ ಹಬ್ಬ.\n• ನೃತ್ಯ, ಸಂಗೀತ, ನಾಟಕ.",
+    "response_hi": "🎭 **Spandan Cultural Fest:**\n\n• वार्षिक सांस्कृतिक उत्सव।\n• नृत्य, संगीत, नाटक।"
+  },
+  "sports_meet": {
+    "keywords": [
+      "sports meet",
+      "annual sports",
+      "sports day",
+      "athletics meet",
+      "സ്പോർട്സ് ഡേ",
+      "ಕ್ರೀಡಾ ದಿನ",
+      "खेल दिवस"
+    ],
+    "response": "🏅 **Annual Sports Meet at SIT:**\n\n• Conducted every year for all students.\n• Track & field, cricket, football, volleyball, kabaddi, badminton, chess.\n• Inter-department competitions.\n• Best athlete and team awards given.\n• Students also participate in VTU Sports Meets at zonal/state level.",
+    "response_ml": "🏅 **Annual Sports Meet:**\n\n• Track & Field, Cricket, Football, Badminton.\n• Inter-Department Competitions.\n• VTU Sports Meet Participation.",
+    "response_kn": "🏅 **ವಾರ್ಷಿಕ ಕ್ರೀಡಾ ಸಮ್ಮೇಳನ:**\n\n• ಟ್ರ್ಯಾಕ್ & ಫೀಲ್ಡ್, ಕ್ರಿಕೆಟ್, ಫುಟ್ಬಾಲ್.\n• VTU Sports Meet.",
+    "response_hi": "🏅 **वार्षिक खेल मेला:**\n\n• Track & Field, Cricket, Football।\n• VTU Sports Meet।"
+  },
+  "student_count": {
+    "keywords": [
+      "students",
+      "strength",
+      "how many students",
+      "total students",
+      "വിദ്യാർഥികൾ",
+      "ആകെ",
+      "ವಿದ್ಯಾರ್ಥಿಗಳು",
+      "छात्र",
+      "कुल"
+    ],
+    "response": "👨‍🎓 **Student Strength at SIT:**\n\n• Approximately **3000+ students** enrolled across all programmes.\n• Students from Karnataka, Kerala, and across India.\n• Diverse and inclusive student community.\n• 200+ faculty members supporting academic growth.",
+    "response_ml": "👨‍🎓 **SIT Student Strength:**\n\n• ~3000+ Students.\n• Karnataka, Kerala, All India.\n• 200+ Faculty.",
+    "response_kn": "👨‍🎓 **SIT ವಿದ್ಯಾರ್ಥಿ ಸಂಖ್ಯೆ:**\n\n• ~3000+ ವಿದ್ಯಾರ್ಥಿಗಳು.\n• 200+ ಫ್ಯಾಕಲ್ಟಿ.",
+    "response_hi": "👨‍🎓 **SIT छात्र संख्या:**\n\n• ~3000+ छात्र।\n• 200+ फैकल्टी।"
+  },
+  "campus": {
+    "keywords": [
+      "campus",
+      "area",
+      "acres",
+      "infrastructure",
+      "building",
+      "block",
+      "കാമ്പസ്",
+      "ഏക്കർ",
+      "കെട്ടിടം",
+      "ಕ್ಯಾಂಪಸ್",
+      "ಏಕರೆ",
+      "ಕಟ್ಟಡ",
+      "कैंपस",
+      "एकड़",
+      "इमारत"
+    ],
+    "response": "🏫 **SIT Campus:**\n\n• Spread over a **lush green campus** in Valachil, Mangalore.\n• Multiple academic blocks, admin block, library, sports ground, hostel, canteen.\n• Wi-Fi enabled throughout.\n• Separate labs for each department.\n• Green campus initiative – tree plantation and eco-friendly practices.",
+    "response_ml": "🏫 **SIT Campus:**\n\n• Valachil, Mangalore ൽ Lush Green Campus.\n• Academic Blocks, Library, Sports Ground, Hostel, Canteen.\n• Wi-Fi Enabled.",
+    "response_kn": "🏫 **SIT ಕ್ಯಾಂಪಸ್:**\n\n• ಮಂಗಳೂರಿನ ವಲಚಿಲ್‌ನಲ್ಲಿ ಹಸಿರು ಕ್ಯಾಂಪಸ್.\n• ಶೈಕ್ಷಣಿಕ ಬ್ಲಾಕ್, ಗ್ರಂಥಾಲಯ, ಕ್ರೀಡಾ ಮೈದಾನ.",
+    "response_hi": "🏫 **SIT कैंपस:**\n\n• मंगलूरु के वलाचिल में हरा-भरा कैंपस।\n• शैक्षणिक ब्लॉक, लाइब्रेरी, खेल मैदान।"
+  },
+  "semester": {
+    "keywords": [
+      "semester",
+      "academic year",
+      "scheme",
+      "curriculum",
+      "syllabus",
+      "vtu syllabus",
+      "സെമസ്റ്റർ",
+      "സിലബസ്",
+      "ಸೆಮಿಸ್ಟರ್",
+      "ಪಠ್ಯಕ್ರಮ",
+      "सेमेस्टर",
+      "पाठ्यक्रम"
+    ],
+    "response": "📅 **Semester Structure at SIT (VTU):**\n\n• B.E. = 8 Semesters (4 Years).\n• Each semester: ~5–6 theory subjects + lab practicals.\n• VTU Scheme 2022 (CBCS) currently followed.\n• CIA (Internal Assessment) + Semester-end VTU Exam.\n• Syllabus available on: vtu.ac.in",
+    "response_ml": "📅 **Semester Structure:**\n\n• B.E. = 8 Semesters (4 Years).\n• CIA + VTU Semester Exam.\n• VTU Scheme 2022.\n• vtu.ac.in ൽ Syllabus.",
+    "response_kn": "📅 **ಸೆಮಿಸ್ಟರ್ ರಚನೆ:**\n\n• B.E. = 8 ಸೆಮಿಸ್ಟರ್ (4 ವರ್ಷ).\n• CIA + VTU ಪರೀಕ್ಷೆ.",
+    "response_hi": "📅 **सेमेस्टर संरचना:**\n\n• B.E. = 8 सेमेस्टर (4 साल)।\n• CIA + VTU परीक्षा।"
+  },
+  "backlog": {
+    "keywords": [
+      "backlog",
+      "fail",
+      "arrear",
+      "reappear",
+      "repeat",
+      "ബ്യാക്ക്ലോഗ്",
+      "ഫെയിൽ",
+      "ಬ್ಯಾಕ್ಲಾಗ್",
+      "ಫೇಲ್",
+      "बैकलॉग",
+      "फेल"
+    ],
+    "response": "📝 **Backlog/Reappear at SIT (VTU):**\n\n• Students who fail can reappear in the same subject in subsequent VTU exams.\n• Reappear option available every semester.\n• Apply for reappear through VTU portal.\n• Re-evaluation of answer scripts available.\n• Students with backlogs can still graduate — just need to clear all subjects.",
+    "response_ml": "📝 **Backlog/Reappear:**\n\n• VTU Exam ൽ Reappear.\n• VTU Portal.\n• Re-evaluation Available.",
+    "response_kn": "📝 **ಬ್ಯಾಕ್ಲಾಗ್:**\n\n• VTU ಪರೀಕ್ಷೆಯಲ್ಲಿ ಪುನಃ ತೆಗೆದುಕೊಳ್ಳಬಹುದು.\n• VTU Portal.",
+    "response_hi": "📝 **बैकलॉग:**\n\n• VTU परीक्षा में पुनः उपस्थित हो सकते हैं।\n• VTU Portal।"
+  },
+  "campus_rules": {
+    "keywords": [
+      "rules",
+      "regulations",
+      "discipline",
+      "code of conduct",
+      "smoking",
+      "drugs",
+      "നിയമങ്ങൾ",
+      "ഡിസ്സിപ്ലിൻ",
+      "ನಿಯಮಗಳು",
+      "ಶಿಸ್ತು",
+      "नियम",
+      "अनुशासन"
+    ],
+    "response": "📜 **Campus Rules at SIT:**\n\n• Smoking, alcohol, and drug use strictly prohibited on campus.\n• Mobile phones restricted during lectures.\n• Proper ID card to be worn at all times.\n• Vehicles must have valid documents and be parked only in designated areas.\n• Respect for staff, peers, and campus property is expected.\n• Violations may result in disciplinary action.",
+    "response_ml": "📜 **Campus Rules:**\n\n• Smoking, Alcohol, Drugs Prohibited.\n• Lecture Time Mobile Restricted.\n• ID Card Mandatory.\n• Disciplinary Action.",
+    "response_kn": "📜 **ಕ್ಯಾಂಪಸ್ ನಿಯಮಗಳು:**\n\n• ಧೂಮಪಾನ, ಮದ್ಯ, ಡ್ರಗ್ಸ್ ನಿಷಿದ್ಧ.\n• ID Card ಕಡ್ಡಾಯ.",
+    "response_hi": "📜 **कैंपस नियम:**\n\n• धूम्रपान, शराब, ड्रग्स निषिद्ध।\n• ID Card अनिवार्य।"
+  },
+  "bank": {
+    "keywords": [
+      "bank",
+      "atm",
+      "cash",
+      "money",
+      "ബാങ്ക്",
+      "ATM",
+      "ಬ್ಯಾಂಕ್",
+      "ATM",
+      "बैंक",
+      "ATM"
+    ],
+    "response": "🏦 **Banking & ATM near SIT:**\n\n• ATM facilities available near the campus at Valachil.\n• Banks like SBI, Canara Bank, and Karnataka Bank have branches/ATMs nearby.\n• Online fee payment via NEFT/IMPS/UPI also accepted by the accounts office.",
+    "response_ml": "🏦 **Bank & ATM:**\n\n• Valachil സമീപം ATM.\n• SBI, Canara Bank, Karnataka Bank.\n• Online Fee: NEFT/UPI.",
+    "response_kn": "🏦 **ಬ್ಯಾಂಕ್ & ATM:**\n\n• ವಲಚಿಲ್ ಸಮೀಪ ATM.\n• SBI, Canara, Karnataka Bank.",
+    "response_hi": "🏦 **बैंक और ATM:**\n\n• वलाचिल के पास ATM।\n• SBI, Canara, Karnataka Bank।"
+  },
+  "xerox": {
+    "keywords": [
+      "xerox",
+      "photocopy",
+      "print",
+      "stationery",
+      "ഫോട്ടോകോപ്പി",
+      "പ്രിന്റ്",
+      "ಫೋಟೋ ಕಾಪಿ",
+      "ಪ್ರಿಂಟ್",
+      "फोटोकॉपी",
+      "प्रिंट"
+    ],
+    "response": "🖨️ **Photocopying & Printing at SIT:**\n\n• Xerox/printing shops available near the campus and in the college premises.\n• Library also provides limited photocopying services.\n• Stationery items available near the canteen area.",
+    "response_ml": "🖨️ **Xerox & Printing:**\n\n• Campus Premises & Nearby Shops.\n• Library Photocopy Service.",
+    "response_kn": "🖨️ **ಕ್ಸೆರಾಕ್ಸ್:**\n\n• ಕ್ಯಾಂಪಸ್ ಆವರಣದಲ್ಲಿ ಮತ್ತು ಹತ್ತಿರ.",
+    "response_hi": "🖨️ **फोटोकॉपी:**\n\n• कैंपस परिसर में और पास में।"
+  },
+  "parking": {
+    "keywords": [
+      "parking",
+      "vehicle",
+      "bike",
+      "two wheeler",
+      "four wheeler",
+      "പാർക്കിംഗ്",
+      "വാഹനം",
+      "ಪಾರ್ಕಿಂಗ್",
+      "ವಾಹನ",
+      "पार्किंग",
+      "वाहन"
+    ],
+    "response": "🚗 **Parking at SIT:**\n\n• Designated parking areas available for students and staff.\n• Two-wheelers and four-wheelers have separate parking zones.\n• Valid vehicle documents are required.\n• Parking is available near each academic block.",
+    "response_ml": "🚗 **Parking:**\n\n• Students & Staff Parking Zones.\n• Two-Wheeler & Four-Wheeler Separate.",
+    "response_kn": "🚗 **ಪಾರ್ಕಿಂಗ್:**\n\n• ವಿದ್ಯಾರ್ಥಿ & ಸಿಬ್ಬಂದಿ ಪ್ರತ್ಯೇಕ ಪಾರ್ಕಿಂಗ್.",
+    "response_hi": "🚗 **पार्किंग:**\n\n• छात्र और स्टाफ अलग पार्किंग जोन।"
+  },
+  "placement_training": {
+    "keywords": [
+      "placement training",
+      "aptitude",
+      "soft skills",
+      "communication",
+      "interview preparation",
+      "ആപ്റ്റിറ്റ്യൂഡ്",
+      "ഇന്റർവ്യൂ",
+      "ಅಭಿರುಚಿ ತರಬೇತಿ",
+      "ಇಂಟರ್ವ್ಯೂ",
+      "एप्टीट्यूड",
+      "इंटरव्यू"
+    ],
+    "response": "🎯 **Placement Training at SIT:**\n\n• Aptitude & reasoning training from 3rd semester onwards.\n• Soft skills, communication, and group discussion training.\n• Mock interviews conducted by industry experts.\n• Resume building and LinkedIn profile workshops.\n• Company-specific preparation sessions before campus drives.",
+    "response_ml": "🎯 **Placement Training:**\n\n• Aptitude, Reasoning – 3rd Semester.\n• Soft Skills, Mock Interviews.\n• Resume Building.",
+    "response_kn": "🎯 **ಪ್ಲೇಸ್ಮೆಂಟ್ ತರಬೇತಿ:**\n\n• Aptitude, Reasoning – 3rd Semester.\n• Mock Interviews, Resume Building.",
+    "response_hi": "🎯 **प्लेसमेंट ट्रेनिंग:**\n\n• Aptitude, Reasoning – 3rd Semester।\n• Mock Interview, Resume Building।"
+  },
+  "recruiters": {
+    "keywords": [
+      "recruiters",
+      "companies",
+      "top companies",
+      "which companies",
+      "hiring",
+      "കമ്പനി",
+      "ഹയറിംഗ്",
+      "ಕಂಪನಿಗಳು",
+      "ನೇಮಕ",
+      "कंपनियां",
+      "नियुक्ति"
+    ],
+    "response": "🏢 **Top Recruiters at SIT:**\n\n• **IT:** Infosys, TCS, Wipro, Accenture, Cognizant, HCL, Tech Mahindra, Capgemini.\n• **Core:** KPTCL, BPCL, L&T, NPCIL, Bosch.\n• **Finance:** Deloitte, KPMG, Mphasis.\n• **Startups & SMEs** also actively recruit.\n• 90%+ of eligible students placed.",
+    "response_ml": "🏢 **Top Recruiters:**\n\n• IT: Infosys, TCS, Wipro, Accenture, HCL.\n• Core: KPTCL, BPCL, L&T.\n• 90%+ Placement.",
+    "response_kn": "🏢 **ಪ್ರಮುಖ ನೇಮಕಾತಿದಾರರು:**\n\n• IT: Infosys, TCS, Wipro, Accenture.\n• Core: KPTCL, BPCL, L&T.",
+    "response_hi": "🏢 **शीर्ष भर्तीकर्ता:**\n\n• IT: Infosys, TCS, Wipro, Accenture।\n• Core: KPTCL, BPCL, L&T।"
+  },
+  "higher_studies": {
+    "keywords": [
+      "higher studies",
+      "gate",
+      "gre",
+      "ms",
+      "abroad",
+      "pgee",
+      "masters",
+      "ഉന്നത പഠനം",
+      "GATE",
+      "GRE",
+      "ಉನ್ನತ ಶಿಕ್ಷಣ",
+      "GATE",
+      "उच्च शिक्षा",
+      "GATE"
+    ],
+    "response": "📚 **Higher Studies Guidance at SIT:**\n\n• Faculty guidance for **GATE** preparation.\n• Coaching support for **GRE/TOEFL/IELTS** for MS abroad.\n• M.Tech available at SIT in CSE, VLSI, and Machine Design.\n• Alumni network helps current students with higher study opportunities.",
+    "response_ml": "📚 **Higher Studies:**\n\n• GATE Guidance.\n• GRE/TOEFL/IELTS Support.\n• M.Tech at SIT.",
+    "response_kn": "📚 **ಉನ್ನತ ಶಿಕ್ಷಣ:**\n\n• GATE ಮಾರ್ಗದರ್ಶನ.\n• M.Tech at SIT.",
+    "response_hi": "📚 **उच्च शिक्षा:**\n\n• GATE गाइडेंस।\n• M.Tech at SIT।"
+  },
+  "alumni": {
+    "keywords": [
+      "alumni",
+      "old students",
+      "graduates",
+      "pass out",
+      "former students",
+      "പൂർവ്വ വിദ്യാർഥി",
+      "ഓൾഡ് സ്റ്റുഡൻറ്",
+      "ಹಳೆ ವಿದ್ಯಾರ್ಥಿ",
+      "ಪದವೀಧರ",
+      "पूर्व छात्र"
+    ],
+    "response": "🤝 **SIT Alumni:**\n\n• SIT has a strong alumni network across India and abroad.\n• Alumni work in top MNCs, government organisations, and as entrepreneurs.\n• Alumni Association conducts regular meetups and mentorship programmes.\n• Alumni contribute to campus recruitment and industry connections.",
+    "response_ml": "🤝 **SIT Alumni:**\n\n• India ലും Abroad ലും Alumni Network.\n• MNCs, Government, Entrepreneurs.\n• Alumni Association.",
+    "response_kn": "🤝 **SIT ಹಳೆ ವಿದ್ಯಾರ್ಥಿಗಳು:**\n\n• ಭಾರತ ಮತ್ತು ವಿದೇಶದಲ್ಲಿ ಬಲವಾದ Alumni Network.\n• Alumni Association.",
+    "response_hi": "🤝 **SIT पूर्व छात्र:**\n\n• भारत और विदेश में Alumni Network।\n• Alumni Association।"
+  },
+  "fees_payment": {
+    "keywords": [
+      "pay fees",
+      "fee payment",
+      "online payment",
+      "fee due",
+      "challan",
+      "ഫീസ് അടക്കൽ",
+      "ഓൺലൈൻ ഫീസ്",
+      "ಶುಲ್ಕ ಪಾವತಿ",
+      "फीस भुगतान"
+    ],
+    "response": "💳 **Fee Payment at SIT:**\n\n• Fees can be paid **online** via NEFT, IMPS, or UPI.\n• Offline payment at the **Accounts Office** by cash or DD.\n• Fee receipts are issued after payment.\n• Late payment may incur penalty – pay on time.\n\n📞 Accounts Office: +91-824-2274334",
+    "response_ml": "💳 **Fee Payment:**\n\n• Online: NEFT, IMPS, UPI.\n• Offline: Accounts Office.\n• 📞 +91-824-2274334",
+    "response_kn": "💳 **ಶುಲ್ಕ ಪಾವತಿ:**\n\n• Online: NEFT, IMPS, UPI.\n• Offline: ಖಾತೆ ಕಚೇರಿ.",
+    "response_hi": "💳 **फीस भुगतान:**\n\n• Online: NEFT, IMPS, UPI।\n• Offline: Accounts Office।"
+  },
+  "gate": {
+    "keywords": [
+      "gate exam",
+      "gate preparation",
+      "gate coaching",
+      "graduate aptitude",
+      "GATE",
+      "ഗേറ്റ്",
+      "ಗೇಟ್",
+      "गेट"
+    ],
+    "response": "📝 **GATE Exam Guidance at SIT:**\n\n• Faculty mentoring available for GATE preparation.\n• GATE-qualified students can pursue M.Tech at NITs/IITs.\n• Study materials and mock tests organized.\n• GATE score also accepted for PSU (public sector) jobs like BPCL, ONGC, NTPC.",
+    "response_ml": "📝 **GATE:**\n\n• Faculty GATE Mentoring.\n• M.Tech at NITs/IITs.\n• PSU Jobs: BPCL, ONGC.",
+    "response_kn": "📝 **GATE:**\n\n• Faculty ಮಾರ್ಗದರ್ಶನ.\n• NIT/IIT M.Tech.\n• PSU ಉದ್ಯೋಗ.",
+    "response_hi": "📝 **GATE:**\n\n• Faculty मार्गदर्शन।\n• NIT/IIT M.Tech।\n• PSU नौकरी।"
+  },
+  "project": {
+    "keywords": [
+      "project",
+      "mini project",
+      "final year project",
+      "capstone",
+      "പ്രൊജക്ട്",
+      "ഫൈനൽ ഇയർ",
+      "ಪ್ರಾಜೆಕ್ಟ್",
+      "ಅಂತಿಮ ವರ್ಷ",
+      "प्रोजेक्ट",
+      "अंतिम वर्ष"
+    ],
+    "response": "🛠️ **Projects at SIT:**\n\n• **Mini Projects** – 5th/6th semester.\n• **Final Year Project** – 7th & 8th semester, major capstone work.\n• Students work in teams on real-world problems.\n• Projects presented at internal review and VTU viva.\n• Industry-sponsored and research projects encouraged.",
+    "response_ml": "🛠️ **Projects:**\n\n• Mini Project – 5th/6th Semester.\n• Final Year Project – 7th/8th Semester.\n• Industry-Sponsored Projects.",
+    "response_kn": "🛠️ **ಪ್ರಾಜೆಕ್ಟ್‌ಗಳು:**\n\n• Mini Project – 5th/6th Semester.\n• Final Year – 7th/8th Semester.",
+    "response_hi": "🛠️ **प्रोजेक्ट:**\n\n• Mini Project – 5th/6th Semester।\n• Final Year – 7th/8th Semester।"
+  },
+  "hostel_fees": {
+    "keywords": [
+      "hostel fees",
+      "hostel charges",
+      "room rent",
+      "boarding fees",
+      "ഹോസ്റ്റൽ ഫീസ്",
+      "ಹಾಸ್ಟೆಲ್ ಶುಲ್ಕ",
+      "हॉस्टल फीस"
+    ],
+    "response": "🏠 **Hostel Fees at SIT:**\n\n• Hostel fees include room rent + mess charges.\n• Fees vary by room type (single/double/triple sharing).\n• Paid semester-wise.\n• Exact charges available from the Hostel Warden / Admin Office.\n\n📞 +91-824-2274334",
+    "response_ml": "🏠 **Hostel Fees:**\n\n• Room Rent + Mess.\n• Single/Double/Triple Sharing.\n• 📞 +91-824-2274334",
+    "response_kn": "🏠 **ಹಾಸ್ಟೆಲ್ ಶುಲ್ಕ:**\n\n• Room Rent + Mess.\n• Single/Double/Triple.\n• 📞 +91-824-2274334",
+    "response_hi": "🏠 **हॉस्टल फीस:**\n\n• Room Rent + Mess।\n• Single/Double/Triple।\n• 📞 +91-824-2274334"
+  },
+  "hostel_food": {
+    "keywords": [
+      "mess food",
+      "hostel mess",
+      "hostel food",
+      "food quality",
+      "ഹോസ്റ്റൽ ഭക്ഷണം",
+      "മെസ്സ്",
+      "ಹಾಸ್ಟೆಲ್ ಆಹಾರ",
+      "ಮೆಸ್",
+      "हॉस्टल खाना",
+      "मेस"
+    ],
+    "response": "🍲 **Hostel Mess at SIT:**\n\n• Nutritious vegetarian and non-vegetarian meals served.\n• Breakfast, Lunch, Dinner, and Evening snacks.\n• Menu changes daily for variety.\n• Hygienic kitchen maintained.\n• Special food on festivals and occasions.",
+    "response_ml": "🍲 **Hostel Mess:**\n\n• Veg & Non-Veg.\n• Breakfast, Lunch, Dinner, Snacks.\n• Daily Changing Menu.\n• Hygienic Kitchen.",
+    "response_kn": "🍲 **ಹಾಸ್ಟೆಲ್ ಮೆಸ್:**\n\n• Veg & Non-Veg.\n• ಉಪಹಾರ, ಊಟ, ರಾತ್ರಿ ಊಟ.\n• ಪ್ರತಿದಿನ ಮೆನು ಬದಲಾಗುತ್ತದೆ.",
+    "response_hi": "🍲 **हॉस्टल मेस:**\n\n• Veg & Non-Veg।\n• नाश्ता, दोपहर, रात्रि भोजन।"
+  },
+  "girls_hostel": {
+    "keywords": [
+      "girls hostel",
+      "ladies hostel",
+      "women hostel",
+      "female hostel",
+      "പെൺകുട്ടി ഹോസ്റ്റൽ",
+      "ലേഡീസ്",
+      "ಹೆಣ್ಣು ಮಕ್ಕಳ ಹಾಸ್ಟೆಲ್",
+      "लड़कियों का हॉस्टल"
+    ],
+    "response": "👩 **Girls Hostel at SIT:**\n\n• Separate, secure girls hostel with 24/7 lady warden.\n• CCTV surveillance.\n• Strict entry/exit timings for security.\n• Common rooms, reading rooms, indoor games.\n• Medical and Wi-Fi facilities available.",
+    "response_ml": "👩 **Girls Hostel:**\n\n• Separate Girls Hostel.\n• 24/7 Lady Warden, CCTV.\n• Common Room, Reading Room.",
+    "response_kn": "👩 **ಹೆಣ್ಣು ಮಕ್ಕಳ ಹಾಸ್ಟೆಲ್:**\n\n• ಪ್ರತ್ಯೇಕ Girls Hostel.\n• 24/7 Lady Warden, CCTV.",
+    "response_hi": "👩 **लड़कियों का हॉस्टल:**\n\n• अलग Girls Hostel।\n• 24/7 Lady Warden, CCTV।"
+  },
+  "boys_hostel": {
+    "keywords": [
+      "boys hostel",
+      "gents hostel",
+      "male hostel",
+      "ആൺകുട്ടി ഹോസ്റ്റൽ",
+      "ಹುಡುಗರ ಹಾಸ್ಟೆಲ್",
+      "लड़कों का हॉस्टल"
+    ],
+    "response": "👨 **Boys Hostel at SIT:**\n\n• Separate boys hostel with 24/7 warden supervision.\n• CCTV surveillance on campus.\n• Study rooms, common area, indoor games.\n• Wi-Fi and medical facilities.\n• Rules ensure discipline and a safe environment.",
+    "response_ml": "👨 **Boys Hostel:**\n\n• Separate Boys Hostel.\n• 24/7 Warden, CCTV.\n• Study Room, Common Area.",
+    "response_kn": "👨 **ಹುಡುಗರ ಹಾಸ್ಟೆಲ್:**\n\n• ಪ್ರತ್ಯೇಕ Boys Hostel.\n• 24/7 Warden, CCTV.",
+    "response_hi": "👨 **लड़कों का हॉस्टल:**\n\n• अलग Boys Hostel।\n• 24/7 Warden, CCTV।"
+  },
+  "vtu_results": {
+    "keywords": [
+      "vtu results",
+      "result",
+      "check result",
+      "marks card",
+      "VTU ഫലം",
+      "മാർക്ക് കാർഡ്",
+      "VTU ಫಲಿತಾಂಶ",
+      "ಅಂಕ ಪಟ್ಟಿ",
+      "VTU रिजल्ट",
+      "मार्क्स कार्ड"
+    ],
+    "response": "📊 **VTU Results:**\n\n• Results published on **vtu.ac.in** after semester exams.\n• Students can check using their USN (University Seat Number).\n• Marks cards issued after VTU convocation.\n• Re-evaluation applications accepted through the VTU portal.",
+    "response_ml": "📊 **VTU Results:**\n\n• vtu.ac.in ൽ Results.\n• USN ഉപയോഗിച്ച് Check.\n• Re-evaluation VTU Portal.",
+    "response_kn": "📊 **VTU ಫಲಿತಾಂಶ:**\n\n• vtu.ac.in ನಲ್ಲಿ ಫಲಿತಾಂಶ.\n• USN ಬಳಸಿ ತಿಳಿಯಿರಿ.",
+    "response_hi": "📊 **VTU रिजल्ट:**\n\n• vtu.ac.in पर Results।\n• USN से चेक करें।"
+  },
+  "usn": {
+    "keywords": [
+      "usn",
+      "university seat number",
+      "roll number",
+      "registration number",
+      "USN",
+      "യൂണിവേഴ്സിറ്റി നമ്പർ",
+      "USN",
+      "ವಿಶ್ವವಿದ್ಯಾಲಯ ಸೀಟ್ ಸಂಖ್ಯೆ",
+      "USN",
+      "यूनिवर्सिटी सीट नंबर"
+    ],
+    "response": "🔢 **USN (University Seat Number):**\n\n• USN is your unique student identifier issued by VTU.\n• Format: **1SI** followed by year and branch code (e.g., 1SI22CS001).\n• Used for exam hall tickets, results, and VTU portal login.\n• Issued by the college admin after VTU registration.",
+    "response_ml": "🔢 **USN:**\n\n• VTU Issue, Unique Identifier.\n• Format: 1SI + Year + Branch Code.\n• Exam, Results, VTU Portal.",
+    "response_kn": "🔢 **USN:**\n\n• VTU ನೀಡಿದ Unique ID.\n• Format: 1SI + Year + Branch.\n• ಪರೀಕ್ಷೆ, ಫಲಿತಾಂಶ, VTU Portal.",
+    "response_hi": "🔢 **USN:**\n\n• VTU का Unique ID।\n• Format: 1SI + Year + Branch।\n• परीक्षा, Results, VTU Portal।"
+  },
+  "campus_entry": {
+    "keywords": [
+      "entry",
+      "gate pass",
+      "visitor",
+      "security",
+      "campus entry",
+      "പ്രവേശനം",
+      "ഗേറ്റ്",
+      "ಪ್ರವೇಶ",
+      "ಗೇಟ್",
+      "प्रवेश",
+      "गेट"
+    ],
+    "response": "🔐 **Campus Entry at SIT:**\n\n• Students must show valid ID card at the gate.\n• Visitors require prior permission from the admin office.\n• Vehicles must be registered and display valid permits.\n• Campus is under 24/7 security surveillance (CCTV).",
+    "response_ml": "🔐 **Campus Entry:**\n\n• Student ID Card.\n• Visitors – Admin Permission.\n• 24/7 CCTV.",
+    "response_kn": "🔐 **ಕ್ಯಾಂಪಸ್ ಪ್ರವೇಶ:**\n\n• ID Card ಕಡ್ಡಾಯ.\n• 24/7 CCTV.",
+    "response_hi": "🔐 **कैंपस प्रवेश:**\n\n• ID Card अनिवार्य।\n• 24/7 CCTV।"
+  },
+  "student_portal": {
+    "keywords": [
+      "portal",
+      "student portal",
+      "online portal",
+      "erp",
+      "login",
+      "പോർട്ടൽ",
+      "ഓൺലൈൻ",
+      "ಪೋರ್ಟಲ್",
+      "ERP",
+      "पोर्टल",
+      "ERP"
+    ],
+    "response": "🖥️ **Student Portal at SIT:**\n\n• SIT uses an online ERP/student portal for:\n  – Attendance tracking.\n  – Internal marks (CIA scores).\n  – Timetable and notices.\n  – Fee payment status.\n• Login credentials given at time of admission.\n• Contact IT department if login issues arise.",
+    "response_ml": "🖥️ **Student Portal:**\n\n• Attendance, CIA Marks, Timetable, Fees.\n• Login: Admission Time.\n• IT Dept: Login Issues.",
+    "response_kn": "🖥️ **ಸ್ಟೂಡೆಂಟ್ ಪೋರ್ಟಲ್:**\n\n• Attendance, CIA, Timetable, Fees.\n• Login: Admission ಸಮಯ.",
+    "response_hi": "🖥️ **स्टूडेंट पोर्टल:**\n\n• Attendance, CIA, Timetable, Fees।\n• Login: Admission समय।"
+  },
+  "tc_certificate": {
+    "keywords": [
+      "tc",
+      "transfer certificate",
+      "bonafide",
+      "character certificate",
+      "migration",
+      "document",
+      "TC",
+      "ട്രാൻസ്ഫർ സർട്ടിഫിക്കറ്റ്",
+      "ബോണഫൈഡ്",
+      "TC",
+      "ವರ್ಗಾವಣೆ ಪ್ರಮಾಣ ಪತ್ರ",
+      "TC",
+      "ट्रांसफर सर्टिफिकेट"
+    ],
+    "response": "📄 **Certificates at SIT:**\n\n• **Bonafide Certificate:** Issued by admin office on request (for bank/visa/other purposes).\n• **TC (Transfer Certificate):** Issued at the time of leaving the college.\n• **Character Certificate:** Issued by Principal's office.\n• Apply at the admin office with a written request.",
+    "response_ml": "📄 **Certificates:**\n\n• Bonafide – Admin Office.\n• TC – Leaving Time.\n• Character Certificate – Principal Office.",
+    "response_kn": "📄 **ಪ್ರಮಾಣ ಪತ್ರಗಳು:**\n\n• Bonafide – Admin ಕಚೇರಿ.\n• TC – ಬಿಡಲು.\n• Character – Principal ಕಚೇರಿ.",
+    "response_hi": "📄 **सर्टिफिकेट:**\n\n• Bonafide – Admin Office।\n• TC – छोड़ने पर।\n• Character – Principal Office।"
+  },
+  "fest_registration": {
+    "keywords": [
+      "register for fest",
+      "event registration",
+      "participate",
+      "ഫെസ്റ്റ് രജിസ്ട്രേഷൻ",
+      "ಹಬ್ಬ ನೋಂದಣಿ",
+      "फेस्ट रजिस्ट्रेशन"
+    ],
+    "response": "🎪 **Event/Fest Registration at SIT:**\n\n• Event registrations for Spandan and Technozion are announced via college notice boards and social media.\n• Register through the official event portal or at the registration desk on campus.\n• Teams from other colleges also participate — watch SIT social media pages for updates.",
+    "response_ml": "🎪 **Event Registration:**\n\n• Notice Boards & Social Media.\n• Official Event Portal.\n• Spandan, Technozion.",
+    "response_kn": "🎪 **ಹಬ್ಬ ನೋಂದಣಿ:**\n\n• Notice Board & Social Media.\n• Event Portal.",
+    "response_hi": "🎪 **फेस्ट रजिस्ट्रेशन:**\n\n• Notice Board & Social Media।\n• Event Portal।"
+  },
+  "social_media": {
+    "keywords": [
+      "instagram",
+      "facebook",
+      "linkedin",
+      "youtube",
+      "social media",
+      "follow",
+      "ഇൻസ്റ്റഗ്രാം",
+      "ഫേസ്ബുക്ക്",
+      "LinkedIn",
+      "ಇನ್ಸ್ಟಾಗ್ರಾಮ್",
+      "ಫೇಸ್‌ಬುಕ್",
+      "इंस्टाग्राम",
+      "फेसबुक"
+    ],
+    "response": "📱 **SIT Social Media:**\n\n• Follow SIT on social media for latest news, events, and updates.\n• Facebook, Instagram, LinkedIn, YouTube.\n• Search: **Srinivas Institute of Technology Valachil**.\n• Official website: www.srinivasgroup.com",
+    "response_ml": "📱 **SIT Social Media:**\n\n• Facebook, Instagram, LinkedIn, YouTube.\n• Search: Srinivas Institute of Technology Valachil.\n• www.srinivasgroup.com",
+    "response_kn": "📱 **SIT ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮ:**\n\n• Facebook, Instagram, LinkedIn, YouTube.\n• www.srinivasgroup.com",
+    "response_hi": "📱 **SIT Social Media:**\n\n• Facebook, Instagram, LinkedIn, YouTube।\n• www.srinivasgroup.com"
+  },
+  "srinivas_group": {
+    "keywords": [
+      "srinivas group",
+      "srinivas university",
+      "srinivas college",
+      "srinivas institution",
+      "ശ്രീനിവാസ് ഗ്രൂപ്പ്",
+      "ಶ್ರೀನಿವಾಸ್ ಗ್ರೂಪ್",
+      "श्रीनिवास ग्रुप"
+    ],
+    "response": "🏛️ **Srinivas Group of Colleges:**\n\n• Srinivas Institute of Technology (SIT) is part of the **Srinivas Group of Colleges**, Mangalore.\n• Group includes: Srinivas University, SIT, Srinivas College of Pharmacy, and more.\n• Managed by Srinivas Educational Trust.\n• www.srinivasgroup.com",
+    "response_ml": "🏛️ **Srinivas Group:**\n\n• SIT – Srinivas Group ഭാഗം.\n• Srinivas University, Pharmacy, and more.\n• www.srinivasgroup.com",
+    "response_kn": "🏛️ **Srinivas Group:**\n\n• SIT – Srinivas Group ಭಾಗ.\n• Srinivas University, Pharmacy.\n• www.srinivasgroup.com",
+    "response_hi": "🏛️ **Srinivas Group:**\n\n• SIT – Srinivas Group का भाग।\n• Srinivas University, Pharmacy।\n• www.srinivasgroup.com"
+  },
+  "website": {
+    "keywords": [
+      "website",
+      "official website",
+      "web",
+      "url",
+      "link",
+      "വെബ്സൈറ്റ്",
+      "ഔദ്യോഗിക",
+      "ವೆಬ್‌ಸೈಟ್",
+      "वेबसाइट"
+    ],
+    "response": "🌐 **SIT Official Website:**\n\n• www.srinivasgroup.com\n• For admissions, results, notices, and faculty details.\n• Email: info@srinivas.ac.in\n• Phone: +91-824-2274334",
+    "response_ml": "🌐 **SIT Website:**\n\n• www.srinivasgroup.com\n• Email: info@srinivas.ac.in\n• Phone: +91-824-2274334",
+    "response_kn": "🌐 **SIT ವೆಬ್‌ಸೈಟ್:**\n\n• www.srinivasgroup.com\n• 📞 +91-824-2274334",
+    "response_hi": "🌐 **SIT वेबसाइट:**\n\n• www.srinivasgroup.com\n• 📞 +91-824-2274334"
+  },
+  "mentoring": {
+    "keywords": [
+      "mentor",
+      "mentee",
+      "counseling",
+      "counsellor",
+      "advisor",
+      "guidance",
+      "മെൻടോർ",
+      "കൗൺസലിംഗ്",
+      "ಮೆಂಟರ್",
+      "ಕೌನ್ಸೆಲಿಂಗ್",
+      "मेंटर",
+      "परामर्श"
+    ],
+    "response": "🤝 **Mentor-Mentee Programme at SIT:**\n\n• Each student is assigned a **faculty mentor**.\n• Regular one-on-one sessions to track academic progress.\n• Personal, career, and academic counselling provided.\n• Mentors help with attendance, backlogs, and career guidance.",
+    "response_ml": "🤝 **Mentor-Mentee:**\n\n• Faculty Mentor Assigned.\n• Academic, Career Counselling.\n• Attendance & Backlog Help.",
+    "response_kn": "🤝 **ಮೆಂಟರ್-ಮೆಂಟಿ:**\n\n• Faculty Mentor.\n• Academic, Career Counselling.",
+    "response_hi": "🤝 **मेंटर-मेंटी:**\n\n• Faculty Mentor।\n• Academic, Career परामर्श।"
+  },
+  "startup": {
+    "keywords": [
+      "startup",
+      "entrepreneurship",
+      "innovation",
+      "incubation",
+      "business idea",
+      "സ്റ്റാർടപ്പ്",
+      "എൻട്രപ്രണർഷിപ്പ്",
+      "ಸ್ಟಾರ್ಟ್‌ಅಪ್",
+      "ಉದ್ಯಮಶೀಲತೆ",
+      "स्टार्टअप",
+      "उद्यमिता"
+    ],
+    "response": "💡 **Innovation & Entrepreneurship at SIT:**\n\n• Entrepreneurship Cell encourages student startups.\n• Innovation projects supported by VGST, DST, and KSCST grants.\n• Mentoring by faculty and industry experts for business ideas.\n• Students have launched startups in tech, agriculture, and health sectors.",
+    "response_ml": "💡 **Startup & Innovation:**\n\n• Entrepreneurship Cell.\n• VGST, DST Grants.\n• Faculty & Industry Mentoring.",
+    "response_kn": "💡 **ಸ್ಟಾರ್ಟ್‌ಅಪ್:**\n\n• Entrepreneurship Cell.\n• VGST, DST ಅನುದಾನ.",
+    "response_hi": "💡 **Startup:**\n\n• Entrepreneurship Cell।\n• VGST, DST अनुदान।"
+  },
+  "book_issue": {
+    "keywords": [
+      "borrow book",
+      "issue book",
+      "library card",
+      "return book",
+      "ലൈബ്രറിയിൽ നിന്ന് പുസ്തകം",
+      "ബോറോ",
+      "ಪುಸ್ತಕ ನೀಡಿಕೆ",
+      "किताब जारी"
+    ],
+    "response": "📖 **Book Borrowing at SIT Library:**\n\n• Students can borrow books using their **library card**.\n• Number of books: 3–5 at a time (varies by programme).\n• Borrowing period: 14 days, renewable.\n• Fine for late return.\n• Reference books and journals for in-library reading only.",
+    "response_ml": "📖 **Book Borrowing:**\n\n• Library Card.\n• 3-5 Books at a Time.\n• 14 Days, Renewable.\n• Late Fine.",
+    "response_kn": "📖 **ಪುಸ್ತಕ ನೀಡಿಕೆ:**\n\n• Library Card.\n• 3-5 ಪುಸ್ತಕ.\n• 14 ದಿನ, Renewable.",
+    "response_hi": "📖 **किताब जारी:**\n\n• Library Card।\n• 3-5 किताबें।\n• 14 दिन, Renewable।"
+  },
+  "gym": {
+    "keywords": [
+      "gym",
+      "gymnasium",
+      "fitness",
+      "workout",
+      "exercise",
+      "ജിം",
+      "ഫിറ്റ്നസ്",
+      "ಜಿಮ್",
+      "ಫಿಟ್ನೆಸ್",
+      "जिम",
+      "फिटनेस"
+    ],
+    "response": "💪 **Gymnasium at SIT:**\n\n• Well-equipped gym available for students and staff.\n• Treadmills, weight training, and cardio equipment.\n• Supervised sessions available.\n• Open during college hours.",
+    "response_ml": "💪 **Gym:**\n\n• Well-Equipped Gym.\n• Treadmill, Weights, Cardio.\n• College Hours.",
+    "response_kn": "💪 **ಜಿಮ್:**\n\n• ಸುಸಜ್ಜಿತ ಜಿಮ್.\n• Treadmill, Weights.",
+    "response_hi": "💪 **जिम:**\n\n• सुसज्जित Gym।\n• Treadmill, Weights।"
+  },
+  "badminton": {
+    "keywords": [
+      "badminton",
+      "shuttle",
+      "indoor court",
+      "ബാഡ്മിന്റൺ",
+      "ಬ್ಯಾಡ್ಮಿಂಟನ್",
+      "बैडमिंटन"
+    ],
+    "response": "🏸 **Badminton at SIT:**\n\n• Indoor badminton court available.\n• Equipment provided.\n• Students can use during free time and evenings.\n• Inter-department and VTU level competitions.",
+    "response_ml": "🏸 **Badminton:**\n\n• Indoor Court.\n• Equipment.\n• Inter-Dept & VTU Competitions.",
+    "response_kn": "🏸 **ಬ್ಯಾಡ್ಮಿಂಟನ್:**\n\n• Indoor Court.\n• ಉಪಕರಣ.",
+    "response_hi": "🏸 **बैडमिंटन:**\n\n• Indoor Court।\n• उपकरण।"
+  },
+  "table_tennis": {
+    "keywords": [
+      "table tennis",
+      "ping pong",
+      "tt",
+      "ടേബിൾ ടെന്നീസ്",
+      "ಟೇಬಲ್ ಟೆನಿಸ್",
+      "टेबल टेनिस"
+    ],
+    "response": "🏓 **Table Tennis at SIT:**\n\n• Table tennis facilities available indoors.\n• Bats and balls provided.\n• Students can use during free hours.\n• Competitions held at intra- and inter-college level.",
+    "response_ml": "🏓 **Table Tennis:**\n\n• Indoor Facility.\n• Equipment Available.",
+    "response_kn": "🏓 **ಟೇಬಲ್ ಟೆನಿಸ್:**\n\n• Indoor Facility.\n• ಉಪಕರಣ.",
+    "response_hi": "🏓 **टेबल टेनिस:**\n\n• Indoor Facility।\n• उपकरण।"
+  },
+  "ieee": {
+    "keywords": [
+      "ieee",
+      "iste",
+      "student chapter",
+      "technical society",
+      "IEEE",
+      "ISTE",
+      "IEEE",
+      "ISTE",
+      "IEEE",
+      "ISTE"
+    ],
+    "response": "⚡ **IEEE & ISTE at SIT:**\n\n• **IEEE Student Chapter** at SIT – organises technical talks, workshops, and competitions.\n• **ISTE (Indian Society for Technical Education)** chapter active.\n• Regular webinars, hackathons, and guest lectures by industry experts.\n• Students can become IEEE members for global network access.",
+    "response_ml": "⚡ **IEEE & ISTE:**\n\n• IEEE Student Chapter.\n• ISTE Chapter.\n• Technical Talks, Workshops, Hackathons.",
+    "response_kn": "⚡ **IEEE & ISTE:**\n\n• IEEE Student Chapter.\n• ISTE Chapter.",
+    "response_hi": "⚡ **IEEE & ISTE:**\n\n• IEEE Student Chapter।\n• ISTE Chapter।"
+  },
+  "thesis": {
+    "keywords": [
+      "thesis",
+      "report",
+      "dissertation",
+      "bind",
+      "submit report",
+      "തീസിസ്",
+      "റിപ്പോർട്ട്",
+      "ಥೀಸಿಸ್",
+      "ವರದಿ",
+      "थीसिस",
+      "रिपोर्ट"
+    ],
+    "response": "📑 **Project Report/Thesis at SIT:**\n\n• Final year project reports must follow the SIT/VTU format.\n• Reports to be submitted in spiral/hard bound copies.\n• Digital copy also submitted via VTU portal.\n• Plagiarism check done before submission.\n• Consult your project guide for specific format requirements.",
+    "response_ml": "📑 **Project Report:**\n\n• SIT/VTU Format.\n• Hard Bound + Digital Copy.\n• Plagiarism Check.",
+    "response_kn": "📑 **ಪ್ರಾಜೆಕ್ಟ್ ವರದಿ:**\n\n• SIT/VTU Format.\n• Hard Bound + Digital.\n• Plagiarism Check.",
+    "response_hi": "📑 **प्रोजेक्ट रिपोर्ट:**\n\n• SIT/VTU Format।\n• Hard Bound + Digital।\n• Plagiarism Check।"
+  },
+  "language": {
+    "keywords": [
+      "language",
+      "medium",
+      "english medium",
+      "instruction",
+      "ഭാഷ",
+      "ഇംഗ്ലീഷ് മീഡിയം",
+      "ಭಾಷೆ",
+      "ಮಾಧ್ಯಮ",
+      "भाषा",
+      "माध्यम"
+    ],
+    "response": "🗣️ **Language of Instruction at SIT:**\n\n• **English** is the medium of instruction for all programmes.\n• All textbooks, exams, and lab manuals are in English.\n• Communication training in English is provided as part of the curriculum.",
+    "response_ml": "🗣️ **Instruction Medium:**\n\n• English Medium.\n• Textbooks, Exams – English.\n• Communication Training.",
+    "response_kn": "🗣️ **ಬೋಧನಾ ಮಾಧ್ಯಮ:**\n\n• ಇಂಗ್ಲಿಷ್ ಮಾಧ್ಯಮ.",
+    "response_hi": "🗣️ **शिक्षा का माध्यम:**\n\n• अंग्रेजी माध्यम।"
+  },
+  "industry_visit": {
+    "keywords": [
+      "industry visit",
+      "field visit",
+      "company visit",
+      "industrial tour",
+      "ഇൻഡസ്ട്രി വിസിറ്റ്",
+      "ഫീൽഡ് വിസിറ്റ്",
+      "ಉದ್ಯಮ ಭೇಟಿ",
+      "उद्योग दौरा"
+    ],
+    "response": "🏭 **Industry Visits at SIT:**\n\n• Regular industry visits organised for students.\n• Visits to Mangalore Refinery (MRPL), BPCL, IT companies, and manufacturing units.\n• Helps students understand real-world applications of their studies.\n• Planned by departments semester-wise.",
+    "response_ml": "🏭 **Industry Visit:**\n\n• MRPL, BPCL, IT Companies.\n• Semester-wise Planned.\n• Real-World Learning.",
+    "response_kn": "🏭 **ಉದ್ಯಮ ಭೇಟಿ:**\n\n• MRPL, BPCL, IT Companies.\n• Semester-wise.",
+    "response_hi": "🏭 **उद्योग दौरा:**\n\n• MRPL, BPCL, IT Companies।\n• Semester-wise।"
+  },
+  "admission_documents": {
+    "keywords": [
+      "documents required",
+      "admission documents",
+      "what to bring",
+      "documents needed",
+      "ഡോക്യുമെന്റ്സ്",
+      "അഡ്മിഷൻ ഡോക്യുമെന്റ്",
+      "ದಾಖಲೆಗಳು",
+      "दस्तावेज़"
+    ],
+    "response": "📂 **Documents Required for Admission at SIT:**\n\n• 10th & 12th Mark Sheets (originals + copies).\n• KCET/COMEDK Rank Card.\n• Transfer Certificate (TC) from previous institution.\n• Migration Certificate (if from other state/board).\n• Caste Certificate (if applicable).\n• Passport-sized photographs (6–8 copies).\n• Aadhar Card copy.\n• Income certificate (for scholarship).",
+    "response_ml": "📂 **Admission Documents:**\n\n• 10th, 12th Marks, TC, Migration.\n• KCET/COMEDK Rank Card.\n• Caste, Income Certificate.\n• Aadhaar, Photos.",
+    "response_kn": "📂 **ಪ್ರವೇಶ ದಾಖಲೆಗಳು:**\n\n• 10th, 12th Marks, TC, Migration.\n• KCET/COMEDK Rank Card.\n• ಜಾತಿ, ಆದಾಯ ಪ್ರಮಾಣ.\n• Aadhaar, Photos.",
+    "response_hi": "📂 **प्रवेश दस्तावेज़:**\n\n• 10th, 12th Marks, TC, Migration।\n• KCET/COMEDK Rank Card।\n• जाति, आय प्रमाण।\n• Aadhaar, Photos।"
+  },
+  "hall_ticket": {
+    "keywords": [
+      "hall ticket",
+      "admit card",
+      "exam card",
+      "ഹാൾ ടിക്കറ്റ്",
+      "അഡ്മിറ്റ് കാർഡ്",
+      "ಹಾಲ್ ಟಿಕೆಟ್",
+      "हॉल टिकट",
+      "एडमिट कार्ड"
+    ],
+    "response": "🎫 **Hall Ticket / Admit Card at SIT (VTU):**\n\n• Hall tickets for VTU semester exams are downloaded from the **VTU portal** (vtu.ac.in).\n• Available approximately 10 days before exams.\n• Students must carry hall ticket + college ID to exam hall.\n• Verify details (name, USN, subject) on hall ticket before exam.",
+    "response_ml": "🎫 **Hall Ticket:**\n\n• vtu.ac.in ൽ Download.\n• Exam 10 Days Before.\n• USN, Name Verify.",
+    "response_kn": "🎫 **ಹಾಲ್ ಟಿಕೆಟ್:**\n\n• vtu.ac.in ನಲ್ಲಿ Download.\n• ಪರೀಕ್ಷೆ 10 ದಿನ ಮೊದಲು.",
+    "response_hi": "🎫 **हॉल टिकट:**\n\n• vtu.ac.in से Download।\n• परीक्षा 10 दिन पहले।"
+  },
+  "revaluation": {
+    "keywords": [
+      "revaluation",
+      "re-evaluation",
+      "rechecking",
+      "challenge valuation",
+      "റീ-ഇവാലുവേഷൻ",
+      "പുനർ-മൂല്യനിർണ്ണയം",
+      "ಮರು ಮೌಲ್ಯಮಾಪನ",
+      "पुनर्मूल्यांकन"
+    ],
+    "response": "📝 **Re-evaluation at VTU:**\n\n• Apply for re-evaluation within the deadline set by VTU after results.\n• Submit application through VTU portal with fee.\n• Photocopy of answer sheet can be obtained first.\n• Results updated on VTU portal after revaluation.",
+    "response_ml": "📝 **Re-evaluation:**\n\n• VTU Portal.\n• Deadline ൽ Apply.\n• Answer Sheet Copy.",
+    "response_kn": "📝 **ಮರು ಮೌಲ್ಯಮಾಪನ:**\n\n• VTU Portal.\n• Deadline ಒಳಗೆ Apply.",
+    "response_hi": "📝 **पुनर्मूल्यांकन:**\n\n• VTU Portal।\n• Deadline के भीतर Apply।"
+  },
+  "workshop": {
+    "keywords": [
+      "workshop",
+      "seminar",
+      "guest lecture",
+      "conference",
+      "വർക്ക്ഷോപ്പ്",
+      "സെമിനാർ",
+      "ഗസ്റ്റ് ലക്ചർ",
+      "ಕಾರ್ಯಾಗಾರ",
+      "ಸೆಮಿನಾರ್",
+      "कार्यशाला",
+      "सेमिनार"
+    ],
+    "response": "🎓 **Workshops & Seminars at SIT:**\n\n• Departments regularly organise workshops, guest lectures, and seminars.\n• Industry experts, alumni, and professors from IITs/NITs are invited.\n• Students gain hands-on skills through workshops on Python, IoT, VLSI, etc.\n• Participation certificates issued.",
+    "response_ml": "🎓 **Workshops & Seminars:**\n\n• Industry Experts, IIT/NIT Professors.\n• Python, IoT, VLSI Workshops.\n• Participation Certificate.",
+    "response_kn": "🎓 **ಕಾರ್ಯಾಗಾರ & ಸೆಮಿನಾರ್:**\n\n• Industry, IIT/NIT ಸ್ಪೀಕರ್‌ಗಳು.\n• Python, IoT, VLSI Workshops.",
+    "response_hi": "🎓 **कार्यशाला & सेमिनार:**\n\n• Industry, IIT/NIT स्पीकर।\n• Python, IoT, VLSI Workshops।"
+  },
+  "warden": {
+    "keywords": [
+      "warden",
+      "hostel warden",
+      "hostel contact",
+      "വാർഡൻ",
+      "ವಾರ್ಡನ್",
+      "वार्डन"
+    ],
+    "response": "👨‍💼 **Hostel Warden at SIT:**\n\n• Each hostel block has a dedicated warden.\n• Wardens are responsible for discipline, welfare, and security.\n• Contact the hostel office for warden details.\n📞 Admin Office: +91-824-2274334",
+    "response_ml": "👨‍💼 **Hostel Warden:**\n\n• Dedicated Warden per Block.\n• 📞 +91-824-2274334",
+    "response_kn": "👨‍💼 **ಹಾಸ್ಟೆಲ್ ವಾರ್ಡನ್:**\n\n• ಪ್ರತಿ Block ಗೆ Warden.\n• 📞 +91-824-2274334",
+    "response_hi": "👨‍💼 **हॉस्टल वार्डन:**\n\n• प्रत्येक Block के लिए Warden।\n• 📞 +91-824-2274334"
+  },
+  "holidays": {
+    "keywords": [
+      "holiday",
+      "holidays",
+      "vacation",
+      "leave",
+      "holiday list",
+      "അവധി",
+      "ഹോളിഡേ",
+      "ರಜೆ",
+      "ಹಬ್ಬ",
+      "छुट्टी",
+      "अवकाश"
+    ],
+    "response": "📅 **Holidays at SIT:**\n\n• College follows the VTU Academic Calendar.\n• Public holidays: Republic Day, Independence Day, Gandhi Jayanti, Diwali, Eid, Christmas, etc.\n• Summer vacation: approximately May–June.\n• Holiday list published at the start of each academic year.\n• Check the college notice board or website for the current year's holiday list.",
+    "response_ml": "📅 **Holidays:**\n\n• VTU Academic Calendar.\n• Summer Vacation: May-June.\n• Notice Board ൽ Holiday List.",
+    "response_kn": "📅 **ರಜೆ:**\n\n• VTU Academic Calendar.\n• Summer Vacation: May-June.\n• Notice Board ನಲ್ಲಿ ಪಟ್ಟಿ.",
+    "response_hi": "📅 **छुट्टियाँ:**\n\n• VTU Academic Calendar।\n• Summer Vacation: May-June।\n• Notice Board पर सूची।"
+  },
+  "academic_calendar": {
+    "keywords": [
+      "academic calendar",
+      "calendar",
+      "schedule",
+      "timetable",
+      "academic schedule",
+      "അക്കാദമിക് കലണ്ടർ",
+      "ಶೈಕ್ಷಣಿಕ ಕ್ಯಾಲೆಂಡರ್",
+      "शैक्षणिक कैलेंडर"
+    ],
+    "response": "📆 **Academic Calendar at SIT:**\n\n• Published at the start of each academic year.\n• Includes: semester start/end dates, exam schedules, holidays, and key events.\n• Available on the SIT website and notice boards.\n• Follows VTU academic calendar guidelines.",
+    "response_ml": "📆 **Academic Calendar:**\n\n• Year Start.\n• Semester, Exam, Holiday Dates.\n• SIT Website & Notice Board.",
+    "response_kn": "📆 **ಶೈಕ್ಷಣಿಕ ಕ್ಯಾಲೆಂಡರ್:**\n\n• ವರ್ಷದ ಆರಂಭದಲ್ಲಿ.\n• Exam, Holiday Dates.",
+    "response_hi": "📆 **शैक्षणिक कैलेंडर:**\n\n• वर्ष की शुरुआत में।\n• Exam, Holiday Dates।"
+  },
+  "evening_out": {
+    "keywords": [
+      "outing",
+      "evening out",
+      "leave hostel",
+      "go out",
+      "permission",
+      "ഔട്ടിംഗ്",
+      "ഹോസ്റ്റൽ ലീവ്",
+      "ಔಟಿಂಗ್",
+      "ಹೊರಗೆ ಹೋಗು",
+      "आउटिंग",
+      "बाहर जाना"
+    ],
+    "response": "🚶 **Hostel Outing Policy at SIT:**\n\n• Students must obtain written permission from the hostel warden for outings.\n• Day outings must be informed in advance; late nights require special permission.\n• Parents/guardians' consent is required for overnight outings.\n• Follow hostel rules to avoid disciplinary action.",
+    "response_ml": "🚶 **Hostel Outing:**\n\n• Warden Permission.\n• Late Night: Special Permission.\n• Parent Consent.",
+    "response_kn": "🚶 **ಹಾಸ್ಟೆಲ್ ಔಟಿಂಗ್:**\n\n• Warden Permission.\n• Parent Consent.",
+    "response_hi": "🚶 **हॉस्टल आउटिंग:**\n\n• Warden Permission।\n• Parent Consent।"
+  },
+  "computer_lab": {
+    "keywords": [
+      "computer lab",
+      "pc",
+      "system",
+      "desktop",
+      "computing",
+      "കമ്പ്യൂട്ടർ ലാബ്",
+      "ಕಂಪ್ಯೂಟರ್ ಲ್ಯಾಬ್",
+      "कंप्यूटर लैब"
+    ],
+    "response": "🖥️ **Computer Labs at SIT:**\n\n• Multiple computer labs with 30–60 systems each.\n• Latest hardware and licensed software (Windows, Linux, MATLAB, etc.).\n• High-speed internet access in all labs.\n• Open during and after college hours for student use.",
+    "response_ml": "🖥️ **Computer Labs:**\n\n• 30-60 Systems.\n• Licensed Software.\n• High-Speed Internet.",
+    "response_kn": "🖥️ **ಕಂಪ್ಯೂಟರ್ ಲ್ಯಾಬ್:**\n\n• 30-60 Systems.\n• Licensed Software.",
+    "response_hi": "🖥️ **कंप्यूटर लैब:**\n\n• 30-60 Systems।\n• Licensed Software।"
+  },
+  "open_source": {
+    "keywords": [
+      "open source",
+      "github",
+      "open elective",
+      "elective subject",
+      "ഓപ്പൺ ഇലക്ടിവ്",
+      "ഇലക്ടിവ്",
+      "ಮುಕ್ತ ಐಚ್ಛಿಕ",
+      "ओपन इलेक्टिव"
+    ],
+    "response": "📖 **Elective Subjects at SIT (VTU):**\n\n• Students choose **Open Electives** and **Professional Electives** in higher semesters.\n• Options include: AI/ML, IoT, Cybersecurity, Data Analytics, Cloud Computing, and more.\n• Electives are chosen based on interest and availability each semester.\n• VTU provides the list; SIT offers available electives based on faculty expertise.",
+    "response_ml": "📖 **Elective Subjects:**\n\n• Open Elective & Professional Elective.\n• AI/ML, IoT, Cybersecurity, Cloud.\n• Semester-wise Choice.",
+    "response_kn": "📖 **ಐಚ್ಛಿಕ ವಿಷಯ:**\n\n• Open & Professional Elective.\n• AI/ML, IoT, Cloud.",
+    "response_hi": "📖 **ऐच्छिक विषय:**\n\n• Open & Professional Elective।\n• AI/ML, IoT, Cloud।"
+  },
+  "water": {
+    "keywords": [
+      "drinking water",
+      "water",
+      "purified water",
+      "ro water",
+      "കുടിവെള്ളം",
+      "ജലം",
+      "ಕುಡಿಯುವ ನೀರು",
+      "पीने का पानी"
+    ],
+    "response": "💧 **Drinking Water at SIT:**\n\n• RO-purified drinking water dispensers available across all blocks.\n• Regular maintenance and quality checks.\n• Hostel also has clean water supply.",
+    "response_ml": "💧 **Drinking Water:**\n\n• RO Water Dispensers.\n• Regular Maintenance.",
+    "response_kn": "💧 **ಕುಡಿಯುವ ನೀರು:**\n\n• RO Water Dispensers.\n• Regular Maintenance.",
+    "response_hi": "💧 **पीने का पानी:**\n\n• RO Water Dispensers।\n• Regular Maintenance।"
+  },
+  "career_fair": {
+    "keywords": [
+      "career fair",
+      "job fair",
+      "placement fair",
+      "walk-in",
+      "ക്യാരിയർ ഫെയർ",
+      "ജോബ് ഫെയർ",
+      "ಕೆರಿಯರ್ ಫೇರ್",
+      "ಜಾಬ್ ಫೇರ್",
+      "करियर फेयर",
+      "जॉब फेयर"
+    ],
+    "response": "💼 **Career & Job Fairs at SIT:**\n\n• Campus placement drives organised each year (Oct–March).\n• Both on-campus and off-campus drives.\n• Companies conduct written tests, group discussions, and interviews.\n• T&P Cell notifies students well in advance.\n• Dress professionally and carry updated resume for placement drives.",
+    "response_ml": "💼 **Campus Placement Drives:**\n\n• Oct-March.\n• On-Campus & Off-Campus.\n• Written Test, GD, Interview.\n• T&P Cell Notification.",
+    "response_kn": "💼 **Campus Placement Drives:**\n\n• Oct-March.\n• Written Test, GD, Interview.",
+    "response_hi": "💼 **Campus Placement Drives:**\n\n• Oct-March।\n• Written Test, GD, Interview।"
+  },
+  "detention": {
+    "keywords": [
+      "detention",
+      "detained",
+      "not eligible",
+      "75 percent",
+      "not allowed exam",
+      "ഡിടൻഷൻ",
+      "ಡಿಟೆಂಷನ್",
+      "डिटेंशन"
+    ],
+    "response": "⚠️ **Detention Policy at SIT (VTU):**\n\n• Students with **less than 75% attendance** are detained (not eligible for VTU exams).\n• Medical condonation may apply (up to 10% with valid certificate).\n• Detained students must repeat the semester.\n• Attendance is tracked via ERP portal.\n• Maintain 75%+ attendance to avoid detention.",
+    "response_ml": "⚠️ **Detention:**\n\n• 75% Attendance Mandatory.\n• Medical Condonation: 10%.\n• Detained → Repeat Semester.",
+    "response_kn": "⚠️ **ಡಿಟೆಂಷನ್:**\n\n• 75% ಹಾಜರಾತಿ ಕಡ್ಡಾಯ.\n• Medical Condonation: 10%.",
+    "response_hi": "⚠️ **डिटेंशन:**\n\n• 75% उपस्थिति अनिवार्य।\n• Medical Condonation: 10%।"
+  },
+  "green_campus": {
+    "keywords": [
+      "green campus",
+      "eco",
+      "environment",
+      "trees",
+      "sustainability",
+      "ഗ്രീൻ കാമ്പസ്",
+      "പരിസ്ഥിതി",
+      "ಹಸಿರು ಕ್ಯಾಂಪಸ್",
+      "ಪರಿಸರ",
+      "हरा कैंपस",
+      "पर्यावरण"
+    ],
+    "response": "🌱 **Green Campus Initiatives at SIT:**\n\n• Tree plantation drives conducted regularly.\n• Solar panels installed to reduce energy consumption.\n• Waste segregation and recycling practices.\n• Water conservation measures.\n• NSS volunteers actively participate in eco-campaigns.",
+    "response_ml": "🌱 **Green Campus:**\n\n• Tree Plantation.\n• Solar Panels.\n• Waste Segregation.\n• Water Conservation.",
+    "response_kn": "🌱 **ಹಸಿರು ಕ್ಯಾಂಪಸ್:**\n\n• Tree Plantation.\n• Solar Panels.\n• Waste Segregation.",
+    "response_hi": "🌱 **हरा कैंपस:**\n\n• Tree Plantation।\n• Solar Panels।\n• Waste Segregation।"
+  },
+  "prayer": {
+    "keywords": [
+      "prayer",
+      "chapel",
+      "temple",
+      "mosque",
+      "religious",
+      "പ്രാർഥന",
+      "ദേവസ്ഥാനം",
+      "ಪ್ರಾರ್ಥನೆ",
+      "प्रार्थना"
+    ],
+    "response": "🙏 **Prayer & Religious Harmony at SIT:**\n\n• SIT promotes religious harmony and respects all faiths.\n• Common prayer is held at the start of key events.\n• Students of all religions are welcome and respected.",
+    "response_ml": "🙏 **Prayer & Harmony:**\n\n• Religious Harmony.\n• All Faiths Respected.",
+    "response_kn": "🙏 **ಪ್ರಾರ್ಥನೆ:**\n\n• ಧಾರ್ಮಿಕ ಸಾಮರಸ್ಯ.\n• ಎಲ್ಲ ಧರ್ಮ ಗೌರವ.",
+    "response_hi": "🙏 **प्रार्थना:**\n\n• धार्मिक सद्भावना।\n• सभी धर्मों का सम्मान।"
+  },
+  "pgcet": {
+    "keywords": [
+      "pgcet",
+      "pg admission",
+      "m.tech admission",
+      "mba admission",
+      "PGCET",
+      "PG Admission",
+      "ಪಿಜಿಸಿಇಟಿ",
+      "पीजीसीईटी"
+    ],
+    "response": "📋 **PGCET / PG Admissions at SIT:**\n\n• M.Tech admissions through **PGCET** (Postgraduate Common Entrance Test) by KEA.\n• MBA admissions through **KMAT / PGCET** or management quota.\n• Apply at kea.kar.nic.in.\n• GATE score also accepted for M.Tech admissions.\n\n📞 +91-824-2274334",
+    "response_ml": "📋 **PGCET:**\n\n• M.Tech: PGCET / GATE.\n• MBA: KMAT / PGCET.\n• kea.kar.nic.in\n• 📞 +91-824-2274334",
+    "response_kn": "📋 **PGCET:**\n\n• M.Tech: PGCET / GATE.\n• MBA: KMAT.\n• kea.kar.nic.in",
+    "response_hi": "📋 **PGCET:**\n\n• M.Tech: PGCET / GATE।\n• MBA: KMAT।\n• kea.kar.nic.in"
+  },
+  "foreign_students": {
+    "keywords": [
+      "foreign students",
+      "international students",
+      "nri",
+      "overseas",
+      "ഫോറിൻ സ്റ്റുഡൻറ്",
+      "NRI",
+      "ವಿದೇಶಿ ವಿದ್ಯಾರ್ಥಿ",
+      "NRI",
+      "विदेशी छात्र",
+      "NRI"
+    ],
+    "response": "🌍 **International/NRI Students at SIT:**\n\n• SIT welcomes NRI and foreign national students.\n• NRI quota seats available in B.E. and postgraduate programmes.\n• Admission through management/NRI quota.\n• Separate fee structure for NRI students.\n\n📞 +91-824-2274334 | info@srinivas.ac.in",
+    "response_ml": "🌍 **International/NRI Students:**\n\n• NRI Quota Seats.\n• NRI Fee Structure.\n• 📞 +91-824-2274334",
+    "response_kn": "🌍 **International/NRI:**\n\n• NRI Quota Seats.\n• NRI Fee Structure.",
+    "response_hi": "🌍 **अंतर्राष्ट्रीय/NRI छात्र:**\n\n• NRI Quota Seats।\n• NRI Fee Structure।"
+  },
+  "sports_scholarship": {
+    "keywords": [
+      "sports scholarship",
+      "sports quota",
+      "sports admission",
+      "സ്പോർട്സ് ക്വോട്ട",
+      "ಕ್ರೀಡಾ ಕೋಟಾ",
+      "खेल कोटा"
+    ],
+    "response": "🏅 **Sports Scholarship/Quota at SIT:**\n\n• Students with outstanding sports achievements may be eligible for sports quota admission.\n• Applicable for national/state-level sports persons.\n• Contact the admissions office for details.\n\n📞 +91-824-2274334",
+    "response_ml": "🏅 **Sports Quota:**\n\n• National/State Sports.\n• Admissions Office.\n• 📞 +91-824-2274334",
+    "response_kn": "🏅 **ಕ್ರೀಡಾ ಕೋಟಾ:**\n\n• ರಾಷ್ಟ್ರ/ರಾಜ್ಯ ಕ್ರೀಡೆ.\n• 📞 +91-824-2274334",
+    "response_hi": "🏅 **खेल कोटा:**\n\n• राष्ट्रीय/राज्य स्तरीय खेल।\n• 📞 +91-824-2274334"
+  },
+  "lost_found": {
+    "keywords": [
+      "lost",
+      "found",
+      "lost and found",
+      "missing",
+      "കാണാതെ പോയ",
+      "ലോസ്റ്റ്",
+      "ಕಳೆದು ಹೋದ",
+      "ಲಾಸ್ಟ್",
+      "खोया",
+      "मिला"
+    ],
+    "response": "🔍 **Lost & Found at SIT:**\n\n• Report lost items to the security office or admin office.\n• Found items are kept at the security desk.\n• For valuable items (laptop, mobile), file a written complaint at admin office.",
+    "response_ml": "🔍 **Lost & Found:**\n\n• Security / Admin Office.\n• Valuable: Written Complaint.",
+    "response_kn": "🔍 **Lost & Found:**\n\n• Security / Admin ಕಚೇರಿ.",
+    "response_hi": "🔍 **Lost & Found:**\n\n• Security / Admin Office।"
+  },
+  "power_backup": {
+    "keywords": [
+      "power backup",
+      "generator",
+      "ups",
+      "electricity",
+      "ജനറേറ്റർ",
+      "UPS",
+      "ಜನರೇಟರ್",
+      "UPS",
+      "जनरेटर",
+      "UPS"
+    ],
+    "response": "⚡ **Power Backup at SIT:**\n\n• Campus has generator and UPS backup for uninterrupted power supply.\n• Labs, library, and classrooms have backup power.\n• Hostel also has power backup for essential services.",
+    "response_ml": "⚡ **Power Backup:**\n\n• Generator & UPS.\n• Labs, Library, Hostel.",
+    "response_kn": "⚡ **ಪವರ್ ಬ್ಯಾಕಪ್:**\n\n• Generator & UPS.\n• Labs, Library, Hostel.",
+    "response_hi": "⚡ **पावर बैकअप:**\n\n• Generator & UPS।\n• Labs, Library, Hostel।"
+  },
+  "nearby": {
+    "keywords": [
+      "nearby",
+      "near college",
+      "shops",
+      "market",
+      "surrounding",
+      "സമീപ",
+      "അടുത്ത്",
+      "ಹತ್ತಿರ",
+      "ಸಮೀಪ",
+      "पास",
+      "नजदीक"
+    ],
+    "response": "📍 **Nearby SIT Valachil:**\n\n• Farangipete town – 1 km (shops, banks, pharmacy).\n• Deralakatte – 5 km (medical, shopping).\n• Mangalore city – 12 km.\n• Surathkal (NITK) – 8 km.\n• Mangalore International Airport – 20 km.",
+    "response_ml": "📍 **SIT Valachil സമീപം:**\n\n• Farangipete – 1 km.\n• Deralakatte – 5 km.\n• Mangalore – 12 km.\n• Surathkal – 8 km.",
+    "response_kn": "📍 **SIT ಹತ್ತಿರ:**\n\n• Farangipete – 1 km.\n• Deralakatte – 5 km.\n• Mangalore – 12 km.",
+    "response_hi": "📍 **SIT के पास:**\n\n• Farangipete – 1 km।\n• Deralakatte – 5 km।\n• Mangalore – 12 km।"
+  },
+  "warden_contact": {
+    "keywords": [
+      "warden contact",
+      "hostel number",
+      "hostel office",
+      "ഹോസ്റ്റൽ ഓഫീസ്",
+      "ಹಾಸ್ಟೆಲ್ ಕಚೇರಿ",
+      "हॉस्टल ऑफिस"
+    ],
+    "response": "📞 **Hostel Office Contact:**\n\nFor hostel-related enquiries:\n📞 Main Office: +91-824-2274334\n📧 info@srinivas.ac.in\n📍 Srinivas Institute of Technology, Valachil, Farangipete, Mangalore – 574143",
+    "response_ml": "📞 **Hostel Office:**\n\n📞 +91-824-2274334\n📧 info@srinivas.ac.in",
+    "response_kn": "📞 **ಹಾಸ್ಟೆಲ್ ಕಚೇರಿ:**\n\n📞 +91-824-2274334",
+    "response_hi": "📞 **हॉस्टल ऑफिस:**\n\n📞 +91-824-2274334"
+  },
+  "first_year": {
+    "keywords": [
+      "first year",
+      "new student",
+      "fresher",
+      "1st year",
+      "joining",
+      "ഫസ്റ്റ് ഇയർ",
+      "പുതിയ വിദ്യാർഥി",
+      "ಮೊದಲ ವರ್ಷ",
+      "ಹೊಸ ವಿದ್ಯಾರ್ಥಿ",
+      "पहला साल",
+      "नया छात्र"
+    ],
+    "response": "👋 **Welcome First-Year Students at SIT!**\n\n• Orientation programme held at the start of each academic year.\n• Introduction to college rules, departments, labs, and facilities.\n• Mentors assigned for academic and personal guidance.\n• Student clubs welcome freshers to join.\n• Ragging is strictly prohibited – report any issues to anti-ragging committee.",
+    "response_ml": "👋 **First Year Welcome:**\n\n• Orientation Programme.\n• Mentor Assigned.\n• Student Clubs.\n• Anti-Ragging.",
+    "response_kn": "👋 **ಮೊದಲ ವರ್ಷ Welcome:**\n\n• Orientation Programme.\n• Mentor.\n• Student Clubs.",
+    "response_hi": "👋 **पहले वर्ष का स्वागत:**\n\n• Orientation Programme।\n• Mentor।\n• Student Clubs।"
+  },
+  "orientation": {
+    "keywords": [
+      "orientation",
+      "induction",
+      "freshers",
+      "ഓറിയന്റേഷൻ",
+      "ഇൻഡക്ഷൻ",
+      "ಓರಿಯೆಂಟೇಷನ್",
+      "ओरिएंटेशन"
+    ],
+    "response": "🎉 **Orientation / Induction at SIT:**\n\n• Held at the start of every new academic year for 1st-year students.\n• Covers: college rules, academic structure, facilities tour, faculty introduction.\n• Guest speakers from industry and alumni.\n• Parents are also invited for orientation day.",
+    "response_ml": "🎉 **Orientation:**\n\n• 1st Year Start.\n• College Rules, Faculty, Facilities Tour.\n• Guest Speakers, Alumni.\n• Parents Invited.",
+    "response_kn": "🎉 **Orientation:**\n\n• 1st Year ಆರಂಭ.\n• College Rules, Faculty, Facilities.\n• Parents Invited.",
+    "response_hi": "🎉 **Orientation:**\n\n• 1st Year शुरुआत।\n• College Rules, Faculty।\n• Parents Invited।"
+  },
+  "ground": {
+    "keywords": [
+      "ground",
+      "field",
+      "playground",
+      "cricket ground",
+      "football ground",
+      "ഗ്രൗണ്ട്",
+      "മൈദാൻ",
+      "ಮೈದಾನ",
+      "मैदान"
+    ],
+    "response": "⚽ **Sports Ground at SIT:**\n\n• Large outdoor ground for cricket and football.\n• Athletic track for running events.\n• Volleyball and basketball courts.\n• Available for students before/after college hours and on weekends.",
+    "response_ml": "⚽ **Sports Ground:**\n\n• Cricket & Football Ground.\n• Athletic Track.\n• Volleyball, Basketball.",
+    "response_kn": "⚽ **ಮೈದಾನ:**\n\n• ಕ್ರಿಕೆಟ್ & ಫುಟ್ಬಾಲ್.\n• Athletic Track.",
+    "response_hi": "⚽ **खेल मैदान:**\n\n• Cricket & Football।\n• Athletic Track।"
+  },
+  "syllabus": {
+    "keywords": [
+      "syllabus",
+      "curriculum",
+      "subjects list",
+      "vtu syllabus",
+      "what subjects",
+      "സിലബസ്",
+      "വിഷയങ്ങൾ",
+      "ಪಠ್ಯಕ್ರಮ",
+      "ವಿಷಯಗಳು",
+      "पाठ्यक्रम",
+      "विषय"
+    ],
+    "response": "📚 **Syllabus at SIT:**\n\n• Follows **VTU Scheme 2022** (Choice Based Credit System – CBCS).\n• Syllabus available on: **vtu.ac.in**\n• Includes theory, lab, and project components.\n• Elective subjects available from 5th semester onwards.\n• Updated regularly as per VTU revision cycles.",
+    "response_ml": "📚 **Syllabus:**\n\n• VTU Scheme 2022.\n• vtu.ac.in\n• Theory, Lab, Projects.\n• Electives from 5th Semester.",
+    "response_kn": "📚 **ಪಠ್ಯಕ್ರಮ:**\n\n• VTU Scheme 2022.\n• vtu.ac.in",
+    "response_hi": "📚 **पाठ्यक्रम:**\n\n• VTU Scheme 2022।\n• vtu.ac.in"
+  },
+  "teaching": {
+    "keywords": [
+      "teaching",
+      "classroom",
+      "lecture",
+      "smart board",
+      "pedagogy",
+      "ക്ലാസ്റൂം",
+      "ടീച്ചിംഗ്",
+      "ತರಗತಿ",
+      "ಬೋಧನೆ",
+      "कक्षा",
+      "शिक्षण"
+    ],
+    "response": "🎒 **Teaching at SIT:**\n\n• Smart classrooms with projectors and interactive boards.\n• Blended learning: traditional lectures + digital content.\n• Case studies, problem-solving sessions, and group discussions.\n• Lab-integrated learning for practical exposure.\n• NPTEL video lectures integrated into teaching.",
+    "response_ml": "🎒 **Teaching Methods:**\n\n• Smart Classrooms.\n• Blended Learning.\n• Case Studies, Labs.\n• NPTEL Videos.",
+    "response_kn": "🎒 **ಬೋಧನೆ:**\n\n• Smart Classrooms.\n• Blended Learning.\n• Labs, NPTEL.",
+    "response_hi": "🎒 **शिक्षण:**\n\n• Smart Classrooms।\n• Blended Learning।\n• Labs, NPTEL।"
+  },
+  "timetable": {
+    "keywords": [
+      "timetable",
+      "class schedule",
+      "time table",
+      "ടൈംടേബിൾ",
+      "ക്ലാസ് ഷെഡ്യൂൾ",
+      "ವೇಳಾಪಟ್ಟಿ",
+      "समय सारणी"
+    ],
+    "response": "📋 **Timetable at SIT:**\n\n• Class timetable is published by each department at the start of every semester.\n• Available on the student portal and notice boards.\n• Typically 6–7 periods per day.\n• Lab sessions scheduled on fixed days each week.",
+    "response_ml": "📋 **Timetable:**\n\n• Semester Start.\n• Student Portal & Notice Board.\n• 6-7 Periods Per Day.",
+    "response_kn": "📋 **ವೇಳಾಪಟ್ಟಿ:**\n\n• Semester ಆರಂಭ.\n• Student Portal.",
+    "response_hi": "📋 **समय सारणी:**\n\n• Semester शुरुआत।\n• Student Portal।"
+  },
+  "canteen_menu": {
+    "keywords": [
+      "canteen menu",
+      "what food",
+      "breakfast",
+      "lunch items",
+      "ക്യാന്റീൻ മെനു",
+      "ഊണ്",
+      "ಕ್ಯಾಂಟೀನ್ ಮೆನು",
+      "कैंटीन मेनू"
+    ],
+    "response": "🍛 **Canteen Menu at SIT:**\n\n• **Breakfast:** Idli, Dosa, Upma, Poha, Bread, Tea/Coffee.\n• **Lunch:** Rice, Chapati, Dal, Sabzi, Rasam, Curd.\n• **Snacks:** Samosa, Bread Omelette, Biscuits, Noodles, Juice.\n• **Beverages:** Tea, Coffee, Lassi, Cold Drinks.\n• Affordable prices for students.",
+    "response_ml": "🍛 **Canteen Menu:**\n\n• Breakfast: Idli, Dosa, Upma.\n• Lunch: Rice, Chapati, Dal.\n• Snacks: Samosa, Noodles.\n• Tea, Coffee.",
+    "response_kn": "🍛 **ಕ್ಯಾಂಟೀನ್ ಮೆನು:**\n\n• ಉಪಹಾರ: Idli, Dosa.\n• ಊಟ: Chapati, Dal.\n• ತಿಂಡಿ: Samosa.",
+    "response_hi": "🍛 **कैंटीन मेनू:**\n\n• नाश्ता: Idli, Dosa।\n• दोपहर: Rice, Chapati।\n• स्नैक्स: Samosa।"
+  },
+  "common_room": {
+    "keywords": [
+      "common room",
+      "recreation",
+      "rest room",
+      "lounge",
+      "കോമൺ റൂം",
+      "വിനോദം",
+      "ಕಾಮನ್ ರೂಮ್",
+      "कॉमन रूम"
+    ],
+    "response": "🛋️ **Common Room at SIT:**\n\n• Common rooms available in hostel blocks.\n• TV, indoor games (carrom, chess, TT), and seating area.\n• Used for recreation and group activities.\n• Open to all hostel students in leisure time.",
+    "response_ml": "🛋️ **Common Room:**\n\n• TV, Indoor Games.\n• Carrom, Chess, TT.\n• Leisure Time.",
+    "response_kn": "🛋️ **ಕಾಮನ್ ರೂಮ್:**\n\n• TV, Indoor Games.\n• Carrom, Chess, TT.",
+    "response_hi": "🛋️ **कॉमन रूम:**\n\n• TV, Indoor Games।\n• Carrom, Chess, TT।"
+  }
+}

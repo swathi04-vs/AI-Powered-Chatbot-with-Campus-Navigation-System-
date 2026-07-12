@@ -1,0 +1,1990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Blueprint Navigation — SIT Campus</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   ARCHITECTURAL BLUEPRINT THEME
+   Inspired by real-world CAD blueprints and modern GIS mapping tools.
+   Clean white-on-blueprint-blue, with crisp lines and minimal UI.
+═══════════════════════════════════════════════════════════════════ */
+:root {
+  /* Blueprint colour palette */
+  --bp-bg:       #1a2744;   /* deep blueprint navy */
+  --bp-paper:    #e8f0fd;   /* blueprint paper blue-white */
+  --bp-grid:     #c5d5f0;   /* grid lines */
+  --bp-line:     #2952a3;   /* strong blueprint lines */
+  --bp-wall:     #1e3a8a;   /* wall colour */
+
+  /* UI surface system */
+  --ui-bg:       #f4f6fb;
+  --ui-surface:  #ffffff;
+  --ui-panel:    #ffffff;
+  --ui-border:   #dde3ef;
+  --ui-border2:  #c8d1e3;
+  --ui-text:     #1a2340;
+  --ui-text2:    #475872;
+  --ui-muted:    #8a96ae;
+
+  /* Accent */
+  --accent:      #1e40af;
+  --accent-lt:   #eff6ff;
+  --accent-hover:#1d4ed8;
+  --accent-glow: rgba(30,64,175,.18);
+
+  /* Floor identity colours — same across views */
+  --f-gf:  #0369a1;   /* sky-700 */
+  --f-f1:  #6d28d9;   /* violet-700 */
+  --f-f2:  #b45309;   /* amber-700 */
+  --f-f3:  #065f46;   /* emerald-800 */
+  --f-f4:  #9f1239;   /* rose-800 */
+
+  /* Room type fill colours — architect pastel palette */
+  --r-cls:  rgba(59,130,246,.22);   /* classroom */
+  --r-lab:  rgba(16,185,129,.22);   /* lab */
+  --r-off:  rgba(245,158,11,.22);   /* office */
+  --r-wc:   rgba(100,116,139,.18);  /* restroom */
+  --r-cor:  rgba(139,92,246,.12);   /* corridor */
+  --r-sta:  rgba(8,145,178,.28);    /* staircase */
+  --r-lft:  rgba(202,138,4,.28);    /* elevator */
+  --r-rmp:  rgba(234,88,12,.22);    /* ramp */
+  --r-rm:   rgba(219,39,119,.18);   /* misc room */
+
+  --shadow:    0 1px 3px rgba(0,0,0,.07), 0 2px 12px rgba(0,0,0,.05);
+  --shadow-md: 0 4px 20px rgba(0,0,0,.1);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.14);
+  --radius:    10px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body {
+  background: var(--ui-bg);
+  color: var(--ui-text);
+  font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--ui-border2); border-radius: 10px; }
+
+/* ─── HEADER ─── */
+header {
+  height: 50px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  background: var(--ui-panel);
+  border-bottom: 1px solid var(--ui-border);
+  box-shadow: 0 1px 5px rgba(0,0,0,.06);
+  z-index: 50;
+}
+.h-back {
+  width: 30px; height: 30px;
+  border-radius: 7px;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border);
+  color: var(--ui-text2);
+  font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  transition: all .15s;
+  flex-shrink: 0;
+}
+.h-back:hover { background: var(--ui-border); color: var(--ui-text); }
+.h-brand { display: flex; align-items: center; gap: 9px; }
+.h-brand-badge {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  box-shadow: 0 2px 6px var(--accent-glow);
+  flex-shrink: 0;
+}
+.h-brand-text strong {
+  font-size: 13px; font-weight: 600; color: var(--ui-text);
+  display: block; line-height: 1.2;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.h-brand-text span { font-size: 11px; color: var(--ui-muted); }
+.h-spacer { flex: 1; }
+
+/* View mode toggle */
+.view-toggle {
+  display: flex;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 2px;
+  gap: 2px;
+}
+.vt-btn {
+  padding: 4px 13px;
+  font-size: 11px; font-weight: 600;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: .4px;
+  border: none;
+  background: transparent;
+  color: var(--ui-muted);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all .15s;
+}
+.vt-btn.on {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 1px 4px var(--accent-glow);
+}
+
+.h-pill {
+  display: flex; align-items: center; gap: 5px;
+  padding: 3px 11px; border-radius: 20px;
+  font-size: 11px; font-weight: 500;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.h-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+/* ─── LAYOUT ─── */
+.main-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 240px 1fr 262px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  background: var(--ui-panel);
+  border-right: 1px solid var(--ui-border);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.sb-block { padding: 12px 12px 10px; border-bottom: 1px solid var(--ui-border); }
+.sb-block:last-child { border-bottom: none; }
+.sb-title {
+  font-size: 9px; font-weight: 700;
+  color: var(--ui-muted);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-family: 'IBM Plex Mono', monospace;
+  margin-bottom: 9px;
+}
+
+/* Floor selector */
+.fl-btn {
+  display: flex; align-items: center; gap: 9px;
+  width: 100%; padding: 7px 9px;
+  margin-bottom: 2px;
+  background: transparent;
+  border: 1.5px solid transparent;
+  border-radius: 8px;
+  color: var(--ui-text2);
+  font-size: 12px; font-weight: 500;
+  cursor: pointer;
+  transition: all .13s;
+  text-align: left;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+.fl-btn:hover { background: var(--ui-bg); color: var(--ui-text); }
+.fl-btn.on {
+  background: var(--accent-lt);
+  border-color: #bfdbfe;
+  color: var(--accent);
+}
+.fl-swatch { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+.fl-name { flex: 1; }
+.fl-tag {
+  font-size: 9px; font-family: 'IBM Plex Mono', monospace; font-weight: 500;
+  background: var(--ui-bg); color: var(--ui-muted);
+  padding: 1px 5px; border-radius: 4px; border: 1px solid var(--ui-border);
+}
+.fl-btn.on .fl-tag { background: #dbeafe; color: var(--accent); border-color: #bfdbfe; }
+
+/* Form controls */
+.f-grp { margin-bottom: 9px; }
+.f-lbl {
+  display: block; font-size: 9px; font-weight: 700;
+  color: var(--ui-muted); letter-spacing: .8px; text-transform: uppercase;
+  font-family: 'IBM Plex Mono', monospace; margin-bottom: 4px;
+}
+.f-sel {
+  width: 100%;
+  padding: 6px 24px 6px 9px;
+  background: var(--ui-bg);
+  border: 1.5px solid var(--ui-border);
+  border-radius: 7px;
+  color: var(--ui-text);
+  font-size: 11px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  cursor: pointer; outline: none;
+  transition: border-color .15s, box-shadow .15s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%238a96ae'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-color: var(--ui-bg);
+}
+.f-sel:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(30,64,175,.1); background-color: var(--ui-surface); }
+
+/* Mode selector */
+.mode-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; margin-bottom: 10px; }
+.mode-btn {
+  padding: 5px 3px; font-size: 10px; font-weight: 600;
+  border: 1.5px solid var(--ui-border);
+  background: var(--ui-bg);
+  color: var(--ui-text2);
+  cursor: pointer; border-radius: 7px;
+  text-align: center;
+  transition: all .13s;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+.mode-btn:hover { background: var(--ui-surface); }
+.mode-btn.on { background: #ede9fe; border-color: #c4b5fd; color: #5b21b6; font-weight: 700; }
+
+/* Buttons */
+.btn-primary {
+  width: 100%; padding: 8px;
+  background: var(--accent); color: #fff;
+  border: none; border-radius: 8px;
+  font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all .15s;
+  margin-bottom: 5px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  box-shadow: 0 2px 6px var(--accent-glow);
+  letter-spacing: .2px;
+}
+.btn-primary:hover { background: var(--accent-hover); box-shadow: 0 4px 12px var(--accent-glow); transform: translateY(-1px); }
+.btn-primary:active { transform: none; }
+.btn-ghost {
+  width: 100%; padding: 6px;
+  background: transparent; color: var(--ui-muted);
+  border: 1.5px solid var(--ui-border); border-radius: 8px;
+  font-size: 11px; cursor: pointer; transition: all .13s;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+.btn-ghost:hover { border-color: #fca5a5; color: #dc2626; background: #fff5f5; }
+
+/* Legend */
+.legend-g { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 7px; }
+.leg { display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--ui-text2); }
+.legdot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+
+/* ─── VIEWPORT ─── */
+.viewport {
+  position: relative; overflow: hidden;
+  background: #1c2e52;
+}
+#C3D {
+  display: block; width: 100%; height: 100%;
+  cursor: grab; outline: none;
+}
+#C3D.dragging { cursor: grabbing; }
+
+/* Floor HUD */
+.floor-hud {
+  position: absolute; top: 11px; left: 50%; transform: translateX(-50%);
+  background: rgba(255,255,255,.94); border: 1px solid var(--ui-border);
+  padding: 4px 16px; border-radius: 20px;
+  font-size: 11px; font-weight: 600; color: var(--ui-text);
+  pointer-events: none; white-space: nowrap;
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow);
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: .3px;
+}
+
+/* Camera controls */
+.cam-ctrl-r { position: absolute; bottom: 52px; right: 12px; display: flex; flex-direction: column; gap: 3px; }
+.cam-ctrl-l { position: absolute; bottom: 52px; left: 12px; display: flex; flex-direction: column; gap: 3px; }
+.cam-row { display: flex; gap: 3px; justify-content: center; }
+.cb {
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid var(--ui-border);
+  color: var(--ui-text2); cursor: pointer;
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; transition: all .13s;
+  backdrop-filter: blur(4px);
+  box-shadow: var(--shadow);
+}
+.cb:hover { background: #fff; border-color: var(--accent); color: var(--accent); box-shadow: 0 2px 8px var(--accent-glow); }
+.cb:active { transform: scale(.92); }
+.cb.mono { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600; }
+
+/* Floor bar */
+.floor-bar {
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 4px;
+  background: rgba(255,255,255,.94);
+  border: 1px solid var(--ui-border);
+  border-radius: 22px; padding: 4px 8px;
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow);
+}
+.fbar-btn {
+  padding: 2px 11px; font-size: 10px; font-weight: 700;
+  font-family: 'IBM Plex Mono', monospace;
+  border: 1.5px solid transparent; border-radius: 14px;
+  cursor: pointer; transition: all .13s;
+  background: transparent; color: var(--ui-muted);
+  letter-spacing: .3px;
+}
+.fbar-btn:hover { background: var(--ui-bg); }
+.fbar-btn.on { color: #fff; }
+
+/* Tooltip */
+#TT {
+  position: fixed; pointer-events: none; z-index: 9999;
+  background: rgba(255,255,255,.97);
+  border: 1px solid var(--ui-border);
+  padding: 7px 11px; border-radius: 9px;
+  font-size: 11px; color: var(--ui-text);
+  display: none; max-width: 200px; line-height: 1.4;
+  box-shadow: var(--shadow-md);
+}
+#TT .tt-n { font-weight: 700; margin-bottom: 2px; }
+#TT .tt-s { font-size: 9px; color: var(--ui-muted); font-family: 'IBM Plex Mono', monospace; letter-spacing: .3px; }
+
+/* ─── INFO PANEL ─── */
+.info-panel {
+  background: var(--ui-panel);
+  border-left: 1px solid var(--ui-border);
+  overflow-y: auto;
+  display: flex; flex-direction: column;
+}
+.ip-block { padding: 12px; border-bottom: 1px solid var(--ui-border); }
+.ip-block:last-child { border-bottom: none; flex: 1; }
+.ip-title {
+  font-size: 9px; font-weight: 700; color: var(--ui-muted);
+  letter-spacing: 1.2px; text-transform: uppercase;
+  font-family: 'IBM Plex Mono', monospace; margin-bottom: 9px;
+}
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.stat-box {
+  background: var(--ui-bg); border: 1px solid var(--ui-border);
+  border-radius: 8px; padding: 8px 6px; text-align: center;
+}
+.stat-num {
+  font-size: 20px; font-weight: 700; color: var(--accent);
+  font-family: 'IBM Plex Mono', monospace; line-height: 1;
+}
+.stat-lbl { font-size: 9px; color: var(--ui-muted); margin-top: 2px; text-transform: uppercase; letter-spacing: .5px; font-weight: 600; }
+.node-card {
+  background: var(--ui-bg); border: 1px solid var(--ui-border);
+  border-radius: 9px; padding: 11px;
+}
+.nc-title { font-size: 12px; font-weight: 700; color: var(--ui-text); line-height: 1.3; margin-bottom: 8px; }
+.nc-row {
+  display: flex; justify-content: space-between;
+  padding: 3px 0; border-bottom: 1px solid var(--ui-border);
+  font-size: 10px;
+}
+.nc-row:last-child { border-bottom: none; }
+.nc-k { color: var(--ui-muted); font-family: 'IBM Plex Mono', monospace; font-size: 9px; flex-shrink: 0; }
+.nc-v { color: var(--ui-text2); text-align: right; }
+.route-card {
+  background: #eff6ff; border: 1px solid #bfdbfe;
+  border-radius: 9px; padding: 9px 11px;
+  font-size: 10px; color: var(--ui-text2);
+  line-height: 1.7; margin-bottom: 7px;
+}
+.route-card strong { color: var(--accent); font-weight: 700; }
+.step-list { display: flex; flex-direction: column; gap: 3px; }
+.step {
+  display: flex; align-items: flex-start; gap: 7px;
+  padding: 6px 7px; background: var(--ui-bg);
+  border: 1px solid transparent; border-radius: 7px;
+  cursor: pointer; transition: all .12s; font-size: 10px;
+}
+.step:hover { background: #eff6ff; border-color: #bfdbfe; }
+.step-num {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--ui-border); color: var(--ui-text2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px; font-weight: 700;
+  font-family: 'IBM Plex Mono', monospace; flex-shrink: 0;
+}
+.step-num.v { background: #ede9fe; color: #6d28d9; }
+.step-name { font-weight: 600; color: var(--ui-text); }
+.step-fl { font-size: 9px; color: var(--ui-muted); font-family: 'IBM Plex Mono', monospace; }
+.step-tags { display: flex; gap: 2px; margin-top: 2px; }
+.stag {
+  font-size: 8px; font-weight: 700; padding: 0 4px;
+  border-radius: 3px; text-transform: uppercase; letter-spacing: .3px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.stag.s { background: #e0f2fe; color: #0369a1; }
+.stag.l { background: #fef9c3; color: #854d0e; }
+.stag.r { background: #dcfce7; color: #166534; }
+.stag.f { background: #f3e8ff; color: #6d28d9; }
+.empty {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 5px; padding: 18px 10px;
+  color: var(--ui-muted); font-size: 11px; text-align: center;
+}
+.empty-ico { font-size: 26px; opacity: .3; }
+</style>
+<style>
+/* ── BUILDING HIGHLIGHT & ROUTE STYLES ── */
+.fl-btn.route-floor { background: rgba(37,99,235,0.08) !important; border-color: rgba(37,99,235,0.35) !important; }
+.fl-btn.route-floor .fl-tag { background: #dbeafe !important; color: #1d4ed8 !important; border-color: #93c5fd !important; font-weight:700; }
+.fl-btn.route-floor .fl-name { color: #1e40af; font-weight:600; }
+.route-info-bar {
+  background: linear-gradient(135deg,#1e3a8a,#2563eb);
+  border-radius:8px; padding:9px 11px; margin-bottom:8px;
+  color:#fff; font-size:10px; display:none; border:1px solid #3b82f6;
+  box-shadow: 0 2px 10px rgba(37,99,235,0.25);
+}
+.route-info-bar.visible { display:block; }
+.route-info-bar .rib-title { font-size:11px; font-weight:700; margin-bottom:5px; letter-spacing:.3px; }
+.route-floor-pills { display:flex; gap:4px; flex-wrap:wrap; }
+.rfpill {
+  background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.3);
+  border-radius:5px; padding:2px 7px; font-size:9px;
+  font-family:'IBM Plex Mono',monospace; font-weight:600; letter-spacing:.5px;
+}
+.rfpill.start { background:rgba(22,163,74,0.4); border-color:rgba(22,163,74,0.6); }
+.rfpill.end   { background:rgba(220,38,38,0.4);  border-color:rgba(220,38,38,0.6); }
+.rfpill.mid   { background:rgba(255,255,255,0.18); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<header>
+  <a href="/navigation" class="h-back" title="Back">&#8592;</a>
+  <div class="h-brand">
+    <div class="h-brand-badge">&#127963;&#65039;</div>
+    <div class="h-brand-text">
+      <strong>SIT · INDOOR NAV</strong>
+      <span>Srinivas Institute of Technology &mdash; Blueprint 3D</span>
+    </div>
+  </div>
+  <div class="h-spacer"></div>
+  <div class="view-toggle">
+    <button class="vt-btn"    id="btn2d" onclick="setVM('2d')">2D PLAN</button>
+    <button class="vt-btn on" id="btn3d" onclick="setVM('3d')">3D VIEW</button>
+  </div>
+  <div class="h-pill"><div class="h-dot"></div>5 FLOORS</div>
+  <a href="/" style="font-size:11px;color:var(--ui-muted);text-decoration:none">&#8592; Portal</a>
+</header>
+
+<!-- ═══════════ MAIN LAYOUT ═══════════ -->
+<div class="main-layout">
+
+  <!-- ▌SIDEBAR ▐ -->
+  <div class="sidebar">
+
+    <div class="sb-block">
+      <div class="sb-title">Floor Navigator</div>
+      <button class="fl-btn on" data-fl="ground" onclick="switchFloor('ground')">
+        <div class="fl-swatch" style="background:var(--f-gf)"></div>
+        <span class="fl-name">Ground Floor</span><span class="fl-tag">GF</span>
+      </button>
+      <button class="fl-btn" data-fl="floor1" onclick="switchFloor('floor1')">
+        <div class="fl-swatch" style="background:var(--f-f1)"></div>
+        <span class="fl-name">First Floor</span><span class="fl-tag">1F</span>
+      </button>
+      <button class="fl-btn" data-fl="floor2" onclick="switchFloor('floor2')">
+        <div class="fl-swatch" style="background:var(--f-f2)"></div>
+        <span class="fl-name">Second Floor</span><span class="fl-tag">2F</span>
+      </button>
+      <button class="fl-btn" data-fl="floor3" onclick="switchFloor('floor3')">
+        <div class="fl-swatch" style="background:var(--f-f3)"></div>
+        <span class="fl-name">Third Floor</span><span class="fl-tag">3F</span>
+      </button>
+      <button class="fl-btn" data-fl="floor4" onclick="switchFloor('floor4')">
+        <div class="fl-swatch" style="background:var(--f-f4)"></div>
+        <span class="fl-name">Fourth Floor</span><span class="fl-tag">4F</span>
+      </button>
+    </div>
+
+    <div class="sb-block">
+      <div class="sb-title">Route Planner</div>
+
+      <!-- Route floor highlight info bar -->
+      <div class="route-info-bar" id="routeInfoBar">
+        <div class="rib-title">&#128204; Active Route Floors</div>
+        <div class="route-floor-pills" id="routeFloorPills"></div>
+      </div>
+      <div class="f-grp"><label class="f-lbl">From Floor</label>
+        <select class="f-sel" id="fromFloor" onchange="rfr()">
+          <option value="ground">Ground Floor</option><option value="floor1">First Floor</option>
+          <option value="floor2">Second Floor</option><option value="floor3">Third Floor</option>
+          <option value="floor4">Fourth Floor</option>
+        </select>
+      </div>
+      <div class="f-grp"><label class="f-lbl">Start Room</label><select class="f-sel" id="fromRoom"></select></div>
+      <div class="f-grp"><label class="f-lbl">To Floor</label>
+        <select class="f-sel" id="toFloor" onchange="rtr()">
+          <option value="ground">Ground Floor</option><option value="floor1">First Floor</option>
+          <option value="floor2" selected>Second Floor</option><option value="floor3">Third Floor</option>
+          <option value="floor4">Fourth Floor</option>
+        </select>
+      </div>
+      <div class="f-grp"><label class="f-lbl">Destination</label><select class="f-sel" id="toRoom"></select></div>
+
+      <div class="sb-title" style="margin-bottom:6px">Connector</div>
+      <div class="mode-grid">
+        <button class="mode-btn on" id="mode_stair"    onclick="setMode('stair')">&#128118; Stair</button>
+        <button class="mode-btn"    id="mode_elevator" onclick="setMode('elevator')">&#128663; Lift</button>
+        <button class="mode-btn"    id="mode_ramp"     onclick="setMode('ramp')">&#8599; Ramp</button>
+      </div>
+      <button class="btn-primary" onclick="findRoute()">&#128269; Find Route</button>
+      <button class="btn-ghost"   onclick="clearRoute()">&#10005; Clear Route</button>
+    </div>
+
+    <div class="sb-block">
+      <div class="sb-title">Room Types</div>
+      <div class="legend-g">
+        <div class="leg"><div class="legdot" style="background:#3b82f6;opacity:.7"></div>Classroom</div>
+        <div class="leg"><div class="legdot" style="background:#10b981;opacity:.7"></div>Laboratory</div>
+        <div class="leg"><div class="legdot" style="background:#f59e0b;opacity:.7"></div>Office/Dept</div>
+        <div class="leg"><div class="legdot" style="background:#64748b;opacity:.7"></div>Restroom</div>
+        <div class="leg"><div class="legdot" style="background:#8b5cf6;opacity:.5"></div>Corridor</div>
+        <div class="leg"><div class="legdot" style="background:#0891b2"></div>Staircase</div>
+        <div class="leg"><div class="legdot" style="background:#ca8a04"></div>Elevator</div>
+        <div class="leg"><div class="legdot" style="background:#ea580c;opacity:.7"></div>Ramp</div>
+        <div class="leg"><div class="legdot" style="background:#16a34a;border-radius:50%"></div>Route Start</div>
+        <div class="leg"><div class="legdot" style="background:#dc2626;border-radius:50%"></div>Route End</div>
+      </div>
+    </div>
+
+    <div class="sb-block">
+      <div class="sb-title">Controls</div>
+      <div style="font-size:10px;color:var(--ui-text2);line-height:1.9">
+        <div>&#128433;&#65039; <b>Click</b> room &mdash; inspect details</div>
+        <div>&#128260; <b>Drag</b> &mdash; rotate / pan view</div>
+        <div>&#128269; <b>Scroll</b> &mdash; zoom in / out</div>
+        <div>&#127970; <b>RST</b> &mdash; reset to full building view</div>
+      </div>
+    </div>
+  </div><!-- /sidebar -->
+
+  <!-- ▌ 3D VIEWPORT ▐ -->
+  <div class="viewport" id="VP">
+    <canvas id="C3D" tabindex="0"></canvas>
+
+    <div class="floor-hud" id="FHUD">Ground Floor (GF) &middot; Level 0</div>
+
+    <!-- Zoom & Reset -->
+    <div class="cam-ctrl-r">
+      <button class="cb" title="Zoom In"    onclick="cZoom(0.82)">+</button>
+      <button class="cb" title="Zoom Out"   onclick="cZoom(1.22)">&minus;</button>
+      <button class="cb mono" title="Reset — show full 3D building" onclick="cReset()">RST</button>
+    </div>
+
+    <!-- Orbit controls (top-left) -->
+    <div class="cam-ctrl-l">
+      <div class="cam-row"><button class="cb" onclick="cOrb(0,-.1)">&#8593;</button></div>
+      <div class="cam-row">
+        <button class="cb" onclick="cOrb(-.12,0)">&#8592;</button>
+        <button class="cb" onclick="cOrb(0,.1)">&#8595;</button>
+        <button class="cb" onclick="cOrb(.12,0)">&#8594;</button>
+      </div>
+    </div>
+
+    <!-- Floor quick-nav -->
+    <div class="floor-bar">
+      <button class="fbar-btn on"  id="fq_ground" data-fl="ground" onclick="switchFloor('ground')" style="background:var(--f-gf)">GF</button>
+      <button class="fbar-btn"     id="fq_floor1" data-fl="floor1" onclick="switchFloor('floor1')">1F</button>
+      <button class="fbar-btn"     id="fq_floor2" data-fl="floor2" onclick="switchFloor('floor2')">2F</button>
+      <button class="fbar-btn"     id="fq_floor3" data-fl="floor3" onclick="switchFloor('floor3')">3F</button>
+      <button class="fbar-btn"     id="fq_floor4" data-fl="floor4" onclick="switchFloor('floor4')">4F</button>
+    </div>
+  </div><!-- /viewport -->
+
+  <!-- ▌ INFO PANEL ▐ -->
+  <div class="info-panel">
+    <div class="ip-block">
+      <div class="ip-title">Building Stats</div>
+      <div class="stat-grid">
+        <div class="stat-box"><div class="stat-num">5</div><div class="stat-lbl">Floors</div></div>
+        <div class="stat-box"><div class="stat-num">127</div><div class="stat-lbl">Rooms</div></div>
+        <div class="stat-box"><div class="stat-num">4</div><div class="stat-lbl">Connects</div></div>
+        <div class="stat-box"><div class="stat-num" id="dStat">&mdash;</div><div class="stat-lbl">Route m</div></div>
+      </div>
+    </div>
+    <div class="ip-block">
+      <div class="ip-title">Selected Room</div>
+      <div id="nodeArea"><div class="empty"><div class="empty-ico">&#128433;&#65039;</div>Click any room on the map</div></div>
+    </div>
+    <div class="ip-block">
+      <div class="ip-title">Navigation Steps</div>
+      <div id="stepsArea"><div class="empty"><div class="empty-ico">&#128506;&#65039;</div>Plan a route to see turn-by-turn steps</div></div>
+    </div>
+  </div><!-- /info-panel -->
+
+</div><!-- /main-layout -->
+
+<div id="TT"></div>
+
+<script>
+/* ╔══════════════════════════════════════════════════════════════════╗
+   ║  SIT INDOOR NAVIGATION — ARCHITECTURAL BLUEPRINT 3D ENGINE      ║
+   ║                                                                  ║
+   ║  Architecture:                                                   ║
+   ║  1. FLOOR PLAN DATA  — rooms as 2D rectangles (not just points)  ║
+   ║  2. BLUEPRINT BUILDER — proper walls, rooms, corridors, stairs   ║
+   ║  3. GRAPH ENGINE     — Dijkstra pathfinding                      ║
+   ║  4. THREE.JS SCENE   — realistic proportions, PBR materials      ║
+   ║  5. LABEL SYSTEM     — canvas sprites, always face camera        ║
+   ║  6. CAMERA SYSTEM    — smooth orbit, zoom, pan                   ║
+   ║  7. UI CONTROLS      — floor switch, route, selection highlight  ║
+   ╚══════════════════════════════════════════════════════════════════╝ */
+
+'use strict';
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 1 · BUILDING CONSTANTS & PROPORTIONS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Key fix: FLOOR_H = 0.28  (was 5.5 → way too tall)
+   Real building: ~60m wide, 3.4m per floor.
+   We map to: 20 world units wide.
+   Scale = 20/60 = 0.333 units/m → floor height = 3.4 × 0.333 = 1.13
+   We use 1.2 for slight visual clarity boost, still realistic.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const WORLD_W   = 20.0;   // world X span (building width)
+const WORLD_D   = 9.2;    // world Z span (building depth, keeps ~60m:28m ratio)
+const FLOOR_H   = 1.2;    // ← FIXED: was 5.5, now realistic 3.4m floor-to-floor
+const WALL_H    = FLOOR_H * 0.82; // wall height within a floor (leaves ceiling gap)
+const WALL_T    = 0.06;   // wall thickness in world units (~18cm real)
+const SLAB_T    = 0.07;   // floor slab thickness
+const MAP_W     = 1060;   // source coordinate space width
+const MAP_D     = 490;    // source coordinate space depth
+
+/* Floor metadata */
+const FM = {
+  ground:{ lbl:'Ground Floor', sh:'GF', z:0, zM:0,   col3d:0x0369a1, colCSS:'#0369a1' },
+  floor1:{ lbl:'First Floor',  sh:'1F', z:1, zM:3.4, col3d:0x6d28d9, colCSS:'#6d28d9' },
+  floor2:{ lbl:'Second Floor', sh:'2F', z:2, zM:6.8, col3d:0xb45309, colCSS:'#b45309' },
+  floor3:{ lbl:'Third Floor',  sh:'3F', z:3, zM:10.2,col3d:0x065f46, colCSS:'#065f46' },
+  floor4:{ lbl:'Fourth Floor', sh:'4F', z:4, zM:13.6,col3d:0x9f1239, colCSS:'#9f1239' },
+};
+
+/* Room type → visual colours (3D hex + CSS hex + fill RGBA) */
+const RTYPE = {
+  classroom:  { c3d:0x3b82f6, css:'#3b82f6', fill:0xdbeafe, emI:0.05 },
+  laboratory: { c3d:0x10b981, css:'#10b981', fill:0xd1fae5, emI:0.05 },
+  office:     { c3d:0xf59e0b, css:'#f59e0b', fill:0xfef3c7, emI:0.05 },
+  restroom:   { c3d:0x64748b, css:'#64748b', fill:0xe2e8f0, emI:0.03 },
+  corridor:   { c3d:0x8b5cf6, css:'#8b5cf6', fill:0xede9fe, emI:0.03 },
+  staircase:  { c3d:0x0891b2, css:'#0891b2', fill:0xe0f2fe, emI:0.08 },
+  elevator:   { c3d:0xca8a04, css:'#ca8a04', fill:0xfef9c3, emI:0.08 },
+  ramp:       { c3d:0xea580c, css:'#ea580c', fill:0xffedd5, emI:0.06 },
+  room:       { c3d:0xdb2777, css:'#db2777', fill:0xfce7f3, emI:0.04 },
+};
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 2 · ARCHITECTURAL ROOM DATA
+   Each room has: id, name, centre-x, centre-y (in pixel coords),
+   width, height (in pixels), type.
+   Rooms become solid extruded boxes — BLUEPRINT STYLE.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+// Room size presets in pixel units (room widths/depths in source space)
+// These translate to world units: 120px ≈ 2.26 world units
+const RS = {
+  large:   { w:160, d:100 },  // seminar hall, auditorium
+  std:     { w:120, d: 90 },  // standard classroom
+  small:   { w: 80, d: 70 },  // small rooms, offices
+  lab:     { w:130, d:100 },  // labs (wider)
+  corr:    { w:220, d: 45 },  // corridor (long narrow)
+  corridor:{ w:500, d: 45 },  // main corridor
+  stair:   { w: 55, d: 55 },  // staircase box
+  lift:    { w: 45, d: 45 },  // elevator shaft
+  ramp:    { w: 50, d: 70 },  // ramp
+  tiny:    { w: 60, d: 55 },  // toilet, small
+};
+
+const FLOOR_ROOMS = {
+  ground: [
+    {id:101,name:'SEMINAR HALL',       x:270,y: 55, w:190,d:110, type:'room'},
+    {id:102,name:'STAIRCASE',          x:458,y: 50, w: RS.stair.w, d:RS.stair.d, type:'staircase'},
+    {id:103,name:'QPDS ROOM',          x:360,y:115, w:110,d: 80, type:'room'},
+    {id:104,name:'CLASSROOM 004',      x:615,y: 50, w:120,d: 80, type:'classroom'},
+    {id:105,name:'CLASSROOM 005',      x:758,y: 50, w:120,d: 80, type:'classroom'},
+    {id:106,name:'CLASSROOM 006',      x:938,y: 50, w:120,d: 80, type:'classroom'},
+    {id:107,name:'CLASSROOM 007',      x:952,y:180, w:120,d: 85, type:'classroom'},
+    {id:108,name:'LIFT',               x:600,y:159, w: RS.lift.w, d:RS.lift.d, type:'elevator'},
+    {id:109,name:'PATHWAY',            x:536,y:247, w:280,d: 45, type:'corridor'},
+    {id:110,name:'FACULTY',            x: 45,y:340, w: 65,d: 80, type:'office'},
+    {id:111,name:'STAIRCASE GF',       x: 80,y:340, w: RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:112,name:'XEROX',              x:132,y:340, w: 80,d: 70, type:'office'},
+    {id:113,name:'GENTS TOILET',       x:190,y:340, w: RS.tiny.w, d:RS.tiny.d, type:'restroom'},
+    {id:114,name:'CLASSROOM 003',      x:250,y:340, w:110,d: 90, type:'classroom'},
+    {id:115,name:'BOARD ROOM',         x:325,y:340, w:110,d: 90, type:'room'},
+    {id:116,name:'OFFICE 2',           x:400,y:340, w: 90,d: 80, type:'office'},
+    {id:117,name:'STAFFS LIFT',        x:450,y:335, w: RS.lift.w, d:RS.lift.d, type:'elevator'},
+    {id:118,name:'RAMP UP',            x:480,y:290, w: RS.ramp.w, d:RS.ramp.d, type:'ramp'},
+    {id:119,name:'LADIES WASHROOM',    x:638,y:340, w: 90,d: 75, type:'restroom'},
+    {id:120,name:'CLASSROOM 002',      x:745,y:340, w:115,d: 90, type:'classroom'},
+    {id:121,name:'CLASSROOM 001',      x:845,y:340, w:115,d: 90, type:'classroom'},
+    {id:122,name:'OFFICE 1',           x:900,y:348, w: 90,d: 80, type:'office'},
+    {id:123,name:"PRINCIPAL'S CABIN",  x:990,y:340, w:110,d: 90, type:'office'},
+    {id:124,name:'MAIN CORRIDOR',      x:536,y:400, w:800,d: 45, type:'corridor'},
+    {id:125,name:'MAIN STAGE',         x:502,y:470, w:RS.large.w,d:RS.large.d, type:'room'},
+  ],
+  floor1: [
+    {id:201,name:'GIRLS COMMON ROOM',  x:310,y: 60, w:140,d: 90, type:'room'},
+    {id:202,name:'CLASSROOM 101',      x:470,y: 60, w:120,d: 85, type:'classroom'},
+    {id:203,name:'STAIRCASE UP',       x:458,y: 50, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:204,name:'STAIRCASE DOWN',     x:510,y: 50, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:205,name:'TOILET',             x:740,y:105, w:RS.tiny.w,d:RS.tiny.d, type:'restroom'},
+    {id:206,name:'CLASSROOM 102',      x:860,y: 60, w:120,d: 85, type:'classroom'},
+    {id:207,name:'CLASSROOM 103',      x:1005,y:60, w:115,d: 85, type:'classroom'},
+    {id:208,name:'COMP GRAPHICS LAB',  x:1020,y:155,w:100,d: 80, type:'laboratory'},
+    {id:209,name:'SYS SOFTWARE LAB',   x:1020,y:218,w:100,d: 75, type:'laboratory'},
+    {id:210,name:'ALGORITHM LAB',      x:1020,y:265,w:100,d: 70, type:'laboratory'},
+    {id:211,name:'DBMS LAB',           x:1020,y:310,w:100,d: 70, type:'laboratory'},
+    {id:212,name:'LIFT',               x:858,y:285, w:RS.lift.w,d:RS.lift.d, type:'elevator'},
+    {id:213,name:'FACULTY ROOM',       x:645,y:362, w:110,d: 80, type:'office'},
+    {id:214,name:'DEPT COMP SCIENCE',  x:645,y:415, w:110,d: 80, type:'office'},
+    {id:215,name:'WASHROOM',           x:645,y:465, w: 80,d: 65, type:'restroom'},
+    {id:216,name:'PATHWAY',            x:570,y:252, w:260,d: 45, type:'corridor'},
+    {id:217,name:'RAMP UP',            x:555,y:292, w:RS.ramp.w,d:RS.ramp.d, type:'ramp'},
+    {id:218,name:'RAMP DOWN',          x:608,y:292, w:RS.ramp.w,d:RS.ramp.d, type:'ramp'},
+    {id:219,name:'STAFFS LIFT',        x:500,y:338, w:RS.lift.w,d:RS.lift.d, type:'elevator'},
+    {id:220,name:'FACULTY',            x: 45,y:362, w: 70,d: 85, type:'office'},
+    {id:221,name:'STAIRCASE UP',       x: 82,y:340, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:222,name:'STAIRCASE DOWN',     x:135,y:340, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:223,name:'TOILET',             x:188,y:340, w:RS.tiny.w,d:RS.tiny.d, type:'restroom'},
+    {id:224,name:'DEPT CHEMISTRY',     x:248,y:340, w:110,d: 90, type:'office'},
+    {id:225,name:'CHEMISTRY LAB',      x:248,y:405, w:110,d: 90, type:'laboratory'},
+    {id:226,name:'DEPT PHYSICS',       x:400,y:340, w:110,d: 90, type:'office'},
+    {id:227,name:'PHYSICS LAB',        x:400,y:405, w:110,d: 90, type:'laboratory'},
+    {id:228,name:'COMPUTER CENTRE',    x:862,y:362, w:120,d: 90, type:'laboratory'},
+    {id:229,name:'CENTRAL COMP LAB',   x:1012,y:362,w:115,d: 90, type:'laboratory'},
+    {id:230,name:'CORRIDOR TOP L',     x:400,y:105, w:580,d: 45, type:'corridor'},
+    {id:231,name:'CORRIDOR TOP R',     x:800,y:105, w:420,d: 45, type:'corridor'},
+    {id:232,name:'MAIN CORRIDOR',      x:536,y:425, w:800,d: 45, type:'corridor'},
+  ],
+  floor2: [
+    {id:301,name:'CAD LAB',            x:390,y:112, w:120,d: 90, type:'laboratory'},
+    {id:302,name:'STAIRCASE UP',       x:458,y: 50, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:303,name:'STAIRCASE DOWN',     x:510,y: 50, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:304,name:'TOILET',             x:740,y:105, w:RS.tiny.w,d:RS.tiny.d, type:'restroom'},
+    {id:305,name:'CLASSROOM 203',      x:862,y: 62, w:120,d: 85, type:'classroom'},
+    {id:306,name:'CLASSROOM 204',      x:1005,y:62, w:115,d: 85, type:'classroom'},
+    {id:307,name:'WEB PROG LAB',       x:1018,y:195,w:100,d: 80, type:'laboratory'},
+    {id:308,name:'DATA STRUCT LAB',    x:1018,y:248,w:100,d: 75, type:'laboratory'},
+    {id:309,name:'PROJECT LAB',        x:1018,y:298,w:100,d: 75, type:'laboratory'},
+    {id:310,name:'LIFT',               x:858,y:285, w:RS.lift.w,d:RS.lift.d, type:'elevator'},
+    {id:311,name:'PLACEMENT OFFICE',   x:645,y:375, w:110,d: 85, type:'office'},
+    {id:312,name:'WASHROOM',           x:645,y:465, w: 80,d: 65, type:'restroom'},
+    {id:313,name:'PATHWAY',            x:570,y:252, w:260,d: 45, type:'corridor'},
+    {id:314,name:'RAMP UP',            x:555,y:292, w:RS.ramp.w,d:RS.ramp.d, type:'ramp'},
+    {id:315,name:'RAMP DOWN',          x:608,y:292, w:RS.ramp.w,d:RS.ramp.d, type:'ramp'},
+    {id:316,name:'STAFFS LIFT',        x:500,y:338, w:RS.lift.w,d:RS.lift.d, type:'elevator'},
+    {id:317,name:'FACULTY',            x: 45,y:362, w: 70,d: 85, type:'office'},
+    {id:318,name:'STAIRCASE UP',       x: 82,y:340, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:319,name:'STAIRCASE DOWN',     x:135,y:340, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:320,name:'TOILET',             x:188,y:340, w:RS.tiny.w,d:RS.tiny.d, type:'restroom'},
+    {id:321,name:'BOARD ROOM',         x:242,y:340, w:100,d: 90, type:'room'},
+    {id:322,name:'LAB 1',              x:322,y:340, w: 90,d: 85, type:'laboratory'},
+    {id:323,name:'LAB 2',              x:398,y:340, w: 90,d: 85, type:'laboratory'},
+    {id:324,name:'LAB 3',              x:472,y:340, w: 90,d: 85, type:'laboratory'},
+    {id:325,name:'LAB 4',              x:842,y:340, w: 90,d: 85, type:'laboratory'},
+    {id:326,name:'LAB 5',              x:908,y:340, w: 90,d: 85, type:'laboratory'},
+    {id:327,name:'LAB 6',              x:968,y:340, w: 90,d: 85, type:'laboratory'},
+    {id:328,name:'LAB 7',              x:1022,y:340,w: 90,d: 85, type:'laboratory'},
+    {id:329,name:'LAB 8',              x:1022,y:400,w: 90,d: 85, type:'laboratory'},
+    {id:330,name:'CORRIDOR TOP L',     x:400,y:105, w:540,d: 45, type:'corridor'},
+    {id:331,name:'CORRIDOR TOP R',     x:800,y:105, w:420,d: 45, type:'corridor'},
+    {id:332,name:'MAIN CORRIDOR',      x:536,y:425, w:800,d: 45, type:'corridor'},
+  ],
+  floor3: [
+    {id:401,name:'CLASSROOM 301',      x:362,y:145, w:115,d: 90, type:'classroom'},
+    {id:402,name:'CLASSROOM 302',      x:472,y:145, w:115,d: 90, type:'classroom'},
+    {id:403,name:'STAIRCASE UP',       x:458,y: 50, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:404,name:'STAIRCASE DOWN',     x:510,y: 50, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:405,name:'TOILET',             x:740,y:105, w:RS.tiny.w,d:RS.tiny.d, type:'restroom'},
+    {id:406,name:'CLASSROOM 303',      x:862,y: 62, w:120,d: 85, type:'classroom'},
+    {id:407,name:'CLASSROOM 304',      x:1005,y:62, w:115,d: 85, type:'classroom'},
+    {id:408,name:'CLS LAB',            x:1018,y:185,w:100,d: 80, type:'laboratory'},
+    {id:409,name:'HDL LAB',            x:1018,y:242,w:100,d: 75, type:'laboratory'},
+    {id:410,name:'SSOSC LAB',          x:1018,y:292,w:100,d: 75, type:'laboratory'},
+    {id:411,name:'LIFT',               x:858,y:285, w:RS.lift.w,d:RS.lift.d, type:'elevator'},
+    {id:412,name:'FACULTY ROOM',       x:645,y:360, w:110,d: 85, type:'office'},
+    {id:413,name:'DEPT ECE',           x:645,y:415, w:110,d: 85, type:'office'},
+    {id:414,name:'WASHROOM',           x:645,y:465, w: 80,d: 65, type:'restroom'},
+    {id:415,name:'PATHWAY',            x:570,y:252, w:260,d: 45, type:'corridor'},
+    {id:416,name:'RAMP UP',            x:555,y:292, w:RS.ramp.w,d:RS.ramp.d, type:'ramp'},
+    {id:417,name:'RAMP DOWN',          x:608,y:292, w:RS.ramp.w,d:RS.ramp.d, type:'ramp'},
+    {id:418,name:'STAFFS LIFT',        x:500,y:338, w:RS.lift.w,d:RS.lift.d, type:'elevator'},
+    {id:419,name:'FACULTY',            x: 45,y:362, w: 70,d: 85, type:'office'},
+    {id:420,name:'STAIRCASE UP',       x: 82,y:340, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:421,name:'STAIRCASE DOWN',     x:135,y:340, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:422,name:'TOILET',             x:188,y:340, w:RS.tiny.w,d:RS.tiny.d, type:'restroom'},
+    {id:423,name:'DSP LAB',            x:252,y:360, w:110,d: 90, type:'laboratory'},
+    {id:424,name:'MICROPROCESSOR LAB', x:252,y:410, w:110,d: 90, type:'laboratory'},
+    {id:425,name:'ADV COMM LAB',       x:400,y:362, w:120,d: 90, type:'laboratory'},
+    {id:426,name:'LOGISTICS LAB',      x:865,y:350, w:115,d: 90, type:'laboratory'},
+    {id:427,name:'ANALOG ELEC LAB',    x:865,y:402, w:115,d: 90, type:'laboratory'},
+    {id:428,name:'PROJECT LAB F3',     x:865,y:448, w:115,d: 80, type:'laboratory'},
+    {id:429,name:'CORRIDOR TOP L',     x:400,y:105, w:540,d: 45, type:'corridor'},
+    {id:430,name:'CORRIDOR TOP R',     x:800,y:105, w:420,d: 45, type:'corridor'},
+    {id:431,name:'MAIN CORRIDOR',      x:536,y:425, w:800,d: 45, type:'corridor'},
+  ],
+  floor4: [
+    {id:501,name:'CLASSROOM 404',      x:348,y:145, w:115,d: 90, type:'classroom'},
+    {id:502,name:'CLASSROOM 405',      x:472,y:145, w:115,d: 90, type:'classroom'},
+    {id:503,name:'STAIRCASE UP',       x:458,y: 50, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:504,name:'STAIRCASE DOWN',     x:510,y: 50, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:505,name:'TOILET',             x:740,y:105, w:RS.tiny.w,d:RS.tiny.d, type:'restroom'},
+    {id:506,name:'CLASSROOM 406',      x:862,y: 62, w:120,d: 85, type:'classroom'},
+    {id:507,name:'CLASSROOM 407',      x:1005,y:62, w:115,d: 85, type:'classroom'},
+    {id:508,name:'AIML LAB',           x:1018,y:205,w:105,d: 90, type:'laboratory'},
+    {id:509,name:'LIFT',               x:858,y:285, w:RS.lift.w,d:RS.lift.d, type:'elevator'},
+    {id:510,name:'FACULTY ROOM',       x:645,y:360, w:110,d: 85, type:'office'},
+    {id:511,name:'DEPT AI & ISE',      x:645,y:415, w:110,d: 85, type:'office'},
+    {id:512,name:'WASHROOM',           x:645,y:465, w: 80,d: 65, type:'restroom'},
+    {id:513,name:'PATHWAY',            x:570,y:252, w:260,d: 45, type:'corridor'},
+    {id:514,name:'RAMP UP',            x:555,y:292, w:RS.ramp.w,d:RS.ramp.d, type:'ramp'},
+    {id:515,name:'RAMP DOWN',          x:608,y:292, w:RS.ramp.w,d:RS.ramp.d, type:'ramp'},
+    {id:516,name:'STAFFS LIFT',        x:500,y:338, w:RS.lift.w,d:RS.lift.d, type:'elevator'},
+    {id:517,name:'CYBER FORENSICS',    x: 42,y:360, w: 90,d: 90, type:'laboratory'},
+    {id:518,name:'STAIRCASE UP',       x: 82,y:340, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:519,name:'STAIRCASE DOWN',     x:135,y:340, w:RS.stair.w,d:RS.stair.d, type:'staircase'},
+    {id:520,name:'TOILET',             x:188,y:340, w:RS.tiny.w,d:RS.tiny.d, type:'restroom'},
+    {id:521,name:'FACULTY DEPT CBS',   x:252,y:362, w:110,d: 90, type:'office'},
+    {id:522,name:'CLASSROOM 401',      x:352,y:362, w:110,d: 90, type:'classroom'},
+    {id:523,name:'CLASSROOM 402',      x:462,y:362, w:110,d: 90, type:'classroom'},
+    {id:524,name:'AUDITORIUM',         x:958,y:392, w:160,d:130, type:'room'},
+    {id:525,name:'CORRIDOR TOP L',     x:400,y:105, w:540,d: 45, type:'corridor'},
+    {id:526,name:'CORRIDOR TOP R',     x:800,y:105, w:420,d: 45, type:'corridor'},
+    {id:527,name:'MAIN CORRIDOR',      x:536,y:425, w:800,d: 45, type:'corridor'},
+  ],
+};
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 3 · EDGE & VERTICAL CONNECTOR DATA
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const FLOOR_EDGES = {
+  ground:[[101,102,120],[101,103,100],[102,103,90],[102,104,160],[104,105,145],[105,106,180],[106,107,140],[107,108,180],[108,104,140],[108,109,90],[103,109,180],[109,118,60],[118,117,50],[117,116,65],[116,115,70],[115,114,70],[114,113,60],[113,112,55],[112,111,55],[111,110,50],[117,119,200],[119,120,115],[120,121,95],[121,122,65],[122,123,95],[119,124,70],[124,125,80],[109,124,150],[118,109,60]],
+  floor1:[[201,230,130],[202,230,80],[203,230,60],[204,230,70],[230,216,150],[205,231,80],[206,231,150],[207,231,180],[208,231,60],[209,231,70],[210,231,80],[211,231,90],[212,231,100],[212,216,100],[216,230,150],[216,231,230],[216,213,110],[216,217,60],[216,232,180],[213,214,50],[214,215,65],[213,216,110],[217,218,50],[217,219,70],[217,232,130],[218,232,120],[219,232,60],[220,232,50],[221,232,55],[222,232,60],[223,232,65],[224,225,60],[224,232,70],[226,227,60],[226,232,80],[228,232,100],[229,232,150]],
+  floor2:[[301,330,100],[302,330,60],[303,330,60],[330,313,150],[304,331,80],[305,331,150],[306,331,180],[307,331,70],[308,331,80],[309,331,90],[310,331,100],[310,313,100],[313,330,150],[313,331,230],[313,311,120],[313,314,60],[313,332,180],[311,312,100],[311,313,120],[314,315,50],[314,316,70],[314,332,130],[315,332,120],[316,332,60],[317,332,50],[318,332,55],[319,332,60],[320,332,65],[321,332,70],[322,332,75],[323,332,80],[324,332,85],[325,332,100],[326,332,110],[327,332,120],[328,332,130],[329,332,140]],
+  floor3:[[401,429,130],[402,429,60],[403,429,60],[404,429,70],[429,415,150],[405,430,80],[406,430,150],[407,430,180],[408,430,70],[409,430,80],[410,430,90],[411,430,100],[411,415,100],[415,429,150],[415,430,230],[415,412,110],[415,416,60],[415,431,180],[412,413,55],[413,414,60],[412,415,110],[416,417,50],[416,418,70],[416,431,130],[417,431,120],[418,431,60],[419,431,50],[420,431,55],[421,431,60],[422,431,65],[423,424,60],[423,431,70],[425,431,80],[426,431,100],[427,431,110],[428,431,120]],
+  floor4:[[501,525,130],[502,525,60],[503,525,60],[504,525,70],[525,513,150],[505,526,80],[506,526,150],[507,526,180],[508,526,70],[509,526,100],[509,513,100],[513,525,150],[513,526,230],[513,510,110],[513,514,60],[513,527,180],[510,511,55],[511,512,60],[510,513,110],[514,515,50],[514,516,70],[514,527,130],[515,527,120],[516,527,60],[517,527,50],[518,527,55],[519,527,60],[520,527,65],[521,527,70],[522,527,80],[523,527,90],[524,527,130]],
+};
+
+const VERT_EDGES = {
+  stair:[
+    ['ground:102','floor1:203',50],['floor1:203','floor2:302',50],['floor2:302','floor3:403',50],['floor3:403','floor4:503',50],
+    ['ground:111','floor1:221',50],['floor1:221','floor2:318',50],['floor2:318','floor3:420',50],['floor3:420','floor4:518',50],
+  ],
+  elevator:[
+    ['ground:108','floor1:212',20],['ground:108','floor2:310',40],['ground:108','floor3:411',60],['ground:108','floor4:509',80],
+    ['floor1:212','floor2:310',20],['floor1:212','floor3:411',40],['floor1:212','floor4:509',60],
+    ['floor2:310','floor3:411',20],['floor2:310','floor4:509',40],['floor3:411','floor4:509',20],
+    ['ground:117','floor1:219',20],['ground:117','floor2:316',40],['ground:117','floor3:418',60],['ground:117','floor4:516',80],
+    ['floor1:219','floor2:316',20],['floor1:219','floor3:418',40],['floor1:219','floor4:516',60],
+    ['floor2:316','floor3:418',20],['floor2:316','floor4:516',40],['floor3:418','floor4:516',20],
+  ],
+  ramp:[
+    ['ground:118','floor1:217',60],['floor1:217','floor2:314',60],['floor2:314','floor3:416',60],['floor3:416','floor4:514',60],
+  ],
+};
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 4 · NODE MAP & GRAPH ENGINE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const NODE_MAP = {};
+for (const [fl, rooms] of Object.entries(FLOOR_ROOMS)) {
+  for (const r of rooms) { NODE_MAP[`${fl}:${r.id}`] = { ...r, floor:fl }; }
+}
+
+let G = {};
+function buildGraph(mode) {
+  G = {};
+  for (const [fl, edges] of Object.entries(FLOOR_EDGES)) {
+    for (const [s, t, w] of edges) {
+      const sk = `${fl}:${s}`, tk = `${fl}:${t}`;
+      (G[sk] = G[sk]||[]).push({to:tk, w});
+      (G[tk] = G[tk]||[]).push({to:sk, w});
+    }
+  }
+  for (const [a, b, w] of (VERT_EDGES[mode]||[])) {
+    (G[a] = G[a]||[]).push({to:b, w});
+    (G[b] = G[b]||[]).push({to:a, w});
+  }
+}
+function dijkstra(src, dst) {
+  if (!NODE_MAP[src]||!NODE_MAP[dst]) return null;
+  const dist={[src]:0}, prev={}, vis=new Set(), pq=[[0,src]];
+  while (pq.length) {
+    pq.sort((a,b)=>a[0]-b[0]);
+    const [d,u] = pq.shift();
+    if (vis.has(u)) continue; vis.add(u); if (u===dst) break;
+    for (const {to,w} of (G[u]||[])) {
+      const nd=d+w;
+      if (nd<(dist[to]??Infinity)) { dist[to]=nd; prev[to]=u; pq.push([nd,to]); }
+    }
+  }
+  if (dist[dst]===undefined) return null;
+  const path=[]; let c=dst;
+  while(c){path.unshift(c);c=prev[c];}
+  return {path, dist:Math.round(dist[dst])};
+}
+buildGraph('stair');
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 5 · COORDINATE MAPPING
+   Convert pixel-space room data → Three.js world coordinates.
+   Building is centred at world origin (0,0,0).
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const SX = WORLD_W / MAP_W;   // horizontal scale: pixels → world units
+const SZ = WORLD_D / MAP_D;   // depth scale
+
+function roomWorld(room, flKey) {
+  /* Returns { cx, y, cz, rw, rd } — centre position and room dimensions */
+  const cx = room.x * SX - WORLD_W / 2;
+  const cz = room.y * SZ - WORLD_D / 2;
+  const rw = room.w * SX;
+  const rd = room.d * SZ;
+  const y  = FM[flKey].z * FLOOR_H;
+  return { cx, y, cz, rw, rd };
+}
+
+function nodeCenter(key) {
+  /* Returns THREE.Vector3 for the centre of a room at floor level */
+  const n = NODE_MAP[key];
+  if (!n) return new THREE.Vector3();
+  const r = roomWorld(n, n.floor);
+  return new THREE.Vector3(r.cx, r.y + WALL_H * 0.5, r.cz);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 6 · THREE.JS RENDERER & CAMERA
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const vpEl  = document.getElementById('VP');
+const cvEl  = document.getElementById('C3D');
+
+const renderer = new THREE.WebGLRenderer({ canvas:cvEl, antialias:true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x192540, 1);   // deep blueprint navy background
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type    = THREE.PCFSoftShadowMap;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x192540);
+scene.fog = new THREE.Fog(0x192540, 28, 55);
+
+/* Camera — PerspectiveCamera with sensible FOV for architectural views */
+const cam = new THREE.PerspectiveCamera(38, 1, 0.05, 120);
+const CAM = { r:14, theta:0.4, phi:0.75 };   // spherical orbit params
+const camTarget = new THREE.Vector3(0, 0, 0);
+
+function applyCamera() {
+  const sinP = Math.sin(CAM.phi);
+  cam.position.set(
+    camTarget.x + CAM.r * sinP * Math.sin(CAM.theta),
+    camTarget.y + CAM.r * Math.cos(CAM.phi),
+    camTarget.z + CAM.r * sinP * Math.cos(CAM.theta)
+  );
+  cam.lookAt(camTarget);
+}
+
+/* Lighting — professional architectural look */
+const ambLight = new THREE.AmbientLight(0xffffff, 0.45);
+scene.add(ambLight);
+
+const sunLight = new THREE.DirectionalLight(0xfff4e0, 1.1);
+sunLight.position.set(15, 22, 10);
+sunLight.castShadow = true;
+sunLight.shadow.mapSize.set(1024, 1024);
+sunLight.shadow.camera.left = -16; sunLight.shadow.camera.right = 16;
+sunLight.shadow.camera.top  =  10; sunLight.shadow.camera.bottom = -10;
+sunLight.shadow.camera.near = 0.5; sunLight.shadow.camera.far   = 60;
+sunLight.shadow.bias = -0.001;
+scene.add(sunLight);
+
+const fillLight = new THREE.DirectionalLight(0xbfd8ff, 0.4);
+fillLight.position.set(-10, 12, -8);
+scene.add(fillLight);
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 7 · CANVAS LABEL SPRITES
+   Billboard text labels that always face camera — crisp at any angle.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function makeTextSprite(text, opts = {}) {
+  const {
+    bg      = 'rgba(255,255,255,0.92)',
+    fg      = '#1a2340',
+    fs      = 11,
+    bold    = false,
+    border  = 'rgba(0,0,0,0.15)',
+    sc      = 1.0,
+    pill    = true,
+  } = opts;
+
+  const cv  = document.createElement('canvas');
+  const ctx = cv.getContext('2d');
+  const DPR = 2;  // render at 2× for crispness
+  const font = `${bold?'700 ':'500 '}${fs*DPR}px "IBM Plex Sans",sans-serif`;
+
+  ctx.font = font;
+  const textW = ctx.measureText(text).width;
+  const pad   = 5 * DPR;
+  const cw = Math.ceil(textW + pad * 2);
+  const ch = Math.ceil((fs + 6) * DPR);
+  cv.width = cw; cv.height = ch;
+
+  /* Draw background */
+  if (pill) {
+    const r = ch * 0.3;
+    ctx.fillStyle   = bg;
+    ctx.strokeStyle = border;
+    ctx.lineWidth   = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(r, 0); ctx.lineTo(cw-r, 0);
+    ctx.quadraticCurveTo(cw,0,cw,r);
+    ctx.lineTo(cw,ch-r); ctx.quadraticCurveTo(cw,ch,cw-r,ch);
+    ctx.lineTo(r,ch); ctx.quadraticCurveTo(0,ch,0,ch-r);
+    ctx.lineTo(0,r); ctx.quadraticCurveTo(0,0,r,0);
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+  } else {
+    ctx.fillStyle = bg; ctx.fillRect(0,0,cw,ch);
+  }
+
+  /* Draw text */
+  ctx.font = font; ctx.fillStyle = fg;
+  ctx.textBaseline = 'middle';
+  ctx.fillText(text, pad, ch/2);
+
+  const tex = new THREE.CanvasTexture(cv);
+  tex.minFilter = tex.magFilter = THREE.LinearFilter;
+
+  const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+    map: tex, transparent:true, depthTest:false, depthWrite:false,
+  }));
+  const aspect = cw / ch;
+  sp.scale.set(aspect * 0.28 * sc, 0.28 * sc, 1);
+  return sp;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 8 · ARCHITECTURAL BLUEPRINT SCENE BUILDER
+   Builds proper rooms as extruded boxes with walls, realistic stairs,
+   elevator shafts, ramp geometry, floor slabs, and labels.
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+const floorGroups  = {};   // floorKey → THREE.Group
+const roomMeshes   = {};   // "floor:id" → main room mesh (for raycasting)
+const roomOrigMat  = {};   // original material per room (for reset after highlight)
+const pathObjs     = [];   // route visuals
+
+/** Create a staircase with realistic steps */
+function makeStaircase(rw, rd, fy, col) {
+  const grp = new THREE.Group();
+  const steps = 8;
+  const sh    = WALL_H / steps;   // step height
+  const sd    = rd / steps;       // step depth
+  const mat   = new THREE.MeshStandardMaterial({ color:col, roughness:0.7, metalness:0.05 });
+  for (let i = 0; i < steps; i++) {
+    const box = new THREE.Mesh(
+      new THREE.BoxGeometry(rw * 0.85, sh, sd * 0.9),
+      mat
+    );
+    box.position.set(0, fy + sh * i + sh/2, -rd/2 + sd * i + sd/2);
+    box.castShadow = true;
+    grp.add(box);
+  }
+  /* Handrail posts */
+  const railMat = new THREE.MeshStandardMaterial({ color:0x94a3b8, roughness:0.5, metalness:0.3 });
+  [-rw*0.35, rw*0.35].forEach(rx => {
+    const rail = new THREE.Mesh(new THREE.BoxGeometry(0.015, WALL_H, 0.015), railMat);
+    rail.position.set(rx, fy + WALL_H*0.5, 0);
+    grp.add(rail);
+    /* Top handrail bar */
+    const bar = new THREE.Mesh(new THREE.BoxGeometry(0.015, 0.015, rd * 0.85), railMat);
+    bar.position.set(rx, fy + WALL_H, 0);
+    grp.add(bar);
+  });
+  return grp;
+}
+
+/** Create elevator shaft with door frame */
+function makeElevator(rw, rd, fy, col) {
+  const grp = new THREE.Group();
+  const mat  = new THREE.MeshStandardMaterial({ color:col, roughness:0.4, metalness:0.25, emissive:col, emissiveIntensity:0.06 });
+  /* Shaft box */
+  const shaft = new THREE.Mesh(new THREE.BoxGeometry(rw*0.85, WALL_H*0.9, rd*0.85), mat);
+  shaft.position.set(0, fy + WALL_H*0.45, 0); shaft.castShadow=true; grp.add(shaft);
+  /* Door frame */
+  const dMat = new THREE.MeshStandardMaterial({ color:0xd1d5db, roughness:0.5, metalness:0.4 });
+  const dw = rw * 0.45, dh = WALL_H * 0.72;
+  const dframe = new THREE.Mesh(new THREE.BoxGeometry(dw + 0.04, dh + 0.02, 0.015), dMat);
+  dframe.position.set(0, fy + dh/2 + 0.01, rd*0.43); grp.add(dframe);
+  const dpanel = new THREE.Mesh(new THREE.BoxGeometry(dw - 0.01, dh - 0.01, 0.008),
+    new THREE.MeshStandardMaterial({color:0x94a3b8, metalness:0.6, roughness:0.3}));
+  dpanel.position.set(0, fy + dh/2 + 0.01, rd*0.43 + 0.01); grp.add(dpanel);
+  /* Indicator light at top */
+  const ind = new THREE.Mesh(new THREE.SphereGeometry(0.015, 8, 6),
+    new THREE.MeshStandardMaterial({color:col, emissive:col, emissiveIntensity:2.5}));
+  ind.position.set(0, fy + WALL_H * 0.95, rd*0.42); grp.add(ind);
+  return grp;
+}
+
+/** Create ramp with a proper slope */
+function makeRamp(rw, rd, fy, col) {
+  const grp = new THREE.Group();
+  /* Ramp surface — angled box via rotation */
+  const rampGeo = new THREE.BoxGeometry(rw * 0.85, 0.04, rd * 0.9);
+  const rampMesh = new THREE.Mesh(rampGeo,
+    new THREE.MeshStandardMaterial({ color:col, roughness:0.65, metalness:0.05 }));
+  rampMesh.position.set(0, fy + WALL_H * 0.5, 0);
+  rampMesh.rotation.x = -Math.atan(WALL_H / (rd * 0.85));   // slope angle
+  rampMesh.castShadow = true;
+  grp.add(rampMesh);
+  /* Side walls */
+  const swMat = new THREE.MeshStandardMaterial({color:col, transparent:true, opacity:0.4});
+  [-rw*0.43, rw*0.43].forEach(rx => {
+    const sw = new THREE.Mesh(new THREE.BoxGeometry(0.015, WALL_H, rd * 0.85), swMat);
+    sw.position.set(rx, fy + WALL_H/2, 0); grp.add(sw);
+  });
+  return grp;
+}
+
+/** Add architect-style step hatching lines inside staircase footprint (2D plan hint) */
+function makeStairHatch(rw, rd, fy, col) {
+  const grp = new THREE.Group();
+  const lineMat = new THREE.LineBasicMaterial({ color:col, transparent:true, opacity:0.55 });
+  const steps = 7;
+  for (let i = 1; i <= steps; i++) {
+    const z = -rd/2 + (rd / steps) * i;
+    const pts = [
+      new THREE.Vector3(-rw/2, fy, z),
+      new THREE.Vector3( rw/2, fy, z),
+    ];
+    grp.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lineMat));
+  }
+  return grp;
+}
+
+function buildScene() {
+  /* ─── Floor-level ground plane ─── */
+  const groundMesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(WORLD_W+2, WORLD_D+2),
+    new THREE.MeshStandardMaterial({ color:0x111827, roughness:0.9 })
+  );
+  groundMesh.rotation.x = -Math.PI/2;
+  groundMesh.position.y = -0.05;
+  groundMesh.receiveShadow = true;
+  scene.add(groundMesh);
+
+  for (const [fk, fm] of Object.entries(FM)) {
+    const grp = new THREE.Group();
+    grp.name  = fk;
+    scene.add(grp);
+    floorGroups[fk] = grp;
+
+    const fy = fm.z * FLOOR_H;   // Y position of floor surface
+
+    /* ── Floor slab ── */
+    const slabMat = new THREE.MeshStandardMaterial({
+      color: 0xf1f5f9, roughness: 0.88, metalness: 0,
+    });
+    const slab = new THREE.Mesh(new THREE.BoxGeometry(WORLD_W, SLAB_T, WORLD_D), slabMat);
+    slab.position.set(0, fy - SLAB_T/2, 0);
+    slab.receiveShadow = true;
+    grp.add(slab);
+
+    /* Floor slab outline */
+    const slabEdge = new THREE.LineSegments(
+      new THREE.EdgesGeometry(new THREE.BoxGeometry(WORLD_W, SLAB_T, WORLD_D)),
+      new THREE.LineBasicMaterial({ color:fm.col3d, transparent:true, opacity:0.7 })
+    );
+    slabEdge.position.copy(slab.position);
+    grp.add(slabEdge);
+
+    /* ── Floor colour band on left edge ── */
+    const band = new THREE.Mesh(
+      new THREE.BoxGeometry(0.05, SLAB_T + 0.05, WORLD_D),
+      new THREE.MeshStandardMaterial({ color:fm.col3d, roughness:0.6, emissive:fm.col3d, emissiveIntensity:0.15 })
+    );
+    band.position.set(-WORLD_W/2 - 0.025, fy - SLAB_T/2, 0);
+    grp.add(band);
+
+    /* ── Structural columns at building corners ── */
+    const colMat = new THREE.MeshStandardMaterial({
+      color: fm.col3d, roughness: 0.55, metalness: 0.15,
+      transparent:true, opacity: 0.35,
+    });
+    const colGeo = new THREE.BoxGeometry(0.12, FLOOR_H * 0.95, 0.12);
+    [[-WORLD_W/2+0.06, fy-FLOOR_H*0.475, -WORLD_D/2+0.06],
+     [ WORLD_W/2-0.06, fy-FLOOR_H*0.475, -WORLD_D/2+0.06],
+     [-WORLD_W/2+0.06, fy-FLOOR_H*0.475,  WORLD_D/2-0.06],
+     [ WORLD_W/2-0.06, fy-FLOOR_H*0.475,  WORLD_D/2-0.06],
+    ].forEach(([cx,cy,cz]) => {
+      const col = new THREE.Mesh(colGeo, colMat);
+      col.position.set(cx,cy,cz);
+      grp.add(col);
+    });
+
+    /* ── ROOMS — the key blueprint change ── */
+    for (const room of FLOOR_ROOMS[fk]) {
+      const key = `${fk}:${room.id}`;
+      const { cx, y, cz, rw, rd } = roomWorld(room, fk);
+      const rt = RTYPE[room.type] || RTYPE.room;
+
+      let roomGroup = new THREE.Group();
+      roomGroup.position.set(cx, 0, cz);
+      grp.add(roomGroup);
+
+      /* Special geometry for staircases, lifts, ramps */
+      if (room.type === 'staircase') {
+        const sg = makeStaircase(rw, rd, fy, rt.c3d);
+        roomGroup.add(sg);
+        /* Hatch overlay at floor level */
+        roomGroup.add(makeStairHatch(rw, rd, fy + 0.01, rt.c3d));
+        /* Perimeter box outline */
+        const outline = new THREE.LineSegments(
+          new THREE.EdgesGeometry(new THREE.BoxGeometry(rw, WALL_H, rd)),
+          new THREE.LineBasicMaterial({ color:rt.c3d, transparent:true, opacity:0.8 })
+        );
+        outline.position.set(0, fy + WALL_H/2, 0); roomGroup.add(outline);
+
+      } else if (room.type === 'elevator') {
+        const eg = makeElevator(rw, rd, fy, rt.c3d);
+        roomGroup.add(eg);
+        const outline = new THREE.LineSegments(
+          new THREE.EdgesGeometry(new THREE.BoxGeometry(rw, WALL_H, rd)),
+          new THREE.LineBasicMaterial({ color:rt.c3d, transparent:true, opacity:0.8 })
+        );
+        outline.position.set(0, fy + WALL_H/2, 0); roomGroup.add(outline);
+
+      } else if (room.type === 'ramp') {
+        const rg = makeRamp(rw, rd, fy, rt.c3d);
+        roomGroup.add(rg);
+        const outline = new THREE.LineSegments(
+          new THREE.EdgesGeometry(new THREE.BoxGeometry(rw, WALL_H, rd)),
+          new THREE.LineBasicMaterial({ color:rt.c3d, transparent:true, opacity:0.6 })
+        );
+        outline.position.set(0, fy + WALL_H/2, 0); roomGroup.add(outline);
+
+      } else if (room.type === 'corridor') {
+        /* Corridors: flat slab, no walls, translucent */
+        const corrH = 0.04;
+        const corrMesh = new THREE.Mesh(
+          new THREE.BoxGeometry(rw, corrH, rd),
+          new THREE.MeshStandardMaterial({
+            color: rt.fill, roughness:0.9, metalness:0,
+            transparent:true, opacity:0.55,
+          })
+        );
+        corrMesh.position.set(0, fy + corrH/2, 0);
+        corrMesh.receiveShadow = true;
+        roomGroup.add(corrMesh);
+        corrMesh.userData = { key, name:room.name, type:room.type, floor:fk };
+        roomMeshes[key] = corrMesh;
+
+        /* Corridor outline */
+        const cedge = new THREE.LineSegments(
+          new THREE.EdgesGeometry(new THREE.BoxGeometry(rw, corrH, rd)),
+          new THREE.LineBasicMaterial({ color:rt.c3d, transparent:true, opacity:0.45 })
+        );
+        cedge.position.set(0, fy + corrH/2, 0); roomGroup.add(cedge);
+
+      } else {
+        /* Standard room: extruded box with flat roof, solid walls */
+        const roomH = WALL_H * 0.92;
+        const roomMat = new THREE.MeshStandardMaterial({
+          color: rt.fill,
+          roughness: 0.82,
+          metalness: 0.0,
+          transparent: true,
+          opacity: 0.78,
+          emissive: new THREE.Color(rt.fill),
+          emissiveIntensity: rt.emI,
+        });
+        const roomMesh = new THREE.Mesh(
+          new THREE.BoxGeometry(rw * 0.96, roomH, rd * 0.96),
+          roomMat
+        );
+        roomMesh.position.set(0, fy + roomH/2, 0);
+        roomMesh.castShadow = true;
+        roomMesh.receiveShadow = true;
+        roomMesh.userData = { key, name:room.name, type:room.type, floor:fk };
+        roomGroup.add(roomMesh);
+        roomMeshes[key] = roomMesh;
+        roomOrigMat[key] = roomMesh.material;
+
+        /* Room outline — wall lines */
+        const outline = new THREE.LineSegments(
+          new THREE.EdgesGeometry(new THREE.BoxGeometry(rw, WALL_H, rd)),
+          new THREE.LineBasicMaterial({
+            color: fm.col3d,
+            transparent:true,
+            opacity: 0.65,
+          })
+        );
+        outline.position.set(0, fy + WALL_H/2, 0);
+        roomGroup.add(outline);
+
+        /* Door gap indicator (small notch on one wall) */
+        if (rw > 0.4 && rd > 0.4) {
+          const doorW = Math.min(rw * 0.28, 0.4);
+          const doorH = WALL_H * 0.7;
+          const doorMat = new THREE.MeshStandardMaterial({ color:0x0f172a, transparent:true, opacity:0.6 });
+          const door = new THREE.Mesh(new THREE.BoxGeometry(doorW, doorH, 0.02), doorMat);
+          door.position.set(0, fy + doorH/2, rd * 0.48);
+          roomGroup.add(door);
+        }
+      }
+
+      /* ── Room label (text sprite) ── */
+      const rt2 = RTYPE[room.type] || RTYPE.room;
+      const isSpecial = ['staircase','elevator','ramp'].includes(room.type);
+      const isCorr    = room.type === 'corridor';
+
+      if (!isCorr) {
+        const shortName = room.name.length > 16 ? room.name.slice(0,14)+'\u2026' : room.name;
+        const lbl = makeTextSprite(shortName, {
+          bg: isSpecial ? rt2.css + 'ee' : 'rgba(255,255,255,0.92)',
+          fg: isSpecial ? '#ffffff' : '#1a2340',
+          fs: isSpecial ? 10 : 9,
+          bold: isSpecial,
+          sc: isSpecial ? 1.1 : 0.88,
+        });
+        lbl.position.set(cx, fy + WALL_H + 0.18, cz);
+        lbl.userData = { isLabel:true };
+        grp.add(lbl);
+      }
+    }
+
+    /* ── Floor identification banner ── */
+    const floorBanner = makeTextSprite(fm.lbl + ' — ' + fm.sh, {
+      bg: fm.colCSS + 'ee',
+      fg: '#ffffff',
+      fs: 12,
+      bold: true,
+      sc: 1.65,
+    });
+    floorBanner.position.set(-WORLD_W/2 + 1.2, fy + 0.3, WORLD_D/2 - 0.4);
+    grp.add(floorBanner);
+
+    /* ── Navigation path edges (faint lines showing walkable connections) ── */
+    for (const [s, t] of FLOOR_EDGES[fk]) {
+      const rs = FLOOR_ROOMS[fk].find(r => r.id === s);
+      const rt = FLOOR_ROOMS[fk].find(r => r.id === t);
+      if (!rs || !rt) continue;
+      const ws = roomWorld(rs, fk), wt = roomWorld(rt, fk);
+      const pts = [
+        new THREE.Vector3(ws.cx, fy + 0.06, ws.cz),
+        new THREE.Vector3(wt.cx, fy + 0.06, wt.cz),
+      ];
+      const line = new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(pts),
+        new THREE.LineBasicMaterial({ color:fm.col3d, transparent:true, opacity:0.15 })
+      );
+      grp.add(line);
+    }
+  }
+
+  /* ── Vertical connector shafts (visible lines linking floors) ── */
+  const seen = new Set();
+  for (const connList of Object.values(VERT_EDGES)) {
+    for (const [a, b] of connList) {
+      const k = [a,b].sort().join('|');
+      if (seen.has(k)) continue; seen.add(k);
+      const na = NODE_MAP[a], nb = NODE_MAP[b];
+      if (!na || !nb) continue;
+      const wa = roomWorld(na, na.floor), wb = roomWorld(nb, nb.floor);
+      const col = (na.type==='elevator'||nb.type==='elevator') ? 0xca8a04
+                : (na.type==='ramp'    ||nb.type==='ramp')     ? 0xea580c
+                : 0x0891b2;
+      const shaft = new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(wa.cx, wa.y, wa.cz),
+          new THREE.Vector3(wb.cx, wb.y, wb.cz),
+        ]),
+        new THREE.LineBasicMaterial({ color:col, transparent:true, opacity:0.38 })
+      );
+      scene.add(shaft);
+    }
+  }
+}
+buildScene();
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 9 · FLOOR VISIBILITY & ROOM HIGHLIGHT SYSTEM
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DEFAULT STATE  : 3D VIEW, all floors fully visible (like screenshot)
+   ROUTE ACTIVE   : only rooms on the path are bright; every other room
+                    across ALL floors is dimmed — room-level, not floor-level
+   RST BUTTON     : returns to full 3D building view (default state)
+   2D PLAN button : single-floor flat view as before
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+let curFloor    = 'ground';
+let viewMode    = '3d';        // ← DEFAULT is 3D (full building)
+let isRouteActive = false;     // true while a route path is drawn
+let routeKeys   = new Set();   // node keys that are ON the current route
+
+/* Store original material values once so we can always restore them */
+function storeOrig(mesh) {
+  if (!mesh || !mesh.material) return;
+  const m = mesh.material;
+  if (m._origStored) return;
+  m._origStored        = true;
+  m._origOpacity       = m.opacity;
+  m._origColor         = m.color.getHex();
+  m._origEmissive      = m.emissive ? m.emissive.getHex() : 0x000000;
+  m._origEmissiveInt   = m.emissiveIntensity ?? 0;
+}
+
+/* Restore a mesh material to its original values */
+function restoreRoom(key) {
+  const mesh = roomMeshes[key];
+  if (!mesh || !mesh.material) return;
+  const m = mesh.material;
+  if (!m._origStored) return;
+  m.color.setHex(m._origColor);
+  m.emissive.setHex(m._origEmissive);
+  m.emissiveIntensity = m._origEmissiveInt;
+  m.opacity           = m._origOpacity;
+  m.transparent       = m._origOpacity < 1.0;
+}
+
+/* ── Full 3D view: ALL floors and ALL rooms at full brightness ── */
+function showFullBuilding() {
+  for (const [fk, grp] of Object.entries(floorGroups)) {
+    grp.visible = true;
+    grp.traverse(obj => {
+      if (!obj.material || obj.userData.isLabel) return;
+      const m = obj.material; if (Array.isArray(m)) return;
+      /* Store originals on first encounter */
+      if (obj.isMesh && m._origStored === undefined) {
+        m._origStored      = true;
+        m._origOpacity     = m.opacity;
+        m._origColor       = m.color ? m.color.getHex() : 0xffffff;
+        m._origEmissive    = m.emissive ? m.emissive.getHex() : 0x000000;
+        m._origEmissiveInt = m.emissiveIntensity ?? 0;
+      }
+      m.transparent = true;
+      if (obj.isSprite)                        m.opacity = 1.0;
+      else if (obj.isLine||obj.isLineSegments) m.opacity = m._origOpacity ?? 0.65;
+      else if (obj.isMesh)                     m.opacity = m._origOpacity ?? 0.78;
+      if (m.emissiveIntensity !== undefined)   m.emissiveIntensity = m._origEmissiveInt ?? 0;
+    });
+  }
+}
+
+/* ── 2D plan view: only active floor visible ── */
+function show2DFloor() {
+  for (const [fk, grp] of Object.entries(floorGroups)) {
+    grp.visible = (fk === curFloor);
+  }
+}
+
+/* ── Route mode: dim every room not on the route, across all floors ── */
+function applyRouteHighlight() {
+  /* Make all floors visible at full structural opacity first */
+  for (const [, grp] of Object.entries(floorGroups)) {
+    grp.visible = true;
+    grp.traverse(obj => {
+      if (!obj.material || obj.userData.isLabel) return;
+      const m = obj.material; if (Array.isArray(m)) return;
+      /* Restore lines/slabs/sprites to normal — only room boxes get dimmed below */
+      if (obj.isSprite)                        { m.opacity = 1.0; }
+      else if (obj.isLine||obj.isLineSegments) { m.opacity = m._origOpacity ?? 0.65; }
+    });
+  }
+
+  /* Now handle every room mesh individually */
+  for (const [key, mesh] of Object.entries(roomMeshes)) {
+    if (!mesh || !mesh.material) continue;
+    storeOrig(mesh);
+    const m = mesh.material;
+    if (routeKeys.has(key)) {
+      /* Route room — restore to original colour/opacity; drawPath will colour it */
+      m.opacity           = m._origOpacity ?? 0.78;
+      m.transparent       = true;
+    } else {
+      /* Non-route room — ghost white, very low opacity like in reference image */
+      m.color.setHex(0xf1f5f9);           /* near-white */
+      m.emissive.setHex(0x000000);
+      m.emissiveIntensity = 0;
+      m.opacity           = 0.10;
+      m.transparent       = true;
+    }
+  }
+}
+
+/* ── Master visibility dispatcher ── */
+function applyVisibility() {
+  if (viewMode === '2d') {
+    show2DFloor();
+  } else if (isRouteActive) {
+    applyRouteHighlight();
+  } else {
+    showFullBuilding();
+  }
+}
+
+function snapCamera() {
+  if (viewMode === '2d') {
+    const fy = FM[curFloor].z * FLOOR_H;
+    camTarget.set(0, fy, 0);
+    CAM.r = 10.5; CAM.theta = 0.3; CAM.phi = 0.52;
+  } else {
+    /* Full building overview */
+    const midY = FM.floor2.z * FLOOR_H;
+    camTarget.set(0, midY, 0);
+    CAM.r = 26; CAM.theta = 0.42; CAM.phi = 0.78;
+  }
+  applyCamera();
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 10 · PATH VISUALISATION + ROOM-LEVEL HIGHLIGHT
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+let curPath = null;
+
+function clearPathVis() {
+  pathObjs.forEach(o => {
+    if (o.parent) o.parent.remove(o); else scene.remove(o);
+    if (o.geometry) o.geometry.dispose();
+    if (o.material) { if (Array.isArray(o.material)) o.material.forEach(m=>m.dispose()); else o.material.dispose(); }
+  });
+  pathObjs.length = 0;
+  for (const key of Object.keys(roomMeshes)) restoreRoom(key);
+  routeKeys.clear();
+  isRouteActive = false;
+  curPath = null;
+}
+
+function updateRouteInfoBar(keys) {
+  const bar   = document.getElementById('routeInfoBar');
+  const pills = document.getElementById('routeFloorPills');
+  if (!keys || !keys.length) { bar.classList.remove('visible'); return; }
+  const flSet   = new Set(keys.map(k => NODE_MAP[k]?.floor).filter(Boolean));
+  const startFl = NODE_MAP[keys[0]]?.floor;
+  const endFl   = NODE_MAP[keys[keys.length-1]]?.floor;
+  pills.innerHTML = [...flSet].map(fk => {
+    const cls = fk === startFl ? 'start' : fk === endFl ? 'end' : 'mid';
+    return `<div class="rfpill ${cls}">${FM[fk].sh}</div>`;
+  }).join('');
+  bar.classList.add('visible');
+  document.querySelectorAll('.fl-btn').forEach(b =>
+    b.classList.toggle('route-floor', flSet.has(b.dataset.fl))
+  );
+}
+
+function drawPath(keys) {
+  clearPathVis();
+  curPath = keys;
+  if (!keys || keys.length < 2) return;
+
+  for (const k of keys) routeKeys.add(k);
+  isRouteActive = true;
+  viewMode = '3d';
+  document.getElementById('btn2d').classList.remove('on');
+  document.getElementById('btn3d').classList.add('on');
+
+  /* ── Dim ALL non-route rooms, highlight route rooms ── */
+  applyVisibility();
+
+  /* ── Colour route rooms: start=green, end=red, middle=vivid original ── */
+  for (let i = 0; i < keys.length; i++) {
+    const mesh = roomMeshes[keys[i]];
+    if (!mesh || !mesh.material) continue;
+    const m = mesh.material;
+    const origC = m._origColor ?? 0x3b82f6;
+    const origE = m._origEmissive ?? origC;
+    m.opacity = 1.0; m.transparent = true;
+    if (i === 0) {
+      m.color.setHex(0x16a34a); m.emissive.setHex(0x16a34a); m.emissiveIntensity = 0.9;
+    } else if (i === keys.length - 1) {
+      m.color.setHex(0xdc2626); m.emissive.setHex(0xdc2626); m.emissiveIntensity = 0.9;
+    } else {
+      m.color.setHex(origC); m.emissive.setHex(origE); m.emissiveIntensity = 0.7;
+    }
+  }
+
+  updateRouteInfoBar(keys);
+
+  /* ══════════════════════════════════════════════════════════════
+     MASSIVE BRIGHT BLUE PATH — impossible to miss
+     R1: fat outer glow halo  (pulsing light-blue)
+     R2: thick solid vivid blue tube  (emissive, opaque)
+     R3: bright white-hot inner core
+  ══════════════════════════════════════════════════════════════ */
+  const TUBE_R   = 0.075;       // thick main tube
+  const GLOW_R   = TUBE_R * 4;  // wide halo
+  const CORE_R   = TUBE_R * 0.3;
+  const TUBE_COL = 0x1d4ed8;    // vivid royal blue
+  const GLOW_COL = 0x60a5fa;    // bright sky blue
+  const CORE_COL = 0xffffff;    // pure white core
+
+  const cPts = keys.map(k => nodeCenter(k)).filter(Boolean);
+
+  for (let i = 0; i < cPts.length - 1; i++) {
+    const a = cPts[i], b = cPts[i+1];
+    const dir = new THREE.Vector3().subVectors(b, a);
+    const len = dir.length();
+    if (len < 0.01) continue;
+    const mid  = new THREE.Vector3().addVectors(a, b).multiplyScalar(0.5);
+    const quat = new THREE.Quaternion().setFromUnitVectors(
+      new THREE.Vector3(0,1,0), dir.clone().normalize()
+    );
+
+    /* R1 — outer glow halo, pulsing */
+    const glow = new THREE.Mesh(
+      new THREE.CylinderGeometry(GLOW_R, GLOW_R, len, 12),
+      new THREE.MeshBasicMaterial({ color:GLOW_COL, transparent:true, opacity:0.22 })
+    );
+    glow.position.copy(mid); glow.quaternion.copy(quat);
+    glow._pulse = true; scene.add(glow); pathObjs.push(glow);
+
+    /* R2 — main solid tube, fully opaque, strong emissive */
+    const tube = new THREE.Mesh(
+      new THREE.CylinderGeometry(TUBE_R, TUBE_R, len, 14),
+      new THREE.MeshStandardMaterial({
+        color:TUBE_COL, emissive:new THREE.Color(0x2563eb),
+        emissiveIntensity:1.4, roughness:0.1, metalness:0.05,
+        transparent:false, depthWrite:true
+      })
+    );
+    tube.position.copy(mid); tube.quaternion.copy(quat);
+    scene.add(tube); pathObjs.push(tube);
+
+    /* R3 — pure white inner core */
+    const core = new THREE.Mesh(
+      new THREE.CylinderGeometry(CORE_R, CORE_R, len, 8),
+      new THREE.MeshBasicMaterial({ color:CORE_COL })
+    );
+    core.position.copy(mid); core.quaternion.copy(quat);
+    scene.add(core); pathObjs.push(core);
+  }
+
+  /* ── Start & end: tall pole + glowing ball ── */
+  [[0, 0x16a34a, 0x22c55e], [keys.length-1, 0xdc2626, 0xf87171]].forEach(([idx, colDark, colLight]) => {
+    const pt = nodeCenter(keys[idx]);
+    const pole = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.028, 0.028, WALL_H * 1.6, 8),
+      new THREE.MeshStandardMaterial({ color:colDark, emissive:new THREE.Color(colDark), emissiveIntensity:1.0 })
+    );
+    pole.position.set(pt.x, pt.y + WALL_H * 0.3, pt.z);
+    scene.add(pole); pathObjs.push(pole);
+
+    const ball = new THREE.Mesh(
+      new THREE.SphereGeometry(0.14, 16, 10),
+      new THREE.MeshStandardMaterial({ color:colDark, emissive:new THREE.Color(colDark), emissiveIntensity:2.0, roughness:0.15 })
+    );
+    ball.position.set(pt.x, pt.y + WALL_H * 1.1, pt.z);
+    scene.add(ball); pathObjs.push(ball);
+
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(0.28, 0.024, 8, 32),
+      new THREE.MeshBasicMaterial({ color:colLight, transparent:true, opacity:0.85 })
+    );
+    ring.position.copy(pt); ring.rotation.x = Math.PI/2;
+    ring._pulse = true; scene.add(ring); pathObjs.push(ring);
+  });
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 11 · RAYCASTER & MOUSE / TOUCH CONTROLS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const rc  = new THREE.Raycaster();
+const mp  = new THREE.Vector2();
+const TT  = document.getElementById('TT');
+
+function getPickable() {
+  return Object.entries(roomMeshes)
+    .filter(([k]) => viewMode === '3d' || k.startsWith(curFloor + ':'))
+    .map(([,m]) => m);
+}
+
+let drag=false, wasDrag=false, dX0=0, dY0=0, dTh=0, dPh=0;
+
+vpEl.addEventListener('mousedown', e => {
+  drag=true; wasDrag=false;
+  dX0=e.clientX; dY0=e.clientY; dTh=CAM.theta; dPh=CAM.phi;
+  cvEl.classList.add('dragging');
+});
+window.addEventListener('mouseup',  () => { drag=false; cvEl.classList.remove('dragging'); });
+
+window.addEventListener('mousemove', e => {
+  if (drag) {
+    const dx = (e.clientX - dX0) * 0.007;
+    const dy = (e.clientY - dY0) * 0.007;
+    if (Math.abs(dx)>.003||Math.abs(dy)>.003) wasDrag=true;
+    CAM.theta = dTh - dx;
+    CAM.phi   = Math.max(0.06, Math.min(Math.PI*0.46, dPh+dy));
+    applyCamera();
+  }
+
+  /* Tooltip */
+  const r   = vpEl.getBoundingClientRect();
+  mp.x = ((e.clientX-r.left)/r.width)*2-1;
+  mp.y = -((e.clientY-r.top)/r.height)*2+1;
+  rc.setFromCamera(mp, cam);
+  const hits = rc.intersectObjects(getPickable());
+  if (hits.length) {
+    const ud = hits[0].object.userData;
+    const tc = RTYPE[ud.type]?.css || '#888';
+    TT.style.display = 'block';
+    TT.style.left = (e.clientX+13)+'px';
+    TT.style.top  = (e.clientY-8)+'px';
+    TT.innerHTML = `<div class="tt-n">${ud.name}</div><div class="tt-s" style="color:${tc}">${(ud.type||'').toUpperCase()} &middot; ${FM[ud.floor]?.lbl||''}</div>`;
+    cvEl.style.cursor = 'pointer';
+  } else {
+    TT.style.display = 'none';
+    cvEl.style.cursor = drag ? 'grabbing' : 'grab';
+  }
+});
+
+vpEl.addEventListener('click', e => {
+  if (wasDrag) return;
+  const r = vpEl.getBoundingClientRect();
+  mp.x = ((e.clientX-r.left)/r.width)*2-1;
+  mp.y = -((e.clientY-r.top)/r.height)*2+1;
+  rc.setFromCamera(mp, cam);
+  const hits = rc.intersectObjects(getPickable());
+  if (hits.length) showNodeInfo(hits[0].object.userData.key);
+});
+vpEl.addEventListener('mouseleave', () => { TT.style.display='none'; });
+
+vpEl.addEventListener('wheel', e => {
+  e.preventDefault();
+  CAM.r = Math.max(2.5, Math.min(38, CAM.r * (e.deltaY>0 ? 1.1 : 0.9)));
+  applyCamera();
+}, { passive:false });
+
+/* Touch */
+let tX=0, tY=0, tTh=0, tPh=0, tPinch=0;
+vpEl.addEventListener('touchstart', e => {
+  if (e.touches.length===1) { tX=e.touches[0].clientX; tY=e.touches[0].clientY; tTh=CAM.theta; tPh=CAM.phi; }
+  else if (e.touches.length===2) tPinch=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+}, {passive:true});
+vpEl.addEventListener('touchmove', e => {
+  if (e.touches.length===1) {
+    CAM.theta = tTh-(e.touches[0].clientX-tX)*.007;
+    CAM.phi   = Math.max(.06,Math.min(Math.PI*.46,tPh+(e.touches[0].clientY-tY)*.007));
+    applyCamera();
+  } else if (e.touches.length===2) {
+    const d = Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);
+    CAM.r = Math.max(2.5,Math.min(38,CAM.r*(tPinch/d))); tPinch=d; applyCamera();
+  }
+}, {passive:true});
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 12 · CAMERA CONTROL BUTTONS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function cZoom(f)     { CAM.r = Math.max(2.5, Math.min(38, CAM.r*f)); applyCamera(); }
+function cOrb(dt, dp) { CAM.theta+=dt; CAM.phi=Math.max(.06,Math.min(Math.PI*.46,CAM.phi+dp)); applyCamera(); }
+
+/* RST — full 3D building view, all floors, clear any route highlight */
+function cReset() {
+  isRouteActive = false;
+  routeKeys.clear();
+  viewMode = '3d';
+  document.getElementById('btn2d').classList.remove('on');
+  document.getElementById('btn3d').classList.add('on');
+  /* Restore all room colours */
+  for (const key of Object.keys(roomMeshes)) restoreRoom(key);
+  showFullBuilding();
+  /* Camera: wide overview of full building */
+  const midY = FM.floor2.z * FLOOR_H;
+  camTarget.set(0, midY, 0);
+  CAM.r = 26; CAM.theta = 0.42; CAM.phi = 0.78;
+  applyCamera();
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 13 · RESIZE HANDLER & RENDER LOOP
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function onResize() {
+  const w = vpEl.clientWidth, h = vpEl.clientHeight;
+  if (!w||!h) return;
+  renderer.setSize(w, h, false);
+  cam.aspect = w/h;
+  cam.updateProjectionMatrix();
+}
+window.addEventListener('resize', onResize);
+if (window.ResizeObserver) new ResizeObserver(onResize).observe(vpEl);
+else onResize();
+
+function animate(ts) {
+  requestAnimationFrame(animate);
+  if (viewMode === '3d' && !drag && !isRouteActive) { CAM.theta += 0.00012; applyCamera(); }
+  const pv = 0.35 + 0.40 * Math.sin(ts * 0.003);
+  for (const o of pathObjs) if (o._pulse && o.material) o.material.opacity = pv;
+  renderer.render(scene, cam);
+}
+requestAnimationFrame(animate);
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 14 · UI CONTROL FUNCTIONS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+let routeMode = 'stair';
+const FL_CSS  = { ground:'var(--f-gf)', floor1:'var(--f-f1)', floor2:'var(--f-f2)', floor3:'var(--f-f3)', floor4:'var(--f-f4)' };
+
+function setVM(m) {
+  viewMode = m;
+  document.getElementById('btn2d').classList.toggle('on', m==='2d');
+  document.getElementById('btn3d').classList.toggle('on', m==='3d');
+  applyVisibility(); snapCamera();
+}
+
+function switchFloor(fk) {
+  curFloor = fk;
+  /* Sidebar floor tabs */
+  document.querySelectorAll('.fl-btn').forEach(b => b.classList.toggle('on', b.dataset.fl===fk));
+  /* Bottom floor bar */
+  document.querySelectorAll('.fbar-btn').forEach(b => {
+    const me = b.dataset.fl===fk;
+    b.classList.toggle('on', me);
+    b.style.background = me ? FL_CSS[fk] : '';
+    b.style.color = me ? '#fff' : '';
+  });
+  /* HUD update */
+  document.getElementById('FHUD').textContent = `${FM[fk].lbl} (${FM[fk].sh}) · Level +${FM[fk].zM}m`;
+  applyVisibility();
+  if (viewMode==='2d') snapCamera();
+}
+
+function setMode(m) {
+  routeMode = m;
+  ['stair','elevator','ramp'].forEach(k =>
+    document.getElementById(`mode_${k}`).classList.toggle('on', k===m)
+  );
+  buildGraph(m);
+}
+
+function populateSel(selId, fl) {
+  const sel = document.getElementById(selId);
+  sel.innerHTML = FLOOR_ROOMS[fl]
+    .filter(r => r.type !== 'corridor')
+    .map(r => `<option value="${fl}:${r.id}">${r.name}</option>`)
+    .join('');
+}
+function rfr() { populateSel('fromRoom', document.getElementById('fromFloor').value); }
+function rtr() { populateSel('toRoom',   document.getElementById('toFloor').value);   }
+rfr(); rtr();
+
+/* Default route: CLASSROOM 001 → CLASSROOM 203 */
+(function setDefaults() {
+  const fs = document.getElementById('fromRoom');
+  for (let i = 0; i < fs.options.length; i++) {
+    if (fs.options[i].text === 'CLASSROOM 001') { fs.selectedIndex=i; break; }
+  }
+  document.getElementById('toFloor').value = 'floor2'; rtr();
+  const ts = document.getElementById('toRoom');
+  for (let i = 0; i < ts.options.length; i++) {
+    if (ts.options[i].text === 'CLASSROOM 203') { ts.selectedIndex=i; break; }
+  }
+})();
+
+function findRoute() {
+  const sk = document.getElementById('fromRoom').value;
+  const ek = document.getElementById('toRoom').value;
+  if (!sk||!ek) { alert('Select start and destination.'); return; }
+  if (sk===ek)  { showErr('Start and destination are the same!'); return; }
+  buildGraph(routeMode);
+  const res = dijkstra(sk, ek);
+  if (!res) { showErr('No route found. Try a different connector mode.'); return; }
+  /* drawPath handles everything: routeKeys, isRouteActive, 3D switch, applyVisibility, room colours */
+  drawPath(res.path);
+  renderSteps(res.path, res.dist);
+  document.getElementById('dStat').textContent = res.dist;
+  snapCamera();
+}
+
+function clearRoute() {
+  clearPathVis();
+  showFullBuilding();
+  document.getElementById('routeInfoBar').classList.remove('visible');
+  document.querySelectorAll('.fl-btn').forEach(b => b.classList.remove('route-floor'));
+  document.getElementById('stepsArea').innerHTML = '<div class="empty"><div class="empty-ico">&#128506;&#65039;</div>Plan a route to see turn-by-turn steps</div>';
+  document.getElementById('dStat').textContent = '\u2014';
+}
+
+function showNodeInfo(key) {
+  const n = NODE_MAP[key]; if (!n) return;
+  const rt = RTYPE[n.type] || RTYPE.room;
+  const conns = (G[key]||[]).length;
+  document.getElementById('nodeArea').innerHTML = `
+    <div class="node-card">
+      <div class="nc-title">${n.name}</div>
+      <div class="nc-row"><span class="nc-k">Type</span><span class="nc-v" style="color:${rt.css};font-weight:700">${(n.type||'').toUpperCase()}</span></div>
+      <div class="nc-row"><span class="nc-k">Floor</span><span class="nc-v">${FM[n.floor]?.lbl}</span></div>
+      <div class="nc-row"><span class="nc-k">Room ID</span><span class="nc-v">${key}</span></div>
+      <div class="nc-row"><span class="nc-k">Size</span><span class="nc-v">${n.w}&times;${n.d} px</span></div>
+      <div class="nc-row"><span class="nc-k">Connections</span><span class="nc-v">${conns} nodes</span></div>
+    </div>`;
+}
+
+function renderSteps(keys, dist) {
+  const s0 = NODE_MAP[keys[0]], sN = NODE_MAP[keys[keys.length-1]];
+  let h = `<div class="route-card"><strong>${s0?.name||'?'}</strong> &rarr; <strong>${sN?.name||'?'}</strong><br>
+    ${routeMode.charAt(0).toUpperCase()+routeMode.slice(1)} &middot; ${keys.length} stops &middot; ~${dist}m</div>
+    <div class="step-list">`;
+  for (let i = 0; i < keys.length; i++) {
+    const k = keys[i], n = NODE_MAP[k]; if (!n) continue;
+    const isV = ['staircase','elevator','ramp'].includes(n.type);
+    const flChg = i>0 && NODE_MAP[keys[i-1]]?.floor!==n.floor;
+    let tags = '';
+    if (n.type==='staircase') tags+='<span class="stag s">STAIR</span>';
+    else if (n.type==='elevator') tags+='<span class="stag l">LIFT</span>';
+    else if (n.type==='ramp') tags+='<span class="stag r">RAMP</span>';
+    if (flChg) tags+='<span class="stag f">FLOOR&#8593;</span>';
+    h += `<div class="step" onclick="focusStep('${k}')">
+      <div class="step-num${isV?' v':''}">${i+1}</div>
+      <div>
+        <div class="step-name">${n.name}</div>
+        <div class="step-fl">${FM[n.floor]?.sh} &middot; ${FM[n.floor]?.lbl}</div>
+        <div class="step-tags">${tags}</div>
+      </div></div>`;
+  }
+  h += '</div>';
+  document.getElementById('stepsArea').innerHTML = h;
+}
+
+function focusStep(key) {
+  const n = NODE_MAP[key]; if (!n) return;
+  showNodeInfo(key);
+  if (viewMode==='2d') switchFloor(n.floor);
+  const pos = nodeCenter(key);
+  camTarget.set(pos.x, pos.y, pos.z);
+  CAM.r = Math.min(CAM.r, 6);
+  applyCamera();
+}
+
+function showErr(msg) {
+  document.getElementById('stepsArea').innerHTML = `<div class="empty" style="color:#dc2626"><div class="empty-ico">&#9888;&#65039;</div>${msg}</div>`;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION 15 · INITIALISATION
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* Start in 3D view — full building visible (matches screenshot default) */
+viewMode = '3d';
+document.getElementById('btn2d').classList.remove('on');
+document.getElementById('btn3d').classList.add('on');
+showFullBuilding();
+snapCamera();
+/* Auto-demo: show a default route on load */
+setTimeout(() => { buildGraph(routeMode); findRoute(); }, 350);
+</script>
+</body>
+</html>

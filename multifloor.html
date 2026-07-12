@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Multi-Floor Navigation — SIT Campus</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+
+:root {
+  --bg:#03060f; --panel:#080d1a; --card:#0d1525; --border:#162040;
+  --cyan:#00f0ff; --purple:#8b5cf6; --green:#00ffa3; --orange:#ff7b35; --red:#ff4060;
+  --text:#b8d4f0; --muted:#3d5a7a;
+  --gf:#0ea5e9; --f1:#6366f1; --f2:#8b5cf6; --f3:#ec4899; --f4:#f97316;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Exo 2',sans-serif;display:flex;flex-direction:column}
+body::before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,240,255,.01) 2px,rgba(0,240,255,.01) 4px);pointer-events:none;z-index:9999}
+
+/* HEADER */
+header{height:54px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:linear-gradient(90deg,#050d1f,#080d1a,#050d1f);border-bottom:1px solid var(--border);position:relative;z-index:100}
+header::after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan) 40%,var(--purple) 60%,transparent);opacity:.5}
+.h-logo{display:flex;align-items:center;gap:12px}
+.h-icon{width:36px;height:36px;border:1.5px solid var(--cyan);display:grid;place-items:center;font-size:18px;animation:icon-glow 3s ease-in-out infinite}
+@keyframes icon-glow{0%,100%{box-shadow:0 0 8px rgba(0,240,255,.4)}50%{box-shadow:0 0 18px rgba(0,240,255,.8),inset 0 0 12px rgba(0,240,255,.15)}}
+.h-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:var(--cyan);letter-spacing:3px}
+.h-sub{font-size:10px;color:var(--muted);letter-spacing:1.5px;margin-top:2px}
+.h-center{display:flex;gap:4px}
+.vbtn{padding:6px 14px;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1.5px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;border-radius:2px;transition:all .2s}
+.vbtn.on{background:rgba(0,240,255,.1);border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 10px rgba(0,240,255,.2)}
+.vbtn:hover:not(.on){border-color:var(--muted);color:var(--text)}
+.h-right{display:flex;align-items:center;gap:10px}
+.badge{display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1px;color:var(--green);background:rgba(0,255,163,.07);border:1px solid rgba(0,255,163,.2)}
+.bdot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 1.5s ease infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+.back{font-size:9px;font-family:'Orbitron',monospace;padding:5px 12px;background:var(--card);border:1px solid var(--border);color:var(--muted);text-decoration:none;border-radius:2px;transition:all .2s;letter-spacing:1px}
+.back:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 8px rgba(0,240,255,.2)}
+
+/* LAYOUT */
+.main{flex:1;display:grid;grid-template-columns:262px 1fr 280px;overflow:hidden;min-height:0}
+
+/* SIDEBAR */
+.sb{background:var(--panel);border-right:1px solid var(--border);overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:16px}
+.sb::-webkit-scrollbar{width:3px}
+.sb::-webkit-scrollbar-thumb{background:var(--border)}
+.slbl{font-family:'Orbitron',monospace;font-size:8px;font-weight:700;color:var(--muted);letter-spacing:3px;padding-bottom:6px;border-bottom:1px solid var(--border);margin-bottom:8px;text-transform:uppercase}
+.ftab{display:flex;align-items:center;gap:9px;width:100%;padding:8px 10px;margin-bottom:3px;background:transparent;border:1px solid transparent;color:var(--text);font-family:'Exo 2',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border-radius:3px;transition:all .15s;text-align:left}
+.ftab:hover{background:rgba(255,255,255,.03);border-color:var(--border)}
+.ftab.on{background:rgba(0,240,255,.08);border-color:rgba(0,240,255,.4);color:var(--cyan)}
+.fdot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.flbl{flex:1}
+.fz{font-family:'Orbitron',monospace;font-size:9px;color:var(--muted)}
+.leg{display:flex;flex-direction:column;gap:4px}
+.legrow{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--muted)}
+.ldot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.fg{display:flex;flex-direction:column;gap:3px;margin-bottom:8px}
+.fg label{font-family:'Orbitron',monospace;font-size:8px;color:var(--muted);letter-spacing:2px}
+.fg select{width:100%;padding:7px 9px;background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:'Exo 2',sans-serif;font-size:12px;font-weight:500;cursor:pointer;outline:none;border-radius:2px;transition:border-color .2s}
+.fg select:focus{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(0,240,255,.1)}
+.fg select option{background:#080d1a}
+.modegrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-bottom:8px}
+.mbtn{padding:7px 4px;font-family:'Orbitron',monospace;font-size:8px;letter-spacing:.5px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;border-radius:2px;transition:all .15s;text-align:center}
+.mbtn.on{background:rgba(139,92,246,.2);border-color:var(--purple);color:#c4b5fd;box-shadow:0 0 8px rgba(139,92,246,.2)}
+.mbtn:hover:not(.on){border-color:var(--muted);color:var(--text)}
+.btnfind{width:100%;padding:10px;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:2px;background:var(--cyan);color:#000;border:none;border-radius:2px;cursor:pointer;transition:all .2s;margin-bottom:6px}
+.btnfind:hover{background:#00d8e8;box-shadow:0 0 16px rgba(0,240,255,.45);transform:translateY(-1px)}
+.btnfind:active{transform:translateY(0)}
+.btnclear{width:100%;padding:7px;font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1px;background:transparent;border:1px solid var(--border);color:var(--muted);cursor:pointer;border-radius:2px;transition:all .15s}
+.btnclear:hover{border-color:var(--red);color:var(--red)}
+
+/* VIEWPORT */
+.vp{position:relative;overflow:hidden}
+#C{display:block;width:100%;height:100%;cursor:grab}
+#C.dragging{cursor:grabbing}
+.floorhud{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:rgba(8,13,26,.92);border:1px solid var(--border);padding:5px 18px;border-radius:20px;font-family:'Orbitron',monospace;font-size:11px;color:var(--cyan);pointer-events:none;white-space:nowrap;box-shadow:0 0 14px rgba(0,240,255,.15);backdrop-filter:blur(8px)}
+.hud-zoom{position:absolute;bottom:16px;right:16px;display:flex;flex-direction:column;gap:4px}
+.hud-rot{position:absolute;bottom:16px;left:16px;display:flex;flex-direction:column;gap:3px}
+.hrow{display:flex;gap:3px;justify-content:center}
+.hbtn{width:34px;height:34px;background:rgba(8,13,26,.9);border:1px solid var(--border);color:var(--text);cursor:pointer;border-radius:3px;display:grid;place-items:center;font-size:16px;transition:all .15s;backdrop-filter:blur(4px)}
+.hbtn:hover{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 8px rgba(0,240,255,.2)}
+.hbtn:active{transform:scale(.94)}
+#TT{position:fixed;pointer-events:none;z-index:9000;background:rgba(8,13,26,.96);border:1px solid var(--cyan);padding:6px 11px;border-radius:3px;font-size:11px;color:var(--text);display:none;max-width:210px;line-height:1.5;backdrop-filter:blur(8px);box-shadow:0 0 12px rgba(0,240,255,.2)}
+
+/* INFO PANEL */
+.ip{background:var(--panel);border-left:1px solid var(--border);overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:16px}
+.ip::-webkit-scrollbar{width:3px}
+.ip::-webkit-scrollbar-thumb{background:var(--border)}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.stile{background:var(--card);border:1px solid var(--border);border-radius:3px;padding:10px 8px;text-align:center}
+.sval{font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--cyan)}
+.slbl2{font-size:9px;color:var(--muted);letter-spacing:1.5px;margin-top:2px;text-transform:uppercase}
+.ncard{background:var(--card);border:1px solid var(--border);border-radius:3px;padding:12px}
+.ntitle{font-size:12px;font-weight:600;margin-bottom:8px;color:var(--text);line-height:1.3}
+.prow{display:flex;justify-content:space-between;align-items:flex-start;padding:3px 0;border-bottom:1px solid rgba(22,32,64,.9);font-size:11px}
+.prow:last-child{border:none}
+.pk{font-family:'Orbitron',monospace;font-size:8px;color:var(--muted);padding-top:1px;flex-shrink:0}
+.pv{color:var(--text);text-align:right;word-break:break-word;max-width:148px}
+.rsumm{background:rgba(0,240,255,.05);border:1px solid rgba(0,240,255,.15);border-radius:3px;padding:10px 12px;font-size:11px;color:var(--muted);line-height:1.8}
+.rsumm strong{color:var(--text)}
+.slist{display:flex;flex-direction:column}
+.srow{display:flex;align-items:flex-start;gap:8px;padding:6px 4px;border-bottom:1px solid rgba(22,32,64,.7);cursor:pointer;border-radius:3px;transition:background .1s}
+.srow:hover{background:rgba(0,240,255,.05)}
+.srow:last-child{border:none}
+.snum{width:20px;height:20px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-family:'Orbitron',monospace;font-size:8px;font-weight:700;background:rgba(0,240,255,.12);border:1px solid rgba(0,240,255,.35);color:var(--cyan)}
+.snum.conn{background:rgba(139,92,246,.15);border-color:var(--purple);color:#c4b5fd}
+.sname{font-size:11px;font-weight:600;line-height:1.3}
+.sfloor{font-size:10px;color:var(--muted);margin-top:1px}
+.stags{display:flex;gap:3px;flex-wrap:wrap;margin-top:2px}
+.tag{font-family:'Orbitron',monospace;font-size:7px;padding:1px 5px;border-radius:2px;letter-spacing:.5px}
+.t-s{background:rgba(0,240,255,.12);color:var(--cyan)}
+.t-l{background:rgba(251,191,36,.12);color:#fbbf24}
+.t-r{background:rgba(251,146,60,.12);color:#fb923c}
+.t-f{background:rgba(236,72,153,.12);color:#ec4899}
+.empty{text-align:center;padding:20px 8px;color:var(--muted);font-size:11px}
+.eico{font-size:26px;opacity:.3;display:block;margin-bottom:8px}
+
+/* ── ROUTE HIGHLIGHT ADDITIONS ─────────────────────────────── */
+/* Floor involvement banner — shows which floors have route segments */
+.floor-route-strip{
+  display:none;flex-direction:column;gap:6px;
+  margin-top:2px;padding:9px 10px;
+  background:rgba(0,240,255,.04);
+  border:1px solid rgba(0,240,255,.15);
+  border-radius:3px;
+}
+.floor-route-strip.show{display:flex;}
+.frs-lbl{font-family:'Orbitron',monospace;font-size:8px;color:var(--muted);letter-spacing:2px;margin-bottom:2px;}
+.frs-badges{display:flex;gap:5px;flex-wrap:wrap;}
+.fbadge{
+  padding:3px 9px;border-radius:2px;
+  font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:.5px;
+  border:1px solid transparent;cursor:pointer;
+  opacity:.25;transition:all .2s;
+}
+.fbadge:hover{opacity:.6;}
+.fbadge.active{opacity:1;}
+.fbadge.gf  {color:var(--gf);border-color:rgba(14,165,233,.4);background:rgba(14,165,233,.1);}
+.fbadge.f1  {color:var(--f1);border-color:rgba(99,102,241,.4);background:rgba(99,102,241,.1);}
+.fbadge.f2  {color:var(--f2);border-color:rgba(139,92,246,.4);background:rgba(139,92,246,.1);}
+.fbadge.f3  {color:var(--f3);border-color:rgba(236,72,153,.4);background:rgba(236,72,153,.1);}
+.fbadge.f4  {color:var(--f4);border-color:rgba(249,115,22,.4);background:rgba(249,115,22,.1);}
+/* Floor transition connector card in steps */
+.conn-divider{
+  display:flex;align-items:center;gap:7px;
+  padding:5px 6px;margin:2px 0;
+  background:rgba(139,92,246,.08);
+  border:1px solid rgba(139,92,246,.25);
+  border-radius:2px;font-size:10px;color:var(--purple);
+}
+.conn-divider span{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:.5px;}
+/* Route summary bar — distance + stats */
+.route-meta-bar{
+  display:none;flex-wrap:wrap;gap:6px;
+  padding:8px 10px;margin-bottom:4px;
+  background:rgba(0,240,255,.05);
+  border:1px solid rgba(0,240,255,.2);border-radius:3px;
+}
+.route-meta-bar.show{display:flex;}
+.rmb-item{display:flex;flex-direction:column;align-items:center;flex:1;min-width:50px;}
+.rmb-val{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;color:var(--cyan);}
+.rmb-lbl{font-size:8px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:1px;}
+/* Highlight: active floor tab gets glow when it has route segment */
+.ftab.route-floor{box-shadow:0 0 8px rgba(0,240,255,.2);border-color:rgba(0,240,255,.5)!important;}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-logo">
+    <div class="h-icon">🏛</div>
+    <div>
+      <div class="h-title">SMART CAMPUS NAV</div>
+      <div class="h-sub">SRINIVAS INSTITUTE OF TECHNOLOGY · MANGALURU · 3D SYSTEM</div>
+    </div>
+  </div>
+  <div class="h-center">
+    <button class="vbtn on" id="btn2d" onclick="setViewMode('2d')">2D PLAN</button>
+    <button class="vbtn"    id="btn3d" onclick="setViewMode('3d')">3D VIEW</button>
+  </div>
+  <div class="h-right">
+    <div class="badge"><div class="bdot"></div>5 FLOORS ONLINE</div>
+    <a href="/navigation" class="back">← BACK</a>
+  </div>
+</header>
+
+<div class="main">
+
+  <!-- ── LEFT SIDEBAR ── -->
+  <div class="sb">
+    <div>
+      <div class="slbl">Floor Navigator</div>
+      <button class="ftab on" data-f="ground" onclick="switchFloor('ground')"><div class="fdot" style="background:var(--gf)"></div><span class="flbl">Ground Floor</span><span class="fz">GF</span></button>
+      <button class="ftab"    data-f="floor1" onclick="switchFloor('floor1')"><div class="fdot" style="background:var(--f1)"></div><span class="flbl">First Floor</span><span class="fz">1F</span></button>
+      <button class="ftab"    data-f="floor2" onclick="switchFloor('floor2')"><div class="fdot" style="background:var(--f2)"></div><span class="flbl">Second Floor</span><span class="fz">2F</span></button>
+      <button class="ftab"    data-f="floor3" onclick="switchFloor('floor3')"><div class="fdot" style="background:var(--f3)"></div><span class="flbl">Third Floor</span><span class="fz">3F</span></button>
+      <button class="ftab"    data-f="floor4" onclick="switchFloor('floor4')"><div class="fdot" style="background:var(--f4)"></div><span class="flbl">Fourth Floor</span><span class="fz">4F</span></button>
+    </div>
+    <div>
+      <div class="slbl">Node Types</div>
+      <div class="leg">
+        <div class="legrow"><div class="ldot" style="background:#3b82f6"></div>Classroom</div>
+        <div class="legrow"><div class="ldot" style="background:#10b981"></div>Laboratory</div>
+        <div class="legrow"><div class="ldot" style="background:#f59e0b"></div>Office / Dept</div>
+        <div class="legrow"><div class="ldot" style="background:#64748b"></div>Restroom / Toilet</div>
+        <div class="legrow"><div class="ldot" style="background:#a78bfa"></div>Corridor / Pathway</div>
+        <div class="legrow"><div class="ldot" style="background:#00f0ff"></div>Staircase ↕</div>
+        <div class="legrow"><div class="ldot" style="background:#fbbf24"></div>Elevator / Lift</div>
+        <div class="legrow"><div class="ldot" style="background:#fb923c"></div>Ramp / Slope</div>
+        <div class="legrow"><div class="ldot" style="background:#f43f5e"></div>Hall / Stage / Room</div>
+      </div>
+    </div>
+    <div>
+      <div class="slbl">Route Planner</div>
+      <div class="fg"><label>FROM FLOOR</label>
+        <select id="fromFloor" onchange="refreshFromRooms()">
+          <option value="ground">Ground Floor (GF)</option>
+          <option value="floor1">First Floor (1F)</option>
+          <option value="floor2">Second Floor (2F)</option>
+          <option value="floor3">Third Floor (3F)</option>
+          <option value="floor4">Fourth Floor (4F)</option>
+        </select>
+      </div>
+      <div class="fg"><label>FROM ROOM</label><select id="fromRoom"></select></div>
+      <div class="fg"><label>TO FLOOR</label>
+        <select id="toFloor" onchange="refreshToRooms()">
+          <option value="ground">Ground Floor (GF)</option>
+          <option value="floor1">First Floor (1F)</option>
+          <option value="floor2" selected>Second Floor (2F)</option>
+          <option value="floor3">Third Floor (3F)</option>
+          <option value="floor4">Fourth Floor (4F)</option>
+        </select>
+      </div>
+      <div class="fg"><label>TO ROOM</label><select id="toRoom"></select></div>
+      <div class="slbl" style="margin-top:4px">CONNECTOR MODE</div>
+      <div class="modegrid">
+        <button class="mbtn on" id="mode_stair"    onclick="setMode('stair')">🪜 STAIR</button>
+        <button class="mbtn"    id="mode_elevator" onclick="setMode('elevator')">🛗 LIFT</button>
+        <button class="mbtn"    id="mode_ramp"     onclick="setMode('ramp')">↗ RAMP</button>
+      </div>
+      <button class="btnfind" onclick="findRoute()">▶ FIND ROUTE</button>
+      <button class="btnclear" onclick="clearRoute()">✕ RESET MAP</button>
+
+      <!-- Floor involvement strip — shows after route is found -->
+      <div class="floor-route-strip" id="floorRouteStrip">
+        <div class="frs-lbl">ROUTE SPANS FLOORS</div>
+        <div class="frs-badges">
+          <span class="fbadge gf" id="rbadge_ground" onclick="switchFloor('ground')" title="Go to Ground Floor">GF</span>
+          <span class="fbadge f1" id="rbadge_floor1" onclick="switchFloor('floor1')" title="Go to 1st Floor">1F</span>
+          <span class="fbadge f2" id="rbadge_floor2" onclick="switchFloor('floor2')" title="Go to 2nd Floor">2F</span>
+          <span class="fbadge f3" id="rbadge_floor3" onclick="switchFloor('floor3')" title="Go to 3rd Floor">3F</span>
+          <span class="fbadge f4" id="rbadge_floor4" onclick="switchFloor('floor4')" title="Go to 4th Floor">4F</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 3D VIEWPORT ── -->
+  <div class="vp" id="vp">
+    <canvas id="C"></canvas>
+    <div class="floorhud" id="fhud">GROUND FLOOR (GF) · z = 0 m</div>
+    <div class="hud-zoom">
+      <button class="hbtn" title="Zoom In"    onclick="camZoom(0.82)">+</button>
+      <button class="hbtn" title="Zoom Out"   onclick="camZoom(1.22)">−</button>
+      <button class="hbtn" title="Reset View" onclick="camReset()" style="font-size:12px">⊡</button>
+    </div>
+    <div class="hud-rot">
+      <div class="hrow">
+        <button class="hbtn" title="Rotate Left"  onclick="camOrbit(-0.12, 0)" style="font-size:13px">↺</button>
+        <button class="hbtn" title="Tilt Up"       onclick="camOrbit(0,-0.08)" style="font-size:14px">↑</button>
+        <button class="hbtn" title="Rotate Right" onclick="camOrbit( 0.12, 0)" style="font-size:13px">↻</button>
+      </div>
+      <div class="hrow">
+        <button class="hbtn" title="Tilt Down"    onclick="camOrbit(0, 0.08)" style="font-size:14px">↓</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── INFO PANEL ── -->
+  <div class="ip">
+    <div>
+      <div class="slbl">Building Stats</div>
+      <!-- Route meta bar — shows floor count, distance, stops after route is found -->
+      <div class="route-meta-bar" id="routeMetaBar">
+        <div class="rmb-item"><div class="rmb-val" id="metaFloors">—</div><div class="rmb-lbl">Floors</div></div>
+        <div class="rmb-item"><div class="rmb-val" id="metaDist">—</div><div class="rmb-lbl">Metres</div></div>
+        <div class="rmb-item"><div class="rmb-val" id="metaStops">—</div><div class="rmb-lbl">Stops</div></div>
+        <div class="rmb-item"><div class="rmb-val" id="metaConn">—</div><div class="rmb-lbl">Transitions</div></div>
+      </div>
+      <div class="sgrid">
+        <div class="stile"><div class="sval">5</div><div class="slbl2">Floors</div></div>
+        <div class="stile"><div class="sval">127</div><div class="slbl2">Nodes</div></div>
+        <div class="stile"><div class="sval">4</div><div class="slbl2">Connectors</div></div>
+        <div class="stile"><div class="sval" id="distStat">—</div><div class="slbl2">Route m</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="slbl">Selected Node</div>
+      <div id="nodeArea"><div class="empty"><span class="eico">🖱</span>Click any node on the map</div></div>
+    </div>
+    <div>
+      <div class="slbl">Route Steps</div>
+      <div id="stepsArea"><div class="empty"><span class="eico">🗺</span>Plan a route to see directions</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="TT"></div>
+
+<script>
+/* ================================================================
+   DATA — exact from CSV files
+================================================================ */
+const FM = {
+  ground:{lbl:'Ground Floor',sh:'GF',z:0, c3d:0x0ea5e9, chx:'#0ea5e9', zm:0 },
+  floor1:{lbl:'First Floor', sh:'1F',z:1, c3d:0x6366f1, chx:'#6366f1', zm:4 },
+  floor2:{lbl:'Second Floor',sh:'2F',z:2, c3d:0x8b5cf6, chx:'#8b5cf6', zm:8 },
+  floor3:{lbl:'Third Floor', sh:'3F',z:3, c3d:0xec4899, chx:'#ec4899', zm:12},
+  floor4:{lbl:'Fourth Floor',sh:'4F',z:4, c3d:0xf97316, chx:'#f97316', zm:16},
+};
+const FH=5.5, MX=1060, MY=490, SW=10.6, SH=4.9;
+
+// node type → three.js hex color
+const TC3={classroom:0x3b82f6,laboratory:0x10b981,office:0xf59e0b,restroom:0x64748b,
+           corridor:0xa78bfa,staircase:0x00f0ff,elevator:0xfbbf24,ramp:0xfb923c,room:0xf43f5e};
+const TCH={classroom:'#3b82f6',laboratory:'#10b981',office:'#f59e0b',restroom:'#64748b',
+           corridor:'#a78bfa',staircase:'#00f0ff',elevator:'#fbbf24',ramp:'#fb923c',room:'#f43f5e'};
+
+// infer type from name keywords
+function inferType(name){
+  const n=name.toLowerCase();
+  if(n.includes('stair')||n.includes('staircase'))return'staircase';
+  if(n.includes('lift')||n.includes('elevator'))return'elevator';
+  if(n.includes('slope')||n.includes('ramp'))return'ramp';
+  if(n.includes('lab'))return'laboratory';
+  if(n.includes('classroom'))return'classroom';
+  if(n.includes('toilet')||n.includes('washroom'))return'restroom';
+  if(n.includes('pathway')||n.includes('corridor'))return'corridor';
+  if(n.includes('dept')||n.includes('office')||n.includes('faculty')||n.includes('cabin'))return'office';
+  return'room';
+}
+
+const FN={
+  ground:[
+    {id:101,name:'SEMINAR HALL',x:338,y:48},{id:102,name:'STAIRCASE UP',x:458,y:44},
+    {id:103,name:'QPDS ROOM',x:360,y:111},{id:104,name:'CLASSROOM 004',x:615,y:41},
+    {id:105,name:'CLASSROOM 005',x:758,y:41},{id:106,name:'CLASSROOM 006',x:938,y:41},
+    {id:107,name:'CLASSROOM 007',x:952,y:181},{id:108,name:'LIFT',x:600,y:159},
+    {id:109,name:'PATHWAY',x:536,y:247},{id:110,name:'FACULTY',x:30,y:336},
+    {id:111,name:'STAIRCASE UP GF',x:75,y:333},{id:112,name:'XEROX CENTRE',x:126,y:333},
+    {id:113,name:'GENTS TOILET',x:178,y:336},{id:114,name:'CLASSROOM 003',x:236,y:333},
+    {id:115,name:'BOARD ROOM',x:306,y:333},{id:116,name:'OFFICE 2',x:373,y:333},
+    {id:117,name:'STAFFS LIFT',x:438,y:330},{id:118,name:'SLOPE UP GF',x:469,y:289},
+    {id:119,name:'LADIES WASHROOM',x:630,y:333},{id:120,name:'CLASSROOM 002',x:742,y:333},
+    {id:121,name:'CLASSROOM 001',x:832,y:333},{id:122,name:'OFFICE 1',x:892,y:342},
+    {id:123,name:'PRINCIPALS CABIN',x:982,y:333},{id:124,name:'CORRIDOR',x:536,y:396},
+    {id:125,name:'MAIN STAGE',x:502,y:469}
+  ],
+  floor1:[
+    {id:201,name:'GIRLS COMMON ROOM',x:340,y:57},{id:202,name:'CLASSROOM 101',x:490,y:57},
+    {id:203,name:'STAIR CASE UP',x:458,y:44},{id:204,name:'STAIR CASE DOWN',x:490,y:44},
+    {id:205,name:'TOILET',x:740,y:100},{id:206,name:'CLASSROOM 102',x:870,y:57},
+    {id:207,name:'CLASSROOM 103',x:1010,y:57},{id:208,name:'COMPUTER GRAPHICS LAB',x:1025,y:150},
+    {id:209,name:'SYSTEM SOFTWARE LAB',x:1025,y:210},{id:210,name:'ALGORITHM LAB',x:1025,y:255},
+    {id:211,name:'DBMS LAB',x:1025,y:300},{id:212,name:'LIFT',x:860,y:280},
+    {id:213,name:'FACULTY ROOM',x:648,y:355},{id:214,name:'DEPT COMPUTER SCIENCE',x:648,y:405},
+    {id:215,name:'WASHROOM',x:648,y:468},{id:216,name:'PATHWAY',x:572,y:247},
+    {id:217,name:'SLOPE UP',x:550,y:290},{id:218,name:'SLOPE DOWN',x:600,y:290},
+    {id:219,name:'STAFFS LIFT',x:497,y:333},{id:220,name:'FACULTY',x:30,y:358},
+    {id:221,name:'STAIRCASE UP LEFT',x:75,y:333},{id:222,name:'STAIRCASE DOWN LEFT',x:125,y:333},
+    {id:223,name:'TOILET LEFT',x:178,y:333},{id:224,name:'DEPT CHEMISTRY',x:237,y:333},
+    {id:225,name:'CHEMISTRY LAB',x:237,y:395},{id:226,name:'DEPT PHYSICS',x:395,y:333},
+    {id:227,name:'PHYSICS LAB',x:395,y:395},{id:228,name:'COMPUTER CENTRE',x:870,y:358},
+    {id:229,name:'CENTRAL COMPUTING LAB',x:1020,y:358},{id:230,name:'CORRIDOR TOP LEFT',x:410,y:100},
+    {id:231,name:'CORRIDOR TOP RIGHT',x:800,y:100},{id:232,name:'CORRIDOR MAIN',x:536,y:420}
+  ],
+  floor2:[
+    {id:301,name:'CAD LAB',x:390,y:110},{id:302,name:'STAIR CASE UP',x:458,y:44},
+    {id:303,name:'STAIR CASE DOWN',x:490,y:44},{id:304,name:'TOILET',x:740,y:100},
+    {id:305,name:'CLASSROOM 203',x:870,y:57},{id:306,name:'CLASSROOM 204',x:1010,y:57},
+    {id:307,name:'WEB PROGRAMMING LAB',x:1025,y:190},{id:308,name:'DATA STRUCTURE LAB',x:1025,y:240},
+    {id:309,name:'PROJECT LAB',x:1025,y:290},{id:310,name:'LIFT',x:860,y:280},
+    {id:311,name:'PLACEMENT OFFICE',x:648,y:370},{id:312,name:'WASHROOM',x:648,y:468},
+    {id:313,name:'PATHWAY',x:572,y:247},{id:314,name:'SLOPE UP',x:550,y:290},
+    {id:315,name:'SLOPE DOWN',x:600,y:290},{id:316,name:'STAFFS LIFT',x:497,y:333},
+    {id:317,name:'FACULTY',x:30,y:358},{id:318,name:'STAIRCASE UP LEFT',x:75,y:333},
+    {id:319,name:'STAIRCASE DOWN LEFT',x:125,y:333},{id:320,name:'TOILET LEFT',x:178,y:333},
+    {id:321,name:'BOARD ROOM',x:230,y:333},{id:322,name:'LAB 1',x:310,y:333},
+    {id:323,name:'LAB 2',x:385,y:333},{id:324,name:'LAB 3',x:460,y:333},
+    {id:325,name:'LAB 4',x:840,y:333},{id:326,name:'LAB 5',x:905,y:333},
+    {id:327,name:'LAB 6',x:965,y:333},{id:328,name:'LAB 7',x:1020,y:333},
+    {id:329,name:'LAB 8',x:1020,y:395},{id:330,name:'CORRIDOR TOP LEFT',x:410,y:100},
+    {id:331,name:'CORRIDOR TOP RIGHT',x:800,y:100},{id:332,name:'CORRIDOR MAIN',x:536,y:420}
+  ],
+  floor3:[
+    {id:401,name:'CLASSROOM 301',x:355,y:140},{id:402,name:'CLASSROOM 302',x:465,y:140},
+    {id:403,name:'STAIR CASE UP',x:458,y:44},{id:404,name:'STAIR CASE DOWN',x:490,y:44},
+    {id:405,name:'TOILET',x:740,y:100},{id:406,name:'CLASSROOM 303',x:870,y:57},
+    {id:407,name:'CLASSROOM 304',x:1010,y:57},{id:408,name:'CLS LAB',x:1025,y:180},
+    {id:409,name:'HDL LAB',x:1025,y:235},{id:410,name:'SSOSC LAB',x:1025,y:280},
+    {id:411,name:'LIFT',x:860,y:280},{id:412,name:'FACULTY ROOM',x:648,y:355},
+    {id:413,name:'DEPT ECE',x:648,y:408},{id:414,name:'WASHROOM',x:648,y:468},
+    {id:415,name:'PATHWAY',x:572,y:247},{id:416,name:'SLOPE UP',x:550,y:290},
+    {id:417,name:'SLOPE DOWN',x:600,y:290},{id:418,name:'STAFFS LIFT',x:497,y:333},
+    {id:419,name:'FACULTY',x:30,y:358},{id:420,name:'STAIRCASE UP LEFT',x:75,y:333},
+    {id:421,name:'STAIRCASE DOWN LEFT',x:125,y:333},{id:422,name:'TOILET LEFT',x:178,y:333},
+    {id:423,name:'DSP LAB',x:245,y:355},{id:424,name:'MICROPROCESSOR LAB',x:245,y:405},
+    {id:425,name:'ADVANCED COMMUNICATION LAB',x:395,y:358},{id:426,name:'LOGISTICS LAB',x:870,y:345},
+    {id:427,name:'ANALOG ELECTRONICS LAB',x:870,y:395},{id:428,name:'PROJECT LAB F3',x:870,y:440},
+    {id:429,name:'CORRIDOR TOP LEFT',x:410,y:100},{id:430,name:'CORRIDOR TOP RIGHT',x:800,y:100},
+    {id:431,name:'CORRIDOR MAIN',x:536,y:420}
+  ],
+  floor4:[
+    {id:501,name:'CLASSROOM 404',x:340,y:140},{id:502,name:'CLASSROOM 405',x:465,y:140},
+    {id:503,name:'STAIR CASE UP',x:458,y:44},{id:504,name:'STAIR CASE DOWN',x:490,y:44},
+    {id:505,name:'TOILET',x:740,y:100},{id:506,name:'CLASSROOM 406',x:870,y:57},
+    {id:507,name:'CLASSROOM 407',x:1010,y:57},{id:508,name:'AIML LAB',x:1025,y:200},
+    {id:509,name:'LIFT',x:860,y:280},{id:510,name:'FACULTY ROOM',x:648,y:355},
+    {id:511,name:'DEPT AI AND ISE',x:648,y:408},{id:512,name:'WASHROOM',x:648,y:468},
+    {id:513,name:'PATHWAY',x:572,y:247},{id:514,name:'SLOPE UP',x:550,y:290},
+    {id:515,name:'SLOPE DOWN',x:600,y:290},{id:516,name:'STAFFS LIFT',x:497,y:333},
+    {id:517,name:'SIT CYBER FORENSICS',x:30,y:355},{id:518,name:'STAIRCASE UP LEFT',x:75,y:333},
+    {id:519,name:'STAIRCASE DOWN LEFT',x:125,y:333},{id:520,name:'TOILET LEFT',x:178,y:333},
+    {id:521,name:'FACULTY DEPT CBS',x:245,y:358},{id:522,name:'CLASSROOM 401',x:345,y:358},
+    {id:523,name:'CLASSROOM 402',x:455,y:358},{id:524,name:'AUDITORIUM',x:960,y:390},
+    {id:525,name:'CORRIDOR TOP LEFT',x:410,y:100},{id:526,name:'CORRIDOR TOP RIGHT',x:800,y:100},
+    {id:527,name:'CORRIDOR MAIN',x:536,y:420}
+  ]
+};
+// Assign types
+for(const[fl,nodes] of Object.entries(FN)) for(const n of nodes) n.type=inferType(n.name);
+
+const FE={
+  ground:[[101,102,120],[101,103,100],[102,103,90],[102,104,160],[104,105,145],[105,106,180],[106,107,140],[107,108,180],[108,104,140],[108,109,90],[103,109,180],[109,118,60],[118,117,50],[117,116,65],[116,115,70],[115,114,70],[114,113,60],[113,112,55],[112,111,55],[111,110,50],[117,119,200],[119,120,115],[120,121,95],[121,122,65],[122,123,95],[119,124,70],[124,125,80],[109,124,150],[118,109,60]],
+  floor1:[[201,230,130],[202,230,80],[203,230,60],[204,230,70],[230,216,150],[205,231,80],[206,231,150],[207,231,180],[208,231,60],[209,231,70],[210,231,80],[211,231,90],[212,231,100],[212,216,100],[216,230,150],[216,231,230],[216,213,110],[216,217,60],[216,232,180],[213,214,50],[214,215,65],[213,216,110],[217,218,50],[217,219,70],[217,232,130],[218,232,120],[219,232,60],[220,232,50],[221,232,55],[222,232,60],[223,232,65],[224,225,60],[224,232,70],[226,227,60],[226,232,80],[228,232,100],[229,232,150]],
+  floor2:[[301,330,100],[302,330,60],[303,330,60],[330,313,150],[304,331,80],[305,331,150],[306,331,180],[307,331,70],[308,331,80],[309,331,90],[310,331,100],[310,313,100],[313,330,150],[313,331,230],[313,311,120],[313,314,60],[313,332,180],[311,312,100],[311,313,120],[314,315,50],[314,316,70],[314,332,130],[315,332,120],[316,332,60],[317,332,50],[318,332,55],[319,332,60],[320,332,65],[321,332,70],[322,332,75],[323,332,80],[324,332,85],[325,332,100],[326,332,110],[327,332,120],[328,332,130],[329,332,140]],
+  floor3:[[401,429,130],[402,429,60],[403,429,60],[404,429,70],[429,415,150],[405,430,80],[406,430,150],[407,430,180],[408,430,70],[409,430,80],[410,430,90],[411,430,100],[411,415,100],[415,429,150],[415,430,230],[415,412,110],[415,416,60],[415,431,180],[412,413,55],[413,414,60],[412,415,110],[416,417,50],[416,418,70],[416,431,130],[417,431,120],[418,431,60],[419,431,50],[420,431,55],[421,431,60],[422,431,65],[423,424,60],[423,431,70],[425,431,80],[426,431,100],[427,431,110],[428,431,120]],
+  floor4:[[501,525,130],[502,525,60],[503,525,60],[504,525,70],[525,513,150],[505,526,80],[506,526,150],[507,526,180],[508,526,70],[509,526,100],[509,513,100],[513,525,150],[513,526,230],[513,510,110],[513,514,60],[513,527,180],[510,511,55],[511,512,60],[510,513,110],[514,515,50],[514,516,70],[514,527,130],[515,527,120],[516,527,60],[517,527,50],[518,527,55],[519,527,60],[520,527,65],[521,527,70],[522,527,80],[523,527,90],[524,527,130]]
+};
+
+// Vertical connectors
+// RIGHT stair:  GF:102 ↔ 1F:203 ↔ 2F:302 ↔ 3F:403 ↔ 4F:503
+// LEFT stair:   GF:111 ↔ 1F:221 ↔ 2F:318 ↔ 3F:420 ↔ 4F:518
+// MAIN lift:    GF:108 ↔ 1F:212 ↔ 2F:310 ↔ 3F:411 ↔ 4F:509
+// STAFF lift:   GF:117 ↔ 1F:219 ↔ 2F:316 ↔ 3F:418 ↔ 4F:516
+// RAMP:         GF:118 → 1F:217 → 2F:314 → 3F:416 → 4F:514
+const VE={
+  stair:[
+    ['ground:102','floor1:203',50],['floor1:203','floor2:302',50],
+    ['floor2:302','floor3:403',50],['floor3:403','floor4:503',50],
+    ['ground:111','floor1:221',50],['floor1:221','floor2:318',50],
+    ['floor2:318','floor3:420',50],['floor3:420','floor4:518',50]
+  ],
+  elevator:[
+    ['ground:108','floor1:212',20],['ground:108','floor2:310',40],
+    ['ground:108','floor3:411',60],['ground:108','floor4:509',80],
+    ['floor1:212','floor2:310',20],['floor1:212','floor3:411',40],
+    ['floor1:212','floor4:509',60],
+    ['floor2:310','floor3:411',20],['floor2:310','floor4:509',40],
+    ['floor3:411','floor4:509',20],
+    ['ground:117','floor1:219',20],['ground:117','floor2:316',40],
+    ['ground:117','floor3:418',60],['ground:117','floor4:516',80],
+    ['floor1:219','floor2:316',20],['floor1:219','floor3:418',40],
+    ['floor1:219','floor4:516',60],
+    ['floor2:316','floor3:418',20],['floor2:316','floor4:516',40],
+    ['floor3:418','floor4:516',20]
+  ],
+  ramp:[
+    ['ground:118','floor1:217',60],['floor1:217','floor2:314',60],
+    ['floor2:314','floor3:416',60],['floor3:416','floor4:514',60]
+  ]
+};
+
+/* ================================================================
+   GRAPH ENGINE
+================================================================ */
+const NM={};  // "floor:id" → node obj
+for(const[fl,nodes] of Object.entries(FN))
+  for(const n of nodes) NM[`${fl}:${n.id}`]={...n,floor:fl};
+
+let ADJ={};
+function buildAdj(mode){
+  ADJ={};
+  for(const[fl,edges] of Object.entries(FE)){
+    for(const[s,t,w] of edges){
+      const sk=`${fl}:${s}`,tk=`${fl}:${t}`;
+      (ADJ[sk]||(ADJ[sk]=[])).push({to:tk,w});
+      (ADJ[tk]||(ADJ[tk]=[])).push({to:sk,w});
+    }
+  }
+  for(const[a,b,w] of(VE[mode]||[])){
+    (ADJ[a]||(ADJ[a]=[])).push({to:b,w});
+    (ADJ[b]||(ADJ[b]=[])).push({to:a,w});
+  }
+}
+
+// Dijkstra with binary-heap-style array
+function dijkstra(src,dst){
+  if(!NM[src]||!NM[dst])return null;
+  const dist={},prev={},visited=new Set();
+  dist[src]=0;
+  // Simple sorted array — good enough for ~127 nodes
+  const pq=[[0,src]];
+  while(pq.length){
+    pq.sort((a,b)=>a[0]-b[0]);
+    const[d,u]=pq.shift();
+    if(visited.has(u))continue;
+    visited.add(u);
+    if(u===dst)break;
+    for(const{to,w} of(ADJ[u]||[])){
+      const nd=d+w;
+      if(nd<(dist[to]??Infinity)){dist[to]=nd;prev[to]=u;pq.push([nd,to]);}
+    }
+  }
+  if(dist[dst]===undefined)return null;
+  const path=[];let c=dst;
+  while(c!==undefined){path.unshift(c);c=prev[c];}
+  return{path,dist:Math.round(dist[dst])};
+}
+
+buildAdj('stair'); // initial build
+
+/* ================================================================
+   THREE.JS — RENDERER + SCENE
+================================================================ */
+const vpEl=document.getElementById('vp');
+const cvEl=document.getElementById('C');
+
+const renderer=new THREE.WebGLRenderer({canvas:cvEl,antialias:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.setClearColor(0x03060f,1);
+renderer.shadowMap.enabled=false;
+
+const scene=new THREE.Scene();
+scene.fog=new THREE.Fog(0x03060f,35,80);
+
+const camera=new THREE.PerspectiveCamera(50,1,0.1,500);
+
+// Camera orbit params
+const CAM={r:14,theta:0.55,phi:1.05};
+const camTgt=new THREE.Vector3(0,12,0);
+function applyCamera(){
+  camera.position.set(
+    camTgt.x+CAM.r*Math.sin(CAM.phi)*Math.sin(CAM.theta),
+    camTgt.y+CAM.r*Math.cos(CAM.phi),
+    camTgt.z+CAM.r*Math.sin(CAM.phi)*Math.cos(CAM.theta)
+  );
+  camera.lookAt(camTgt);
+}
+
+// Lighting
+scene.add(new THREE.AmbientLight(0xffffff,0.65));
+const sun=new THREE.DirectionalLight(0x88bbff,0.55);
+sun.position.set(10,25,8);scene.add(sun);
+const pt=new THREE.PointLight(0x00f0ff,0.4,100);
+pt.position.set(0,30,0);scene.add(pt);
+
+/* ================================================================
+   SCENE GEOMETRY — FLOORS + NODES + EDGES
+================================================================ */
+const FG={};    // floorKey → THREE.Group
+const NMesh={}; // nodeKey  → THREE.Mesh
+const pathObjs=[];  // path visuals (cleared on re-route)
+const shafts=[];    // vertical lines (always visible in 3D)
+
+function mapToWorld(px,py,flKey){
+  return new THREE.Vector3(
+    (px/MX)*SW-SW/2,
+    FM[flKey].z*FH,
+    (py/MY)*SH-SH/2
+  );
+}
+
+function buildScene(){
+  for(const[fk,fm] of Object.entries(FM)){
+    const grp=new THREE.Group();grp.name=fk;scene.add(grp);FG[fk]=grp;
+    const fy=fm.z*FH;
+
+    // Slab
+    const sg=new THREE.BoxGeometry(SW,0.07,SH);
+    const sm=new THREE.MeshLambertMaterial({color:fm.c3d,transparent:true,opacity:0.07,side:THREE.DoubleSide});
+    const slab=new THREE.Mesh(sg,sm);slab.position.set(0,fy-0.035,0);grp.add(slab);
+    const wf=new THREE.LineSegments(new THREE.EdgesGeometry(sg),
+      new THREE.LineBasicMaterial({color:fm.c3d,transparent:true,opacity:0.22}));
+    wf.position.copy(slab.position);grp.add(wf);
+
+    // Horizontal edges
+    for(const[s,t] of FE[fk]){
+      const ns=FN[fk].find(n=>n.id===s),nt=FN[fk].find(n=>n.id===t);
+      if(!ns||!nt)continue;
+      const pts=[mapToWorld(ns.x,ns.y,fk),mapToWorld(nt.x,nt.y,fk)];
+      const eg=new THREE.BufferGeometry().setFromPoints(pts);
+      grp.add(new THREE.Line(eg,new THREE.LineBasicMaterial({color:fm.c3d,transparent:true,opacity:0.1})));
+    }
+
+    // Node spheres
+    for(const n of FN[fk]){
+      const key=`${fk}:${n.id}`;
+      const pos=mapToWorld(n.x,n.y,fk);
+      const isV=['staircase','elevator','ramp'].includes(n.type);
+      const r=isV?0.075:0.052;
+      const col=TC3[n.type]||0x888888;
+      const mat=new THREE.MeshLambertMaterial({color:col,emissive:col,emissiveIntensity:0.18});
+      const mesh=new THREE.Mesh(new THREE.SphereGeometry(r,8,6),mat);
+      mesh.position.copy(pos);
+      mesh.userData={key,name:n.name,type:n.type,floor:fk,id:n.id};
+      grp.add(mesh);NMesh[key]=mesh;
+      // Connector ring
+      if(isV){
+        const ring=new THREE.Mesh(
+          new THREE.TorusGeometry(0.14,0.013,6,22),
+          new THREE.MeshBasicMaterial({color:col,transparent:true,opacity:0.38})
+        );ring.position.copy(pos);ring.rotation.x=Math.PI/2;grp.add(ring);
+      }
+    }
+  }
+
+  // Vertical shaft decorations
+  const seen=new Set();
+  for(const[,conn] of Object.entries(VE)){
+    for(const[a,b] of conn){
+      const k=[a,b].sort().join('|');if(seen.has(k))continue;seen.add(k);
+      const na=NM[a],nb=NM[b];if(!na||!nb)continue;
+      const col=(na.type==='elevator'||nb.type==='elevator')?0xfbbf24:
+                (na.type==='ramp'    ||nb.type==='ramp')    ?0xfb923c:0x00f0ff;
+      const pts=[mapToWorld(na.x,na.y,na.floor),mapToWorld(nb.x,nb.y,nb.floor)];
+      const line=new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(pts),
+        new THREE.LineBasicMaterial({color:col,transparent:true,opacity:0.25})
+      );scene.add(line);shafts.push(line);
+    }
+  }
+}
+buildScene();
+
+/* ================================================================
+   FLOOR VISIBILITY + VIEW MODE
+================================================================ */
+let curFloor='ground';
+let viewMode='2d';
+
+/* ================================================================
+   HIGHLIGHT ENGINE  ← single source of truth for all 3D styling
+   Called after: route computed · floor switched · reset
+   Never remounts scene objects — only mutates material properties.
+================================================================ */
+
+// Route state: populated by buildRouteHighlightState(), cleared by clearRoute()
+let RS_activeFloors  = new Set();   // Set of floor keys on route
+let RS_routeNodes    = new Set();   // Set of "floor:id" keys on route
+let RS_vertConns     = [];          // [{fromFloor, toFloor, type}]
+let RS_hasRoute      = false;
+
+function applyVisibility(){
+  for(const[fk,grp] of Object.entries(FG)){
+    if(viewMode==='2d'){
+      grp.visible=(fk===curFloor);
+      continue;
+    }
+    // ── 3D mode ──
+    grp.visible=true;
+    const isActiveFl  = (fk===curFloor);
+    const isRouteFl   = RS_hasRoute && RS_activeFloors.has(fk);
+    const isDimmedFl  = RS_hasRoute && !RS_activeFloors.has(fk);
+
+    grp.traverse(o=>{
+      if(!o.material)return;
+      const geo=o.geometry;
+      if(geo&&geo.type==='SphereGeometry'){
+        // Node sphere — check per-node route membership
+        const key=o.userData?.key;
+        if(RS_hasRoute){
+          if(RS_routeNodes.has(key)){
+            // Route node on active floor: already styled by drawPath()
+            o.material.opacity=1;o.material.transparent=false;
+          } else if(isDimmedFl){
+            o.material.opacity=0.06;o.material.transparent=true;o.material.emissiveIntensity=0;
+          } else if(isRouteFl&&!isActiveFl){
+            o.material.opacity=0.14;o.material.transparent=true;o.material.emissiveIntensity=0.03;
+          } else {
+            o.material.opacity=isActiveFl?0.32:0.08;o.material.transparent=true;
+            o.material.emissiveIntensity=0.06;
+          }
+        } else {
+          o.material.opacity=isActiveFl?1:0.18;o.material.transparent=!isActiveFl;
+          o.material.emissiveIntensity=isActiveFl?0.18:0.04;
+        }
+      }else if(o.type==='Line'||o.type==='LineSegments'){
+        if(RS_hasRoute){
+          o.material.opacity=isDimmedFl?0.02:isActiveFl?0.18:0.06;
+        }else{
+          o.material.opacity=isActiveFl?0.18:0.04;
+        }
+        o.material.transparent=true;
+      }else if(geo&&geo.type==='BoxGeometry'){
+        if(RS_hasRoute){
+          o.material.opacity=isDimmedFl?0.01:isActiveFl?0.09:0.025;
+        }else{
+          o.material.opacity=isActiveFl?0.09:0.025;
+        }
+        o.material.transparent=true;
+      }else if(geo&&geo.type==='TorusGeometry'){
+        o.material.opacity=isActiveFl?0.38:0.07;o.material.transparent=true;
+      }
+    });
+  }
+  shafts.forEach(s=>s.visible=viewMode==='3d');
+}
+
+function snapCamera(){
+  if(viewMode==='2d'){
+    const fy=FM[curFloor].z*FH;
+    camTgt.set(0,fy,0);CAM.r=10;CAM.theta=0;CAM.phi=0.12;
+  }else{
+    camTgt.set(0,FM.floor2.z*FH,0);CAM.r=28;CAM.theta=0.55;CAM.phi=1.05;
+  }
+  applyCamera();
+}
+
+/* ================================================================
+   PATH HIGHLIGHT
+================================================================ */
+let curPathKeys=null;
+function clearPathVisuals(){
+  pathObjs.forEach(o=>{if(o.parent)o.parent.remove(o);else scene.remove(o);});
+  pathObjs.length=0;
+  for(const[,mesh] of Object.entries(NMesh)){
+    const col=TC3[mesh.userData.type]||0x888888;
+    mesh.material.color.setHex(col);mesh.material.emissive.setHex(col);
+    mesh.material.emissiveIntensity=0.18;mesh.scale.set(1,1,1);
+  }
+  curPathKeys=null;
+}
+
+function drawPath(keys){
+  clearPathVisuals();curPathKeys=keys;
+  if(!keys||keys.length<2)return;
+  for(let i=0;i<keys.length;i++){
+    const m=NMesh[keys[i]];if(!m)continue;
+    if(i===0){m.material.color.setHex(0x00ffa3);m.material.emissive.setHex(0x00ffa3);m.material.emissiveIntensity=1.6;m.scale.set(3.2,3.2,3.2);}
+    else if(i===keys.length-1){m.material.color.setHex(0xff7b35);m.material.emissive.setHex(0xff7b35);m.material.emissiveIntensity=1.6;m.scale.set(3.2,3.2,3.2);}
+    else{m.material.color.setHex(0x00f0ff);m.material.emissive.setHex(0x00f0ff);m.material.emissiveIntensity=0.9;m.scale.set(1.9,1.9,1.9);}
+  }
+  const pts=keys.map(k=>{const n=NM[k];return n?mapToWorld(n.x,n.y,n.floor):null;}).filter(Boolean);
+  if(pts.length<2)return;
+  // Main glowing line
+  scene.add(Object.assign(new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints(pts),
+    new THREE.LineBasicMaterial({color:0x00f0ff})
+  ),{_path:true}));
+  pathObjs.push(scene.children[scene.children.length-1]);
+  // Cylinder tubes per segment
+  for(let i=0;i<pts.length-1;i++){
+    const a=pts[i],b=pts[i+1];
+    const d=new THREE.Vector3().subVectors(b,a);
+    const len=d.length();if(len<0.01)continue;
+    const mid=new THREE.Vector3().addVectors(a,b).multiplyScalar(0.5);
+    const cyl=new THREE.Mesh(
+      new THREE.CylinderGeometry(0.022,0.022,len,5),
+      new THREE.MeshBasicMaterial({color:0x00f0ff,transparent:true,opacity:0.5})
+    );cyl.position.copy(mid);cyl.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.normalize());
+    scene.add(cyl);pathObjs.push(cyl);
+  }
+  // Pulse rings on intermediate nodes
+  for(let i=1;i<keys.length-1;i++){
+    const m=NMesh[keys[i]];if(!m)continue;
+    const ring=new THREE.Mesh(
+      new THREE.TorusGeometry(0.13,0.016,6,20),
+      new THREE.MeshBasicMaterial({color:0x00f0ff,transparent:true,opacity:0.65})
+    );ring.position.copy(m.position);ring.rotation.x=Math.PI/2;ring._pulse=true;
+    scene.add(ring);pathObjs.push(ring);
+  }
+}
+
+/* ================================================================
+   RAYCASTER + MOUSE CONTROLS
+================================================================ */
+const rc=new THREE.Raycaster();
+const mPos=new THREE.Vector2();
+const tt=document.getElementById('TT');
+
+function getPickable(){
+  if(viewMode==='2d') return Object.entries(NMesh).filter(([k])=>k.startsWith(curFloor+':')).map(([,m])=>m);
+  return Object.values(NMesh);
+}
+
+let isDrag=false,wasDrag=false,dx0=0,dy0=0,t0=0,p0=0;
+
+vpEl.addEventListener('mousedown',e=>{
+  isDrag=true;wasDrag=false;dx0=e.clientX;dy0=e.clientY;t0=CAM.theta;p0=CAM.phi;
+  cvEl.classList.add('dragging');
+});
+window.addEventListener('mouseup',()=>{isDrag=false;cvEl.classList.remove('dragging');});
+
+window.addEventListener('mousemove',e=>{
+  if(isDrag){
+    const dx=(e.clientX-dx0)*0.007,dy=(e.clientY-dy0)*0.007;
+    if(Math.abs(dx)>0.003||Math.abs(dy)>0.003)wasDrag=true;
+    CAM.theta=t0-dx;
+    CAM.phi=Math.max(0.05,Math.min(Math.PI*0.47,p0+dy));
+    applyCamera();
+  }
+  // Tooltip
+  const r=vpEl.getBoundingClientRect();
+  mPos.x=((e.clientX-r.left)/r.width)*2-1;
+  mPos.y=-((e.clientY-r.top)/r.height)*2+1;
+  rc.setFromCamera(mPos,camera);
+  const hits=rc.intersectObjects(getPickable());
+  if(hits.length){
+    const ud=hits[0].object.userData;
+    tt.style.display='block';tt.style.left=(e.clientX+14)+'px';tt.style.top=(e.clientY-8)+'px';
+    tt.innerHTML=`<strong>${ud.name}</strong><br>${ud.type.toUpperCase()} · ${FM[ud.floor].lbl}`;
+    vpEl.style.cursor='pointer';
+  }else{
+    tt.style.display='none';
+    vpEl.style.cursor=isDrag?'grabbing':'grab';
+  }
+});
+
+vpEl.addEventListener('click',e=>{
+  if(wasDrag)return;
+  const r=vpEl.getBoundingClientRect();
+  mPos.x=((e.clientX-r.left)/r.width)*2-1;
+  mPos.y=-((e.clientY-r.top)/r.height)*2+1;
+  rc.setFromCamera(mPos,camera);
+  const hits=rc.intersectObjects(getPickable());
+  if(hits.length)showNodeInfo(hits[0].object.userData.key);
+});
+
+vpEl.addEventListener('mouseleave',()=>{tt.style.display='none';});
+
+vpEl.addEventListener('wheel',e=>{
+  e.preventDefault();
+  CAM.r=Math.max(3,Math.min(50,CAM.r+e.deltaY*0.013));
+  applyCamera();
+},{passive:false});
+
+// Touch
+let tx0=0,ty0=0,tt0c=0,tp0c=0;
+vpEl.addEventListener('touchstart',e=>{
+  if(e.touches.length===1){tx0=e.touches[0].clientX;ty0=e.touches[0].clientY;tt0c=CAM.theta;tp0c=CAM.phi;}
+},{passive:true});
+vpEl.addEventListener('touchmove',e=>{
+  if(e.touches.length===1){
+    const dx=(e.touches[0].clientX-tx0)*0.007,dy=(e.touches[0].clientY-ty0)*0.007;
+    CAM.theta=tt0c-dx;CAM.phi=Math.max(0.05,Math.min(Math.PI*0.47,tp0c+dy));
+    applyCamera();
+  }
+},{passive:true});
+
+/* ================================================================
+   CAMERA BUTTON HANDLERS
+================================================================ */
+function camZoom(f){CAM.r=Math.max(3,Math.min(50,CAM.r*f));applyCamera();}
+function camOrbit(dt,dp){CAM.theta+=dt;CAM.phi=Math.max(0.05,Math.min(Math.PI*0.47,CAM.phi+dp));applyCamera();}
+function camReset(){snapCamera();}
+
+/* ================================================================
+   RENDER LOOP
+================================================================ */
+function onResize(){
+  const w=vpEl.clientWidth,h=vpEl.clientHeight;
+  if(w===0||h===0)return;
+  renderer.setSize(w,h,false);
+  camera.aspect=w/h;camera.updateProjectionMatrix();
+}
+window.addEventListener('resize',onResize);
+// Use ResizeObserver for reliable resize
+if(window.ResizeObserver){
+  new ResizeObserver(onResize).observe(vpEl);
+}else{onResize();}
+
+let lastT=0;
+function animate(ts){
+  requestAnimationFrame(animate);
+  // Slow auto-rotate only in 3D when not dragging
+  if(viewMode==='3d'&&!isDrag){CAM.theta+=0.0003;applyCamera();}
+  // Pulse path rings
+  const v=0.45+0.3*Math.sin(ts*0.003);
+  for(const o of pathObjs){if(o._pulse&&o.material)o.material.opacity=v;}
+  renderer.render(scene,camera);
+}
+requestAnimationFrame(animate);
+
+/* ================================================================
+   UI STATE + CONTROL FUNCTIONS
+================================================================ */
+let routeMode='stair';
+
+function setViewMode(m){
+  viewMode=m;
+  document.getElementById('btn2d').classList.toggle('on',m==='2d');
+  document.getElementById('btn3d').classList.toggle('on',m==='3d');
+  applyVisibility();snapCamera();
+}
+
+function switchFloor(fk){
+  curFloor=fk;
+  document.querySelectorAll('.ftab').forEach(b=>b.classList.toggle('on',b.dataset.f===fk));
+  document.getElementById('fhud').textContent=`${FM[fk].lbl} (${FM[fk].sh}) · z = ${FM[fk].zm} m`;
+  applyVisibility();
+  if(viewMode==='2d')snapCamera();
+}
+
+function setMode(m){
+  routeMode=m;
+  ['stair','elevator','ramp'].forEach(k=>document.getElementById('mode_'+k).classList.toggle('on',k===m));
+  buildAdj(m);
+}
+
+function refreshFromRooms(){
+  const fl=document.getElementById('fromFloor').value;
+  populateSel('fromRoom',fl);
+}
+function refreshToRooms(){
+  const fl=document.getElementById('toFloor').value;
+  populateSel('toRoom',fl);
+}
+function populateSel(selId,fl){
+  const sel=document.getElementById(selId);
+  // Exclude corridors/pathways from dropdown but keep them in graph
+  const nodes=FN[fl].filter(n=>!['corridor'].includes(n.type));
+  sel.innerHTML=nodes.map(n=>`<option value="${fl}:${n.id}">${n.name}</option>`).join('');
+}
+// Init selects
+refreshFromRooms();refreshToRooms();
+// Default: CLASSROOM 001 (GF) → CLASSROOM 203 (2F)
+(function(){
+  const fs=document.getElementById('fromRoom');
+  for(let i=0;i<fs.options.length;i++){if(fs.options[i].text==='CLASSROOM 001'){fs.selectedIndex=i;break;}}
+  const ts=document.getElementById('toRoom');
+  for(let i=0;i<ts.options.length;i++){if(ts.options[i].text==='CLASSROOM 203'){ts.selectedIndex=i;break;}}
+})();
+
+/* ================================================================
+   ROUTE STATE BUILDER
+   Derives activeFloors, routeNodes, vertConns from a raw Dijkstra path.
+   Pure function — updates RS_* globals, then triggers applyVisibility.
+================================================================ */
+function buildRouteHighlightState(keys){
+  RS_activeFloors = new Set();
+  RS_routeNodes   = new Set(keys);
+  RS_vertConns    = [];
+  RS_hasRoute     = true;
+
+  let prevFloor = null;
+  for(let i=0;i<keys.length;i++){
+    const n=NM[keys[i]];if(!n)continue;
+    RS_activeFloors.add(n.floor);
+    if(prevFloor && prevFloor!==n.floor){
+      const pn=NM[keys[i-1]];
+      RS_vertConns.push({
+        fromFloor:prevFloor,toFloor:n.floor,
+        type:pn?pn.type:'staircase',
+        nodeKey:keys[i-1],
+      });
+    }
+    prevFloor=n.floor;
+  }
+}
+
+function updateFloorBadges(){
+  const FLOORS=['ground','floor1','floor2','floor3','floor4'];
+  for(const fk of FLOORS){
+    const el=document.getElementById('rbadge_'+fk);
+    if(!el)continue;
+    // Active = on route, current = currently viewed
+    el.classList.toggle('active', RS_activeFloors.has(fk));
+    // Highlight sidebar floor tab if it has a route segment
+    const tab=document.querySelector(`.ftab[data-f="${fk}"]`);
+    if(tab) tab.classList.toggle('route-floor', RS_activeFloors.has(fk));
+  }
+  document.getElementById('floorRouteStrip').classList.toggle('show', RS_hasRoute && RS_activeFloors.size>1);
+}
+
+function findRoute(){
+  const sk=document.getElementById('fromRoom').value;
+  const ek=document.getElementById('toRoom').value;
+  if(!sk||!ek){showErr('Select both start and destination rooms.');return;}
+  if(sk===ek){showErr('Start and destination are the same location.');return;}
+  buildAdj(routeMode);
+  const res=dijkstra(sk,ek);
+  if(!res){showErr('No path found — try a different connector mode (STAIR / LIFT / RAMP).');return;}
+
+  // Build route highlight state BEFORE drawing
+  buildRouteHighlightState(res.path);
+
+  // Draw path (colours source/dest/intermediate nodes)
+  drawPath(res.path);
+
+  // Apply dim/highlight to all floors
+  applyVisibility();
+
+  // Update floor badges and tabs
+  updateFloorBadges();
+
+  // Update stats
+  const floorCount = RS_activeFloors.size;
+  const connCount  = RS_vertConns.length;
+  document.getElementById('distStat').textContent = res.dist;
+  document.getElementById('metaFloors').textContent = floorCount;
+  document.getElementById('metaDist').textContent   = res.dist;
+  document.getElementById('metaStops').textContent  = res.path.length;
+  document.getElementById('metaConn').textContent   = connCount;
+  document.getElementById('routeMetaBar').classList.add('show');
+
+  // Steps with floor-transition markers
+  renderSteps(res.path, res.dist);
+
+  // Auto-switch view
+  const sf=NM[sk]?.floor, ef=NM[ek]?.floor;
+  if(sf!==ef){ setViewMode('3d'); }
+  else        { setViewMode('2d'); switchFloor(sf); }
+}
+
+function clearRoute(){
+  // 1. Clear route state
+  RS_activeFloors = new Set();
+  RS_routeNodes   = new Set();
+  RS_vertConns    = [];
+  RS_hasRoute     = false;
+
+  // 2. Remove 3D path visuals
+  clearPathVisuals();
+
+  // 3. Restore all floor visibility to default
+  applyVisibility();
+
+  // 4. Clear floor badges
+  const FLOORS=['ground','floor1','floor2','floor3','floor4'];
+  for(const fk of FLOORS){
+    const el=document.getElementById('rbadge_'+fk);
+    if(el) el.classList.remove('active');
+    const tab=document.querySelector(`.ftab[data-f="${fk}"]`);
+    if(tab) tab.classList.remove('route-floor');
+  }
+  document.getElementById('floorRouteStrip').classList.remove('show');
+  document.getElementById('routeMetaBar').classList.remove('show');
+
+  // 5. Reset UI text
+  document.getElementById('stepsArea').innerHTML='<div class="empty"><span class="eico">🗺</span>Plan a route to see turn-by-turn directions</div>';
+  document.getElementById('distStat').textContent='—';
+  document.getElementById('metaFloors').textContent='—';
+  document.getElementById('metaDist').textContent='—';
+  document.getElementById('metaStops').textContent='—';
+  document.getElementById('metaConn').textContent='—';
+}
+
+function showNodeInfo(key){
+  const n=NM[key];if(!n)return;
+  const col=TCH[n.type]||'#888';
+  const conns=(ADJ[key]||[]).length;
+  document.getElementById('nodeArea').innerHTML=`<div class="ncard">
+    <div class="ntitle">${n.name}</div>
+    <div class="prow"><span class="pk">NODE_ID</span><span class="pv">${key}</span></div>
+    <div class="prow"><span class="pk">TYPE</span><span class="pv" style="color:${col}">${n.type.toUpperCase()}</span></div>
+    <div class="prow"><span class="pk">FLOOR</span><span class="pv">${FM[n.floor].lbl} (${FM[n.floor].sh})</span></div>
+    <div class="prow"><span class="pk">MAP COORDS</span><span class="pv">(${n.x}, ${n.y})</span></div>
+    <div class="prow"><span class="pk">CONNECTIONS</span><span class="pv">${conns} adjacent nodes</span></div>
+  </div>`;
+}
+
+function renderSteps(keys,dist){
+  const s0=NM[keys[0]],sN=NM[keys[keys.length-1]];
+  const floorList=[...RS_activeFloors].map(f=>FM[f]?.sh).join(' → ');
+  let h=`<div class="rsumm">
+    <strong>${s0?.name||'?'}</strong> &rarr; <strong>${sN?.name||'?'}</strong><br>
+    Mode: <strong>${routeMode.toUpperCase()}</strong> &nbsp;&middot;&nbsp;
+    ${keys.length} stops &nbsp;&middot;&nbsp; ~${dist}m &nbsp;&middot;&nbsp;
+    <span style="color:var(--cyan)">${floorList}</span>
+  </div><div class="slist">`;
+  for(let i=0;i<keys.length;i++){
+    const k=keys[i],n=NM[k];if(!n)continue;
+    const isConn=['staircase','elevator','ramp'].includes(n.type);
+    const flChg=i>0&&NM[keys[i-1]]?.floor!==n.floor;
+    // Floor-transition divider row
+    if(flChg){
+      const prevFl=NM[keys[i-1]]?.floor;
+      const icon=n.type==='elevator'?'&#128663;':n.type==='ramp'?'&#8599;':'&#129114;';
+      h+=`<div class="conn-divider">
+        <span>${icon}</span>
+        <span>${FM[prevFl]?.sh||'?'} &#8594; ${FM[n.floor]?.sh||'?'}</span>
+        <span style="flex:1;text-align:right;opacity:.7">${n.type.toUpperCase()}</span>
+      </div>`;
+    }
+    let tags='';
+    if(n.type==='staircase')tags+='<span class="tag t-s">STAIR</span>';
+    else if(n.type==='elevator')tags+='<span class="tag t-l">LIFT</span>';
+    else if(n.type==='ramp')tags+='<span class="tag t-r">RAMP</span>';
+    if(i===0)tags+='<span class="tag" style="background:rgba(0,255,163,.12);color:#00ffa3">START</span>';
+    if(i===keys.length-1)tags+='<span class="tag" style="background:rgba(255,123,53,.12);color:#ff7b35">END</span>';
+    h+=`<div class="srow" onclick="focusStep('${k}')">
+      <div class="snum${isConn?' conn':''}">${i===0?'S':i===keys.length-1?'D':i}</div>
+      <div><div class="sname">${n.name}</div><div class="sfloor">${FM[n.floor]?.lbl||'?'}</div>
+      <div class="stags">${tags}</div></div>
+    </div>`;
+  }
+  h+='</div>';
+  document.getElementById('stepsArea').innerHTML=h;
+}
+
+function focusStep(key){
+  const n=NM[key];if(!n)return;
+  showNodeInfo(key);
+  if(viewMode==='2d'){switchFloor(n.floor);}
+  const pos=mapToWorld(n.x,n.y,n.floor);
+  camTgt.set(pos.x,pos.y,pos.z);
+  CAM.r=Math.min(CAM.r,7);
+  applyCamera();
+}
+
+function showErr(msg){
+  document.getElementById('stepsArea').innerHTML=`<div class="empty" style="color:var(--red)"><span class="eico">⚠️</span>${msg}</div>`;
+}
+
+/* ================================================================
+   INIT
+================================================================ */
+applyVisibility();
+snapCamera();
+
+// Auto-run demo route on load
+setTimeout(()=>{
+  buildAdj(routeMode);
+  findRoute();
+},300);
+</script>
+</body>
+</html>
